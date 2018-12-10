@@ -1,0 +1,9 @@
+gdm_web:
+  image: webdevops/php-apache:7.2
+  links:
+    - "db:mysql"
+  ports:
+    - 8989:80
+  volumes:
+    - ./www:/app/
+    - ./_dev/php-api.ini/:/opt/docker/etc/php/php.ini

@@ -1,0 +1,10 @@
+db:
+  image: mysql
+  command: --default-authentication-plugin=mysql_native_password
+  restart: always
+  ports:
+    - 3336:3306
+  volumes:
+    - "./_dev/exec/data:/var/lib/mysql"
+  environment:
+    MYSQL_ROOT_PASSWORD: dev
