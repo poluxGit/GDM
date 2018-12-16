@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="GenericDataManagement" default="ci" basedir="../../..">
   <property name="source" value="src" />
+	<property name="source" value="src" />
 
   <target name="ci"
       description="Tâche principale d'intégration continue"
@@ -35,10 +36,9 @@
   </target>
 
 	<target name="buildParamDisplay" description="Affichage des variables locales">
-		<echo msg="basedir : ${basedir}" />
-		<echo msg="buildir : ${builddir}" />
-		<echo msg="top buildir : ${top.builddir}" />
-		<echo msg="lang : ${lang}" />
+		<echo msg="env : ${env.*}" />
+		<echo msg="Phing project nbame : ${phing.project.name}" />
+		<echo msg="Project basedir : ${project.basedir}" />
 	</target>
 
 
