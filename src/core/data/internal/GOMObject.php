@@ -49,7 +49,7 @@ abstract class GOMObject
    * Tableau des définitions SQL des champs de l'objet
    *
    * @var array([],[])
-   * @internal [[ 'name' => 'Champs1','type' => 'string','sql_name' => 'TOTO' ...],[ 'Name' => 'Champs2','Type' => 'date', ...]]
+   * @internal [[ 'name' => 'Champs1', 'type' => 'string', 'sql_name' => 'TOTO' ...],[ 'Name' => 'Champs2', 'Type' => 'date', ...]]
    */
   private $_aFieldDefinition = [];
 
