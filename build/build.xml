@@ -78,7 +78,7 @@
 	</target>
 
 	<target name="phpcs" description="PHP CodeSniffer - Norme de codage">
-	  <phpcodesniffer standard="Zend" pharlocation="/usr/bin/phpcs">
+	  <phpcodesniffer standard="Zend">
       <fileset dir="${project.basedir}/${source}">
         <include name="**/*.php"/>
       </fileset>
