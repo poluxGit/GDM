@@ -1,5 +1,5 @@
 <?php
-require_once './vendor/autoload.php';
+require_once '/var/jenkins_home/workspace/GenericDataManagement/vendor/autoload.php';
 use PHPUnit\Framework\TestCase;
 use GOM\Core\Application;
 

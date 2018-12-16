@@ -35,7 +35,7 @@
 	<!-- Outils d'analyse -->
   <target name="qa" description="Lance les outils d'analyse">
 		<phingcall target="buildParamDisplay" />
-		<!-- <phingcall target="phpcomp" /> -->
+		<phingcall target="phpcompupd" />
 		<phingcall target="pdepend" />
     <phingcall target="phpmd" />
     <phingcall target="phpcpd" />
@@ -50,6 +50,10 @@
 		<echo msg="Phing project nbame : ${phing.project.name}" />
 		<echo msg="Project basedir : ${project.basedir}" />
 		<echo msg="Calculated RootDir : ${rootdir}" />
+	</target>
+
+	<target name="phpcompupd" description="PHP Composer - Update Command">
+		<composer command="update" />
 	</target>
 
 
