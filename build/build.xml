@@ -41,7 +41,7 @@
     <phingcall target="phpcpd" />
     <phingcall target="phploc" />
     <phingcall target="phpcs" />
-    <!-- <phingcall target="phpdoc" /> -->
+    <phingcall target="phpdoc" />
     <phingcall target="phpunit" />
     <phingcall target="phpcb" />
   </target>
@@ -74,31 +74,25 @@
 	</target>
 
 	<target name="phploc" description="PHP Loc - Statistiques / Métriques">
-  	<exec logoutput="true" dir="${project.basedir}" command="phploc --log-csv '${project.basedir}/build/logs/phploc.csv' '${project.basedir}/${source}'" escape="false" />
+  	<exec logoutput="true" dir="${rootdir}" command="phploc --log-csv '${rootdir}/build/logs/phploc.csv' '${rootdir}/${source}'" escape="false" />
 	</target>
 
 	<target name="phpcs" description="PHP CodeSniffer - Norme de codage">
 	  <phpcodesniffer standard="Zend">
-      <fileset dir="${project.basedir}/${source}">
+      <fileset dir="${rootdir}/${source}">
         <include name="**/*.php"/>
       </fileset>
-      <formatter type="checkstyle" outfile="${project.basedir}/build/logs/checkstyle.xml"/>
+      <formatter type="checkstyle" outfile="${rootdir}/build/logs/checkstyle.xml"/>
 	  </phpcodesniffer>
 	</target>
 
 	<target name="phpdoc" description="PHPDoc - Documentation">
-    <phpdoc title="API Documentation"
-            destdir="${project.basedir}/build/api"
-            sourcecode="false"
-            output="HTML:Smarty:PHP">
-      <fileset dir="${project.basedir}/${source}">
+    <phpdoc2  title="${phing.project.name} - API Documentation"
+            destdir="${rootdir}/build/api"
+            template="responsive-twig">
+      <fileset dir="${rootdir}/${source}">
           <include name="**/*.php"/>
       </fileset>
-      <projdocfileset dir=".">
-          <include name="README"/>
-          <include name="INSTALL"/>
-          <include name="CHANGELOG"/>
-      </projdocfileset>
     </phpdoc>
 	</target>
 
