@@ -10,17 +10,17 @@
 
   <target name="clean" description="Vide les répertoires d'artefacts">
 
-		<delete dir="${project.basedir}/build/api" />
-    <delete dir="${project.basedir}/build/code-browser" />
-    <delete dir="${project.basedir}/build/coverage" />
-    <delete dir="${project.basedir}/build/logs" />
-    <delete dir="${project.basedir}/build/pdepend" />
+		<delete dir="${rootdir}/build/api" />
+    <delete dir="${rootdir}/build/code-browser" />
+    <delete dir="${rootdir}/build/coverage" />
+    <delete dir="${rootdir}/build/logs" />
+    <delete dir="${rootdir}/build/pdepend" />
 
-		<mkdir dir="${project.basedir}/build/api" />
-		<mkdir dir="${project.basedir}/build/code-browser" />
-		<mkdir dir="${project.basedir}/build/coverage" />
-		<mkdir dir="${project.basedir}/build/logs" />
-		<mkdir dir="${project.basedir}/build/pdepend" />
+		<mkdir dir="${rootdir}/build/api" />
+		<mkdir dir="${rootdir}/build/code-browser" />
+		<mkdir dir="${rootdir}/build/coverage" />
+		<mkdir dir="${rootdir}/build/logs" />
+		<mkdir dir="${rootdir}/build/pdepend" />
   </target>
 
   <target name="qa" description="Lance les outils d'analyse">
