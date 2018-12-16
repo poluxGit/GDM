@@ -29,7 +29,7 @@ final class ApplicationTest extends TestCase
   	public function testApplicationLoadInvalidFormatSettingsFile(): void
   	{
 			$this->expectException(\Exception::class);
-			$laObj =Application::loadDBSettings('./../datasets/AppSettingsFile_01-invalidformat.json');
+			$laObj =Application::loadDBSettings('./../tests/datasets/AppSettingsFile_01-invalidformat.json');
 			$this->assertEquals($laObj,NULL);
 
 	  }//end testApplicationLoadInvalidFormatSettingsFile()
@@ -41,7 +41,7 @@ final class ApplicationTest extends TestCase
 		 */
   	public function testApplicationLoadValideSettingsFile(): void
   	{
-			$laObj = Application::loadDBSettings('./../tests/core/AppSettingsFile_02-valid.json');
+			$laObj = Application::loadDBSettings('./../tests/datasets/AppSettingsFile_02-valid.json');
 			$this->assertNotEquals($laObj,NULL);
 
 			$this->assertEquals(array_key_exists("database",$laObj),true);
