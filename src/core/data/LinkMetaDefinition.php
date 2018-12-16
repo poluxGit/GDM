@@ -1,11 +1,11 @@
 <?php
 
-namespace GOM\Data;
+namespace GOM\Core\Data;
 
 /**
  * Définition de metadonnées de lien entre Objet
  */
-class LinkMetaDefinition extends GOMObject
+class LinkMetaDefinition extends Internal\GOMObject
 {
 
   /**

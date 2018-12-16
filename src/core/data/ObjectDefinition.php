@@ -1,11 +1,11 @@
 <?php
 
-namespace GOM\Data;
+namespace GOM\Core\Data;
 
 /**
  * Définition d'Objet
  */
-class ObjectDefinition extends GOMObject
+class ObjectDefinition extends Internal\GOMObject
 {
   /**
    * Constructeur par défaut

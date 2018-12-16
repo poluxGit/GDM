@@ -1,11 +1,12 @@
 <?php
 
-namespace GOM\Data\Internal;
+namespace GOM\Core\Data;
 
 /**
  * Définition de metadonnées d'Objet
  */
-class GOMObjectMetaDefinition extends GOMObject {
+class ObjectMetaDefinition extends Internal\GOMObject
+{
 
   /**
    * Constructeur par défaut
@@ -40,5 +41,3 @@ class GOMObjectMetaDefinition extends GOMObject {
     $this->addFieldDefinition('EstMulitple', 'IS_MULTIPLE', 'INT', 'Flag Multiple');
   }//end initFieldDefinition()
 }//end class
-
- ?>

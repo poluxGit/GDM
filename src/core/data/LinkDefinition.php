@@ -1,11 +1,11 @@
 <?php
 
-namespace GOM\Data;
+namespace GOM\Core\Data;
 
 /**
  * Définition de lien entre Objet
  */
-class LinkDefinition extends GOMObject
+class LinkDefinition extends Internal\GOMObject
 {
   /**
    * Constructeur par défaut
