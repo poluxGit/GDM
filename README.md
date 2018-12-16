@@ -2,6 +2,13 @@
 
 Gestion générique d'objet (persistance et organisation).
 
+## Infos Techniques
+
+Projet PHP Composer => composer install --no-dev
+
+*PHP Version => 7.1"
+
+
 ## Concepts du modèle générique
 
 Le modèle GDM implémente et utilise les concepts permettant la gestion dynamique de stockage dans un modèle relationnel d' **"Objets"**.
