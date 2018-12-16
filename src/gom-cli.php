@@ -6,9 +6,6 @@
  * @author poluxGit
  * -----------------------------------------------------------------------------
  */
-
-require_once '../vendor/autoload.php';
-
 require_once './core/Application.php';
 require_once './core/data/internal/GOMObject.php';
 require_once './core/data/internal/GOMObjectDefinition.php';
@@ -65,7 +62,7 @@ const PROG_ACTIONS = [
  */
  function generateMessageProgHelp()
  {
-   $l_sMessage  = "Syntaxe: php gom.php {ACTION} {ACTION_PARAMETERS}\n";
+   $l_sMessage  = "Syntaxe: php gom-cli.php {ACTION} {ACTION_PARAMETERS}\n";
    $l_sMessage .= "avec:\n";
    // Pour chacune des actions
    foreach (PROG_ACTIONS as $key => $ActionValue) {

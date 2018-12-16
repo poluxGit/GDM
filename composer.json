@@ -1,0 +1,28 @@
+{
+    "name": "poluxGit/gdm",
+    "type": "library",
+    "license": "MIT",
+    "homepage": "https://github.com/poluxGit/GDM",
+    "description": "Generic Object Management",
+    "keywords": ["personal", "poluxGit", "php"],
+    "authors": [
+        {
+            "name": "polux_fr",
+            "email": "poluxmsn@free.fr"
+        }
+    ],
+    "require": {
+        "php": ">=7.2"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~4.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "GOM\\": "src/core"
+        }
+    },
+		"config": {
+			"optimize-autoloader": true
+		}
+}
