@@ -23,14 +23,17 @@
   </target>
 
   <target name="qa" description="Lance les outils d'analyse">
+		<echo msg="Projet BaseDir : ${project.basedir}" />
+		<echo msg="buildir : ${buildir}" />
+		<echo msg="Projet BaseDir : ${project.basedir}" />
 		<phingcall target="pdepend" />
-    <phingcall target="phpmd" />
+    <!-- <phingcall target="phpmd" />
     <phingcall target="phpcpd" />
     <phingcall target="phploc" />
     <phingcall target="phpcs" />
     <phingcall target="phpdoc" />
     <phingcall target="phpunit" />
-    <phingcall target="phpcb" />
+    <phingcall target="phpcb" /> -->
   </target>
 
 	<target name="pdepend" description="PHP Depend">
