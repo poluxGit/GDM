@@ -21,7 +21,7 @@
 			"sebastian/phpcpd": "@stable",
 			"pdepend/pdepend": "@stable",
 			"phploc/phploc": "@stable",
-			"phpunit/phpunit": ">=4.3.*",
+			"phpunit/phpunit": "@stable",
 			"theseer/phpdox": "@stable"
     },
     "autoload": {
