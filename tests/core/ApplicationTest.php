@@ -1,6 +1,6 @@
 <?php
 
-require_once '../../vendor/autoload.php'
+require_once '../../vendor/autoload.php';
 
 use PHPUnit\Framework\TestCase;
 use GOM\Core\Application;
@@ -19,7 +19,7 @@ final class ApplicationTest extends TestCase
 		 */
   	public function testApplicationLoadInvalidSettingsFile(): void
   	{
-			$this->expectException(Exception::class);
+			$this->expectException(\Exception::class);
 			Application::loadDBSettings('./toto');
 	  }//end testApplicationLoadInvalidSettingsFile()
 }//end class
