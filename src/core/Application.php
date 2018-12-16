@@ -1,6 +1,6 @@
 <?php
 
-namespace GOM;
+namespace GOM\Core;
 /**
  * GOMFactory - Static Class
  *
