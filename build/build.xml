@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="GenericDataManagement" default="ci" basedir="../../..">
+<project name="GenericDataManagement" default="ci" basedir="..">
   <property name="source" value="src" />
 	<property name="source" value="src" />
 
