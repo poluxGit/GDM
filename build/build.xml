@@ -60,8 +60,8 @@
 	</target>
 
 	<target name="phpcpd" description="PHP CPD - Détection code dupliqué...">
-    <phpcpd file="${project.basedir}/${source}">
-      <formatter type="pmd" outfile="${project.basedir}/build/logs/pmd-cpd.xml"/>
+    <phpcpd file="${rootdir}/${source}">
+      <formatter type="pmd" outfile="${rootdir}/build/logs/pmd-cpd.xml"/>
     </phpcpd>
 	</target>
 
