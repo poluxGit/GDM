@@ -16,7 +16,7 @@
 				"pdepend/pdepend" : "@stable"
     },
     "require-dev": {
-			"squizlabs/php_codesniffer": "@stable",
+			"squizlabs/php_codesniffer": "*",
 			"phpmd/phpmd": "@stable",
 			"sebastian/phpcpd": "@stable",
 			"pdepend/pdepend": "@stable",
