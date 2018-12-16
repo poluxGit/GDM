@@ -1,7 +1,5 @@
 <?php
-namespace GOM\Data;
-
-use GOM\Data\Internal;
+namespace GOM\Core;
 
 /**
  * DataFactory - Classe statique de gestion des données
@@ -31,7 +29,7 @@ class DataFactory
   static function importModelFromJSONData($p_sJSONData)
   {
     //XXX self::initDBConnection();
-    $l_obj = new Data\Internal\GOMObjectDefinition();
+    $l_obj = new Data\ObjectDefinition();
   }//end importMDLFromJSONData()
 
   /**
@@ -45,7 +43,7 @@ class DataFactory
     $l_obj = NULL;
     try {
         // TODO To dev
-      $l_obj = new Data\Internal\GOMObjectDefinition($p_sTID);
+      $l_obj = new Data\ObjectDefinition($p_sTID);
       $l_obj->loadObject();
 
 
@@ -61,13 +59,13 @@ class DataFactory
    * Retourne l'OBD dont le TID est passé en argument
    *
    * @param string $p_sTID  TID de l'OBD à charger
-   * @return Data\Internal\GOMObjectDefinition
+   * @return Data\ObjectDefinition
    */
   static function getObjectDefinition($p_sTID){
 
     $l_obj = NULL;
     try {
-      $l_obj = new Internal\GOMObjectDefinition($p_sTID);
+      $l_obj = new Data\ObjectDefinition($p_sTID);
       $l_obj->loadObject();
     } catch (\Exception $e) {
       $l_sMsgException = sprintf("Une erreur est survenue durant le chargement de l'OBD de TID : '%s'.",$p_sTID);
@@ -81,13 +79,13 @@ class DataFactory
    * Retourne le model dont le TID est passé en argument
    *
    * @param string $p_sTID  TID du model à charger
-   * @return Data\Internal\GOMModel
+   * @return Data\Model
    */
   static function getModel($p_sTID){
 
     $l_obj = NULL;
     try {
-      $l_obj = new Internal\GOMModel($p_sTID);
+      $l_obj = new Data\Model($p_sTID);
       $l_obj->loadObject();
     } catch (\Exception $e) {
       $l_sMsgException = sprintf("Une erreur est survenue durant le chargement du model (TID : '%s').",$p_sTID);
@@ -100,13 +98,13 @@ class DataFactory
    * Retourne la définition de liens
    *
    * @param string $p_sTID  TID du lien à charger
-   * @return Data\Internal\GOMLinkDefinition
+   * @return Data\LinkDefinition
    */
   static function getLinkDefinition($p_sTID){
 
     $l_obj = NULL;
     try {
-      $l_obj = new Internal\GOMLinkDefinition($p_sTID);
+      $l_obj = new Data\LinkDefinition($p_sTID);
       $l_obj->loadObject();
     } catch (\Exception $e) {
       $l_sMsgException = sprintf("Une erreur est survenue durant le chargement de la définition de liens (TID : '%s').",$p_sTID);
@@ -119,13 +117,13 @@ class DataFactory
    * Retourne la définition de la metadonnées de liens
    *
    * @param string $p_sTID  TID de la metadonnées de liens à charger
-   * @return Data\Internal\GOMLinkMetaDefinition
+   * @return Data\LinkMetaDefinition
    */
   static function getLinkMetaDefinition($p_sTID){
 
     $l_obj = NULL;
     try {
-      $l_obj = new Internal\GOMLinkMetaDefinition($p_sTID);
+      $l_obj = new Data\LinkMetaDefinition($p_sTID);
       $l_obj->loadObject();
     } catch (\Exception $e) {
       $l_sMsgException = sprintf("Une erreur est survenue durant le chargement de la définition de metadonnées de liens (TID : '%s').",$p_sTID);
@@ -138,13 +136,13 @@ class DataFactory
    * Retourne la définition de la metadonnées d'objet
    *
    * @param string $p_sTID  TID de la metadonnées de liens à charger
-   * @return Data\Internal\GOMObjectMetaDefinition
+   * @return Data\ObjectMetaDefinition
    */
   static function getObjectMetaDefinition($p_sTID){
 
     $l_obj = NULL;
     try {
-      $l_obj = new Internal\GOMObjectMetaDefinition($p_sTID);
+      $l_obj = new Data\ObjectMetaDefinition($p_sTID);
       $l_obj->loadObject();
     } catch (\Exception $e) {
       $l_sMsgException = sprintf("Une erreur est survenue durant le chargement de la définition de metadonnées d'Objet' (TID : '%s').",$p_sTID);
@@ -154,4 +152,3 @@ class DataFactory
   }//end getObjectMetaDefinition()
 
 }//end class
- ?>

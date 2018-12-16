@@ -1,13 +1,13 @@
 <?php
 
-namespace GOM\Data\Internal;
+namespace GOM\Data;
 
 /**
  * Classe GOMModel - Modele de données interne
  *
  */
-class GOMModel extends GOMObject{
-
+class Model extends GOMObject
+{
   /**
    * Constructeur par défaut
    */
@@ -96,5 +96,3 @@ class GOMModel extends GOMObject{
   }//end
 
 }//end class
-
- ?>

@@ -8,12 +8,12 @@
  */
 require_once './core/Application.php';
 require_once './core/data/internal/GOMObject.php';
-require_once './core/data/internal/GOMObjectDefinition.php';
-require_once './core/data/internal/GOMModel.php';
-require_once './core/data/internal/GOMLinkDefinition.php';
-require_once './core/data/internal/GOMLinkMetaDefinition.php';
-require_once './core/data/internal/GOMObjectMetaDefinition.php';
-require_once './core/data/DataFactory.php';
+require_once './core/data/ObjectDefinition.php';
+require_once './core/data/Model.php';
+require_once './core/data/LinkDefinition.php';
+require_once './core/data/LinkMetaDefinition.php';
+require_once './core/data/ObjectMetaDefinition.php';
+require_once './core/DataFactory.php';
 
 /**
  * Script d'import d'un nouveau modèle en base de données
@@ -153,7 +153,7 @@ function main($argc, $argv)
           throw new Exception(PROG_NAME." : Le fichier source n'est pas interprétable. (i.e : '".$lStrJSONFile."')\nJSON Error => ".$lstrErrJSON);
         }
         echo "- Démarrage de l'import...\n";
-        GOM\Application::importModelFromJSONData($ljsonContent);
+        GOM\Core\Application::importModelFromJSONData($ljsonContent);
         echo "- Fin de l'import!\n";
         break;
 
@@ -168,22 +168,22 @@ function main($argc, $argv)
 
       case 'LOAD_OBD':
           // Chargement d'une définition d'objet
-          $l_oObj = GOM\Data\DataFactory::getObjectDefinition($argv[2]);
+          $l_oObj = GOM\Core\DataFactory::getObjectDefinition($argv[2]);
           print_r($l_oObj);
           break;
       case 'LOAD_MDL':
           // Chargement d'un modele
-          $l_oObj = GOM\Data\DataFactory::getModel($argv[2]);
+          $l_oObj = GOM\Core\DataFactory::getModel($argv[2]);
           print_r($l_oObj);
           break;
       case 'LOAD_LNKD':
           // Chargement d'une définition de lien
-          $l_oObj = GOM\Data\DataFactory::getLinkDefinition($argv[2]);
+          $l_oObj = GOM\Core\DataFactory::getLinkDefinition($argv[2]);
           print_r($l_oObj);
           break;
       case 'LOAD_LNKMD':
           // Chargement d'une définition de metadonnées de lien
-          $l_oObj = GOM\Data\DataFactory::getLinkMetaDefinition($argv[2]);
+          $l_oObj = GOM\Core\DataFactory::getLinkMetaDefinition($argv[2]);
           print_r($l_oObj);
           break;
       default:
@@ -202,7 +202,7 @@ function main($argc, $argv)
 }//end main()
 
 // INITIALISATION GOM
-GOM\Application::loadDBSettings('./gom-settings.json');
+GOM\Core\Application::loadDBSettings('./gom-settings.json');
 
 // Démarrage du traitement
 /* -------------------------------------------------------------------------- */

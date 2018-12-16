@@ -1,6 +1,9 @@
 <?php
 
 namespace GOM\Core;
+
+use GOM\Core\Data\Internal;
+use GOM\Core\Data;
 /**
  * GOMFactory - Static Class
  *
@@ -63,8 +66,8 @@ class Application
    * Configuration des classes
    */
   protected static function setupClasses(){
-    Data\Internal\GOMObject::setCommonPDOConnection(self::$_oDbPDOHandler);
-    Data\DataFactory::setPDOConnection(self::$_oDbPDOHandler);
+    \GOM\Core\Data\Internal\GOMObject::setCommonPDOConnection(self::$_oDbPDOHandler);
+    \GOM\Core\DataFactory::setPDOConnection(self::$_oDbPDOHandler);
   }//end setupClasses
 
   /**
@@ -95,7 +98,7 @@ class Application
   static function importModelFromJSONData($p_sJSONData)
   {
     //XXX self::initDBConnection();
-    $l_obj = new Data\Internal\GOMObjectDefinition();
+    $l_obj = new ObjectDefinition();
   }//end importMDLFromJSONData()
 
 }//end class

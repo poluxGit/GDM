@@ -26,7 +26,7 @@
     },
     "autoload": {
         "psr-4": {
-            "GOM\\": "src/core",
+            "GOM\\Core\\": "src/core",
 						"GOM\\Test\\": "tests/core"
         }
     },

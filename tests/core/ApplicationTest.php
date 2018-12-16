@@ -35,16 +35,16 @@ final class ApplicationTest extends TestCase
 
 	  }//end testApplicationLoadSettingsFromInvalidFormatedFile()
 
-		// /**
-		//  * testApplicationLoadValideSettingsFile
-		//  *
-		//  * Chargement des paramètres depuis un fichier au format JSON invalide.
-		//  */
-  	// public function testApplicationLoadSettingsFromValidFile(): void
-  	// {
-		// 	$laObj = Application::loadDBSettings('./../tests/datasets/AppSettingsFile_02-valid.json');
-		// 	$this->assertNotEquals($laObj,NULL);
-		// 	$this->assertEquals(array_key_exists("database",$laObj),true);
-	  // }//end testApplicationLoadSettingsFromValidFile()
+		/**
+		 * testApplicationLoadValideSettingsFile
+		 *
+		 * Chargement des paramètres depuis un fichier au format JSON invalide.
+		 */
+  	public function testApplicationLoadSettingsFromValidFile(): void
+  	{
+			$laObj = Application::loadDBSettings('./../tests/datasets/AppSettingsFile_02-valid.json');
+			$this->assertNotEquals($laObj,NULL);
+			$this->assertEquals(array_key_exists("database",$laObj),true);
+	  }//end testApplicationLoadSettingsFromValidFile()
 
 }//end class

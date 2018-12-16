@@ -1,6 +1,6 @@
 <?php
 
-namespace GOM\Data\Internal;
+namespace GOM\Core\Data\Internal;
 
 /**
  * Représentation générique d'objet en base de données

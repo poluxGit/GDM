@@ -1,18 +1,18 @@
 <?php
 
-namespace GOM\Data\Internal;
+namespace GOM\Data;
 
 /**
- * Définition de lien entre Objet
+ * Définition de metadonnées de lien entre Objet
  */
-class GOMLinkDefinition extends GOMObject{
+class LinkMetaDefinition extends GOMObject
+{
 
   /**
    * Constructeur par défaut
    */
   public function __construct(string $p_sTID){
-    parent::__construct($p_sTID,'A000_LNKD');
-
+    parent::__construct($p_sTID,'A000_LNKMD');
     $this->initFieldDefinition();
   }//end __construct()
 
@@ -23,13 +23,14 @@ class GOMLinkDefinition extends GOMObject{
   public function initFieldDefinition()
   {
     $this->addFieldDefinition('ID', 'BID', 'string', 'Id. (BID)');
-    $this->addFieldDefinition('MODEL', 'MDL_TID', 'string', 'Modèle (TID)');
+    $this->addFieldDefinition('LinkDefTID', 'LNKD_TID', 'string', 'LNKD (TID)');
     $this->addFieldDefinition('TitreCourt', 'STITLE', 'string', 'Titre Court');
     $this->addFieldDefinition('TitreLong', 'LTITLE', 'string', 'Titre Long');
     $this->addFieldDefinition('Commentaire', 'COMMENT', 'string', 'Commentaire divers');
-    $this->addFieldDefinition('Type', 'LNKD_TYPE', 'string', 'Type d\'objet');
-    $this->addFieldDefinition('ObjectDefSrcTID', 'OBD_TID_SOURCE', 'string', 'TID de l\'OBD Source');
-    $this->addFieldDefinition('ObjectDefTrgTID', 'OBD_TID_TARGET', 'string', 'Nb caractère du cpt numérique');
+    $this->addFieldDefinition('DataType', 'LNKMD_DATA_TYPE', 'string', 'Type de la metadonnées');
+    $this->addFieldDefinition('DataPattern', 'LNKMD_DATA_PATTERN', 'string', 'Pattern de la metadonnées');
+    $this->addFieldDefinition('TIDPattern', 'LNKMI_TID_PATTERN', 'string', 'Pattern du TID');
+    $this->addFieldDefinition('BIDPattern', 'LNKMI_BID_PATTERN', 'string', 'Pattern du BID');
     $this->addFieldDefinition('JSONData', 'JSON_DATA', 'string', 'Données complémentaires');
     $this->addFieldDefinition('DateCreation', 'CDATE', 'date', 'Date de création');
     $this->addFieldDefinition('DateMaj', 'UDATE', 'date', 'Date de dernière maj');
@@ -39,5 +40,3 @@ class GOMLinkDefinition extends GOMObject{
     $this->addFieldDefinition('EstPropage', 'IS_PROPAGATED', 'INT', 'Flag de propagation');
   }//end initFieldDefinition()
 }//end class
-
- ?>
