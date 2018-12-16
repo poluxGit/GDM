@@ -12,8 +12,7 @@
         }
     ],
     "require": {
-        "php": ">=7.1",
-				"pdepend/pdepend" : "@stable"
+        "php": ">=7.1"
     },
     "require-dev": {
 			"squizlabs/php_codesniffer": "^2.9.2",
