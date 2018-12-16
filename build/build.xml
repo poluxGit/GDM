@@ -4,7 +4,7 @@
 
   <target name="ci"
       description="Tâche principale d'intégration continue"
-      depends="clean,qa"
+      depends="qa"
   />
 
   <target name="clean" description="Vide les répertoires d'artefacts">
