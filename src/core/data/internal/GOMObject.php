@@ -50,7 +50,7 @@ abstract class GOMObject
    *
    * @var array([], [])
    * @internal [[ 'name' => 'Champs1', 'type' => 'string',
-	 *     sql_name' => 'TOTO' ...], [ 'Name' => 'Champs2', 'Type' => 'date', ...]]
+        *     sql_name' => 'TOTO' ...], [ 'Name' => 'Champs2', 'Type' => 'date', ...]]
    */
   private $_aFieldDefinition = [];
 
@@ -75,7 +75,7 @@ abstract class GOMObject
   {
     // Connection BD passée en paramètres ?
     if($poDBConn === NULL)
-		{
+              {
       $this->_oPDODBConnection = self::$_oPDOCommonDBConnection;
     } else {
       $this->_oPDODBConnection = $poDBConn;
@@ -209,8 +209,8 @@ abstract class GOMObject
    * @param string  $psFieldLabel    Libellé du champs (Optionnel)
    */
   public function addFieldDefinition( string $psFieldName,
-																			string $psSQLFieldName,
-																			string $psFieldType, string $psFieldLabel = null)
+                                                                                                                                     string $psSQLFieldName,
+                                                                                                                                     string $psFieldType, string $psFieldLabel = null)
   {
       $lbNameAlreadyExists = count($this->getFieldDefinitionByAttrValue('sql_name', $psSQLFieldName))>0;
       // Un champs de même nom est-il déjà défini ?
@@ -314,7 +314,7 @@ abstract class GOMObject
 
       foreach ($this->_aFieldDefinition as $lskey => $laValue){
         if(array_key_exists($psFieldAttrName, $laValue)
-					&& strtolower($laValue[$psFieldAttrName])==strtolower($psFieldAttrValue))
+                                   && strtolower($laValue[$psFieldAttrName])==strtolower($psFieldAttrValue))
         {
           $laFieldDefinition[$lskey] = $laValue;
         }
@@ -324,11 +324,11 @@ abstract class GOMObject
       if (count($laFieldDefinition)>1 && !$pbAllowMultipleResult) {
         // TODO Faire une classe Exception spécifique 'FieldDefintionNotExists'
         $lsMsgException = sprintf(
-					"Le nombre de résultat dont l'attribut '%s' vaut '%s' est anormal. Nb Résultat: %i.",
-					$psFieldAttrName,
-					$psFieldAttrValue,
-					count($laFieldDefinition)
-				);
+                                   "Le nombre de résultat dont l'attribut '%s' vaut '%s' est anormal. Nb Résultat: %i.",
+                                   $psFieldAttrName,
+                                   $psFieldAttrValue,
+                                   count($laFieldDefinition)
+                            );
         throw new \Exception($lsMsgException);
       }
 
@@ -421,10 +421,10 @@ abstract class GOMObject
           if (count($laResultat)==0) {
             // TODO Faire une classe Exception spécifique 'LoadObjectInvalidDBConnection'
             $lsMsgException = sprintf(
-							"L'Objet avec le TID '%s' n'a pu être chargé depuis la table '%s'.",
-							$this->getTID(),
-							$this->_sTablename
-						);
+                                                 "L'Objet avec le TID '%s' n'a pu être chargé depuis la table '%s'.",
+                                                 $this->getTID(),
+                                                 $this->_sTablename
+                                          );
             throw new \Exception($lsMsgException);
           }
 
@@ -432,11 +432,11 @@ abstract class GOMObject
           if (count($laResultat) > 1) {
             // TODO Faire une classe Exception spécifique 'LoadObjectInvalidDBConnection'
             $lsMsgException = sprintf(
-							"Plusieurs objets avec le TID '%s' sont défini dans la table '%s'.
-							 Impossible de réaliser le chargement en mémoire !",
-							$this->getTID(),
-							$this->_sTablename
-						);
+                                                 "Plusieurs objets avec le TID '%s' sont défini dans la table '%s'.
+                                                  Impossible de réaliser le chargement en mémoire !",
+                                                 $this->getTID(),
+                                                 $this->_sTablename
+                                          );
             throw new \Exception($lsMsgException);
           } else {
             $this->initFieldValuesArrayFromDefinition();
