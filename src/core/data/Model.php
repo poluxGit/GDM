@@ -60,32 +60,32 @@ class Model extends Internal\GOMObject
         if(self::$_oPDOCommonDBConnection === NULL)
         {
           // TODO Faire une classe Exception spécifique 'LoadObjectInvalidDBConnection'
-          $l_sMsgException = sprintf("La connexion à la base de données n'est pas définie.");
-          throw new \Exception($l_sMsgException);
+          $lsMsgException = sprintf("La connexion à la base de données n'est pas définie.");
+          throw new \Exception($lsMsgException);
         } else {
-          $l_sSQLQuery = sprintf("SELECT DMA_createNewModel(:MDL_SCODE, :MDL_BIDCODE, :MDL_VERSION, :MDL_STITLE, :MDL_LTITLE, :MDL_COMMENT, :MDL_JSONDATA);");
-          $l_oPDOStat         = $this->_oPDODBConnection->prepare($l_sSQLQuery);
+          $lsSQLQuery = sprintf("SELECT DMA_createNewModel(:MDL_SCODE, :MDL_BIDCODE, :MDL_VERSION, :MDL_STITLE, :MDL_LTITLE, :MDL_COMMENT, :MDL_JSONDATA);");
+          $loPDOStat         = $this->_oPDODBConnection->prepare($lsSQLQuery);
 
-          $l_oPDOStat->bindValue(':MDL_SCODE', $psShortCode, \PDO::PARAM_STR);
-          $l_oPDOStat->bindValue(':MDL_BIDCODE', $psBIDCode, \PDO::PARAM_STR);
-          $l_oPDOStat->bindValue(':MDL_VERSION', $psVersion, \PDO::PARAM_STR);
-          $l_oPDOStat->bindValue(':MDL_STITLE', $psShortTitle, \PDO::PARAM_STR);
-          $l_oPDOStat->bindValue(':MDL_LTITLE', $psLongTitle, \PDO::PARAM_STR);
-          $l_oPDOStat->bindValue(':MDL_COMMENT', $psComment, \PDO::PARAM_STR);
-          $l_oPDOStat->bindValue(':MDL_JSONDATA', $psJSONData, \PDO::PARAM_STR);
+          $loPDOStat->bindValue(':MDL_SCODE', $psShortCode, \PDO::PARAM_STR);
+          $loPDOStat->bindValue(':MDL_BIDCODE', $psBIDCode, \PDO::PARAM_STR);
+          $loPDOStat->bindValue(':MDL_VERSION', $psVersion, \PDO::PARAM_STR);
+          $loPDOStat->bindValue(':MDL_STITLE', $psShortTitle, \PDO::PARAM_STR);
+          $loPDOStat->bindValue(':MDL_LTITLE', $psLongTitle, \PDO::PARAM_STR);
+          $loPDOStat->bindValue(':MDL_COMMENT', $psComment, \PDO::PARAM_STR);
+          $loPDOStat->bindValue(':MDL_JSONDATA', $psJSONData, \PDO::PARAM_STR);
 
           // Execution de la requete
-          $l_oPDOStat->execute();
-          $l_aResultat = $l_oPDOStat->fetchAll();
+          $loPDOStat->execute();
+          $laResultat = $loPDOStat->fetchAll();
 
           // Aucun résultat ?
-          if (count($l_aResultat)==0) {
+          if (count($laResultat)==0) {
             // TODO Faire une classe Exception spécifique 'LoadObjectInvalidDBConnection'
-            $l_sMsgException = sprintf("La création du model a rencontré une erreur (Code : '%s').", $psShortCode);
-            throw new \Exception($l_sMsgException);
+            $lsMsgException = sprintf("La création du model a rencontré une erreur (Code : '%s').", $psShortCode);
+            throw new \Exception($lsMsgException);
           }
 
-          return array_shift($l_aResultat);
+          return array_shift($laResultat);
         }
     } catch (\Exception $e) {
       throw new \Exception($e->getMessage());

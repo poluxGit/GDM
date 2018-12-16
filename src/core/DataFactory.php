@@ -29,7 +29,7 @@ class DataFactory
   static function importModelFromJSONData($psJSONData)
   {
     //XXX self::initDBConnection();
-    $l_obj = new Data\ObjectDefinition();
+    $lobj = new Data\ObjectDefinition();
   }//end importMDLFromJSONData()
 
   /**
@@ -40,19 +40,19 @@ class DataFactory
    */
   static function getObject($psTID){
 
-    $l_obj = NULL;
+    $lobj = NULL;
     try {
         // TODO To dev
-      $l_obj = new Data\ObjectDefinition($psTID);
-      $l_obj->loadObject();
+      $lobj = new Data\ObjectDefinition($psTID);
+      $lobj->loadObject();
 
 
     } catch (\Exception $e) {
-      $l_sMsgException = sprintf("Une erreur est survenue durant le chargement de l'objet TID : '%s'.", $psTID);
-      throw new \Exception($l_sMsgException);
+      $lsMsgException = sprintf("Une erreur est survenue durant le chargement de l'objet TID : '%s'.", $psTID);
+      throw new \Exception($lsMsgException);
     }
 
-    return $l_obj;
+    return $lobj;
   }//end loadObject()
 
   /**
@@ -63,16 +63,16 @@ class DataFactory
    */
   static function getObjectDefinition($psTID){
 
-    $l_obj = NULL;
+    $lobj = NULL;
     try {
-      $l_obj = new Data\ObjectDefinition($psTID);
-      $l_obj->loadObject();
+      $lobj = new Data\ObjectDefinition($psTID);
+      $lobj->loadObject();
     } catch (\Exception $e) {
-      $l_sMsgException = sprintf("Une erreur est survenue durant le chargement de l'OBD de TID : '%s'.", $psTID);
-      throw new \Exception($l_sMsgException);
+      $lsMsgException = sprintf("Une erreur est survenue durant le chargement de l'OBD de TID : '%s'.", $psTID);
+      throw new \Exception($lsMsgException);
     }
 
-    return $l_obj;
+    return $lobj;
   }//end getObjectDefinition()
 
   /**
@@ -83,15 +83,15 @@ class DataFactory
    */
   static function getModel($psTID){
 
-    $l_obj = NULL;
+    $lobj = NULL;
     try {
-      $l_obj = new Data\Model($psTID);
-      $l_obj->loadObject();
+      $lobj = new Data\Model($psTID);
+      $lobj->loadObject();
     } catch (\Exception $e) {
-      $l_sMsgException = sprintf("Une erreur est survenue durant le chargement du model (TID : '%s').", $psTID);
-      throw new \Exception($l_sMsgException);
+      $lsMsgException = sprintf("Une erreur est survenue durant le chargement du model (TID : '%s').", $psTID);
+      throw new \Exception($lsMsgException);
     }
-    return $l_obj;
+    return $lobj;
   }//end getModel()
 
   /**
@@ -102,15 +102,15 @@ class DataFactory
    */
   static function getLinkDefinition($psTID){
 
-    $l_obj = NULL;
+    $lobj = NULL;
     try {
-      $l_obj = new Data\LinkDefinition($psTID);
-      $l_obj->loadObject();
+      $lobj = new Data\LinkDefinition($psTID);
+      $lobj->loadObject();
     } catch (\Exception $e) {
-      $l_sMsgException = sprintf("Une erreur est survenue durant le chargement de la définition de liens (TID : '%s').", $psTID);
-      throw new \Exception($l_sMsgException);
+      $lsMsgException = sprintf("Une erreur est survenue durant le chargement de la définition de liens (TID : '%s').", $psTID);
+      throw new \Exception($lsMsgException);
     }
-    return $l_obj;
+    return $lobj;
   }//end getLinkDefinition()
 
   /**
@@ -121,15 +121,15 @@ class DataFactory
    */
   static function getLinkMetaDefinition($psTID){
 
-    $l_obj = NULL;
+    $lobj = NULL;
     try {
-      $l_obj = new Data\LinkMetaDefinition($psTID);
-      $l_obj->loadObject();
+      $lobj = new Data\LinkMetaDefinition($psTID);
+      $lobj->loadObject();
     } catch (\Exception $e) {
-      $l_sMsgException = sprintf("Une erreur est survenue durant le chargement de la définition de metadonnées de liens (TID : '%s').", $psTID);
-      throw new \Exception($l_sMsgException);
+      $lsMsgException = sprintf("Une erreur est survenue durant le chargement de la définition de metadonnées de liens (TID : '%s').", $psTID);
+      throw new \Exception($lsMsgException);
     }
-    return $l_obj;
+    return $lobj;
   }//end getLinkMetaDefinition()
 
   /**
@@ -140,15 +140,15 @@ class DataFactory
    */
   static function getObjectMetaDefinition($psTID){
 
-    $l_obj = NULL;
+    $lobj = NULL;
     try {
-      $l_obj = new Data\ObjectMetaDefinition($psTID);
-      $l_obj->loadObject();
+      $lobj = new Data\ObjectMetaDefinition($psTID);
+      $lobj->loadObject();
     } catch (\Exception $e) {
-      $l_sMsgException = sprintf("Une erreur est survenue durant le chargement de la définition de metadonnées d'Objet' (TID : '%s').", $psTID);
-      throw new \Exception($l_sMsgException);
+      $lsMsgException = sprintf("Une erreur est survenue durant le chargement de la définition de metadonnées d'Objet' (TID : '%s').", $psTID);
+      throw new \Exception($lsMsgException);
     }
-    return $l_obj;
+    return $lobj;
   }//end getObjectMetaDefinition()
 
 }//end class
