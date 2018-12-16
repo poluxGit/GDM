@@ -7,7 +7,6 @@ namespace GOM\Core\Data;
  */
 class ObjectMetaDefinition extends Internal\GOMObject
 {
-
   /**
    * Constructeur par défaut
    */
@@ -40,4 +39,18 @@ class ObjectMetaDefinition extends Internal\GOMObject
     $this->addFieldDefinition('EstSystem', 'IS_SYSTEM', 'INT', 'Flag system');
     $this->addFieldDefinition('EstMulitple', 'IS_MULTIPLE', 'INT', 'Flag Multiple');
   }//end initFieldDefinition()
+
+  /**
+   * getAllMetaDefinitionsForAnObjectDefinition
+   *
+   * Retourne la liste des TID des définition des metadonnées liées à
+   * la définition d'objet.
+   *
+   * @param string $psTIDObjectDefinition   TID de la définition de l'objet.
+   * @return array  Tableau des TID des définition des metadonnées trouvées
+   */
+  public static function getAllMetaDefinitionsForAnObjectDefinition($psTIDObjectDefinition)
+  {
+    return self::searchObjectFromSQLConditions(["OBD_TID = '$psTIDObjectDefinition'"],'A000_OBMD');
+  }//end getAllMetaDefinitionsForAnObjectDefinition()
 }//end class

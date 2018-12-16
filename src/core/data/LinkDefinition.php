@@ -38,4 +38,14 @@ class LinkDefinition extends Internal\GOMObject
     $this->addFieldDefinition('EstSupprime', 'IS_DELETED', 'INT', 'Flag de suppression');
     $this->addFieldDefinition('EstPropage', 'IS_PROPAGATED', 'INT', 'Flag de propagation');
   }//end initFieldDefinition()
+
+  /**
+   * Retourne le tableau des TID des définitions de metadonnées du LNKD
+   *
+   * @return array(LinkMetaDefinition)
+   */
+  public function getLinkMetaDefinitions()
+  {
+    return LinkMetaDefinition::getAllMetaDefinitionsForALinkDefinition($this->getTID());
+  }//end getLinkMetaDefinitions()
 }//end class

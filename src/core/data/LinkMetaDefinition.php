@@ -39,4 +39,19 @@ class LinkMetaDefinition extends Internal\GOMObject
     $this->addFieldDefinition('EstSupprime', 'IS_DELETED', 'INT', 'Flag de suppression');
     $this->addFieldDefinition('EstPropage', 'IS_PROPAGATED', 'INT', 'Flag de propagation');
   }//end initFieldDefinition()
+
+  /**
+   * getAllMetaDefinitionsForALinkDefinition
+   *
+   * Retourne la liste des TID des définition des metadonnées liées à
+   * la définition de lien.
+   *
+   * @param string $psTIDLinkDefinition   TID de la définition de lien
+   * @return array  Tableau des TID des définition des metadonnées trouvées
+   */
+  public static function getAllMetaDefinitionsForALinkDefinition($psTIDLinkDefinition)
+  {
+    return self::searchObjectFromSQLConditions(["LNKD_TID = '$psTIDObjectDefinition'"],'A000_LNKMD');
+  }//end getAllMetaDefinitionsForALinkDefinition()
+
 }//end class

@@ -41,4 +41,15 @@ class ObjectDefinition extends Internal\GOMObject
     $this->addFieldDefinition('EstSupprime', 'IS_DELETED', 'INT', 'Flag de suppression');
     $this->addFieldDefinition('EstSystem', 'IS_SYSTEM', 'INT', 'Flag system');
   }//end initFieldDefinition()
+
+  /**
+   * Retourne le tableau des TID des définitions de metadonnées de l'OBD
+   *
+   * @return array(ObjectMetaDefinition)
+   */
+  public function getObjectMetaDefinitions()
+  {
+    return ObjectMetaDefinition::getAllMetaDefinitionsForAnObjectDefinition($this->getTID());
+  }//end getObjectMetaDefinitions()
+
 }//end class

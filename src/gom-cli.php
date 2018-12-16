@@ -6,14 +6,7 @@
  * @author poluxGit
  * -----------------------------------------------------------------------------
  */
-require_once './core/Application.php';
-require_once './core/data/internal/GOMObject.php';
-require_once './core/data/ObjectDefinition.php';
-require_once './core/data/Model.php';
-require_once './core/data/LinkDefinition.php';
-require_once './core/data/LinkMetaDefinition.php';
-require_once './core/data/ObjectMetaDefinition.php';
-require_once './core/DataFactory.php';
+require_once '../vendor/autoload.php';
 
 /**
  * Script d'import d'un nouveau modèle en base de données

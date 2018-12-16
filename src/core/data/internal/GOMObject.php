@@ -2,6 +2,8 @@
 
 namespace GOM\Core\Data\Internal;
 
+use GOM\Core;
+
 /**
  * Représentation générique d'objet en base de données
  */
@@ -405,7 +407,16 @@ abstract class GOMObject
           throw new \Exception($lsMsgException);
         } else {
           $laWhereCondition  = ['TID = :tid'];
-          $lsSQLQuery        = $this->buildSQLSelectQuery($laWhereCondition);
+          $lsSQLQuery        = SQLQueryGenerator::buildSQLSelectQuery(
+            array_map(
+              function ($pelem) {
+                return $pelem['sql_name'];
+              },
+              $this->_aFieldDefinition
+            ),
+            $this->_sTablename,
+            $laWhereCondition
+          );
           $loPDOStat         = $this->_oPDODBConnection->prepare($lsSQLQuery);
 
           $loPDOStat->bindValue(
@@ -479,36 +490,6 @@ abstract class GOMObject
     }
   }//end initFieldValuesArrayFromDefinition()
 
-  /**
-   * Retourne la requête SQL de sélection de l'objet
-   *
-   * @param array(string) $paWhereCondition  Tableau des conditions SQL Where (AND)
-   * @return  string  Requete SQL de sélection
-   */
-  protected function buildSQLSelectQuery($paWhereCondition)
-  {
-    $lsSQLQuery = "SELECT ";
-
-    // SELECT Part
-    $laFieldDefinitionSQLName = array_map(function($pelem) { return $pelem['sql_name'];}, $this->_aFieldDefinition);
-    $lsSQLQuery .= implode(", ", $laFieldDefinitionSQLName);
-
-    // TODO Gestion des type de données pour formatage (... date, reel ...)
-
-    // FROM part
-    $lsSQLQuery .= " FROM ";
-    $lsSQLQuery .= $this->_sTablename;
-
-    // WHERE part nécessaire ?
-    if (count($paWhereCondition)> 0) {
-      $lsSQLQuery .= " WHERE ";
-      $lsSQLQuery .= implode(", ", $paWhereCondition);
-    }
-
-    //DEBUG echo $lsSQLQuery."\n";
-    return $lsSQLQuery;
-  }//end buildSQLSelectQuery()
-
   // ************************************************************************ //
   // METHODES STATIQUES
   // ************************************************************************ //
@@ -523,6 +504,21 @@ abstract class GOMObject
     self::$_oPDOCommonDBConnection = $poPDOConnection;
   }//end setCommonPDOConnection()
 
+  /**
+   * Retourne un tableau de TID d'objet(s) trouvé(s)
+   *
+   * @param array  $paWhereCondition  Tableau des Conditions SQL (AND)
+   * @param string $psTablename       Nom de la table de l'objet à cherché
+   *
+   * @return array  Tableau contenant les TID des objets trouvés
+   */
+  public static function searchObjectFromSQLConditions($paWhereCondition, $psTablename)
+  {
+    $laResults = null;
+    $lsSQLQuery = SQLQueryGenerator::buildSQLSelectQuery(['TID'],$psTablename,$paWhereCondition);
+    $laResults = DatabaseManager::getAllRows($lsSQLQuery);
+    return $laResults;
+  }//end searchObjectFromSQLConditions()
 
   // ************************************************************************ //
   // METHODES ABSTRAITES
