@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project name="GenericDataManagement" default="ci" basedir="..">
+<project name="GenericDataManagement" default="ci" basedir=".">
   <property name="source" value="src" />
 	<property name="source" value="src" />
 
@@ -43,7 +43,7 @@
 
 
 	<target name="pdepend" description="PHP Depend">
-		<phpdepend file="./${source}">
+		<phpdepend file="${project.basedir}/${source}">
 			<logger type="jdepend-xml" outfile="${project.basedir}/build/logs/jdepend.xml" />
 			<logger type="jdepend-chart" outfile="${project.basedir}/build/pdepend/dependencies.svg" />
 			<logger type="overview-pyramid" outfile="${project.basedir}/build/pdepend/overview-pyramid.svg" />
