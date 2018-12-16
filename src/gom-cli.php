@@ -117,14 +117,14 @@ function main($argc, $argv)
     $l_sAction = strtoupper($argv[1]);
 
     // Validation de l'action
-    if(!array_key_exists(strtoupper($l_sAction), PROG_ACTIONS)){
+    if (!array_key_exists(strtoupper($l_sAction), PROG_ACTIONS)){
       throw new Exception(generatePROGName()." : Action '$l_sAction' non reconnue ! \n".generateMessageProgHelp());
     }
 
     // Validation du nombre de paramètre
     $l_iNbParamActionAttendu = count(PROG_ACTIONS[strtoupper($l_sAction)]);
     $l_iNbParamActionReel = ($argc-2);
-    if( $l_iNbParamActionAttendu != $l_iNbParamActionReel ){
+    if ( $l_iNbParamActionAttendu != $l_iNbParamActionReel ){
       throw new Exception(generatePROGName()." : Nombre de paramètres pour l'action '$l_sAction' invalid (Donné(s): $l_iNbParamActionReel | Attendu : $l_iNbParamActionAttendu) !\n".generateMessageProgHelp());
     }
 
@@ -139,8 +139,7 @@ function main($argc, $argv)
         if(!file_exists($argv[2]))
         {
           throw new Exception(PROG_NAME." : Le fichier source ne peux pas être atteint. (i.e : '".$argv[2]."')");
-        }
-        else {
+        } else {
           $lStrJSONFile = $argv[2];
         }
         // fichier JSON  bien formé ?

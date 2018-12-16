@@ -62,8 +62,7 @@ class Model extends Internal\GOMObject
           // TODO Faire une classe Exception spécifique 'LoadObjectInvalidDBConnection'
           $l_sMsgException = sprintf("La connexion à la base de données n'est pas définie.");
           throw new \Exception($l_sMsgException);
-        }
-        else {
+        } else {
           $l_sSQLQuery = sprintf("SELECT DMA_createNewModel(:MDL_SCODE, :MDL_BIDCODE, :MDL_VERSION, :MDL_STITLE, :MDL_LTITLE, :MDL_COMMENT, :MDL_JSONDATA);");
           $l_oPDOStat         = $this->_oPDODBConnection->prepare($l_sSQLQuery);
 
@@ -80,7 +79,7 @@ class Model extends Internal\GOMObject
           $l_aResultat = $l_oPDOStat->fetchAll();
 
           // Aucun résultat ?
-          if(count($l_aResultat)==0){
+          if (count($l_aResultat)==0){
             // TODO Faire une classe Exception spécifique 'LoadObjectInvalidDBConnection'
             $l_sMsgException = sprintf("La création du model a rencontré une erreur (Code : '%s').",$p_sShortCode);
             throw new \Exception($l_sMsgException);

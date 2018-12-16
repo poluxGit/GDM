@@ -76,8 +76,7 @@ abstract class GOMObject
     if($p_oDBConn === NULL)
 		{
       $this->_oPDODBConnection = self::$_oPDOCommonDBConnection;
-    }
-    else{
+    } else {
       $this->_oPDODBConnection = $p_oDBConn;
     }
 
@@ -88,8 +87,7 @@ abstract class GOMObject
     {
       // Mode MAJ !
       $this->_sTID = $p_sTID;
-    }
-    else {
+    } else {
       // Mode Création !
     }
 
@@ -175,8 +173,7 @@ abstract class GOMObject
     // Définition de champs trouvée ?
     if ($l_sFieldName !== NULL){
       $this->_aFieldValue[$p_sFieldSQLName] = $p_xNewValue;
-    }
-    else {
+    } else {
       // TODO Faire une classe Exception spécifique 'FieldDefinitionNotExists'
       $l_sMsgException = sprintf("Le champs SQL '%s' n'est pas défini sur l'objet courant.",$p_sFieldSQLName);
       throw new \Exception($l_sMsgException);
@@ -195,8 +192,7 @@ abstract class GOMObject
     if ($this->isFieldDefinitionExists($p_sFieldName)){
       $l_sSQLFieldName = $this->getSQLFieldNameFromName($p_sFieldName);
       $this->_aFieldValue[$l_sSQLFieldName] = $p_xNewValue;
-    }
-    else {
+    } else {
       // TODO Faire une classe Exception spécifique 'FieldDefinitionNotExists'
       $l_sMsgException = sprintf("Le champs '%s' n'est pas défini sur l'objet courant.",$p_sFieldName);
       throw new \Exception($l_sMsgException);
@@ -329,12 +325,10 @@ abstract class GOMObject
 
       if (count($l_aFieldDefinition)==1){
         return array_shift($l_aFieldDefinition);
-      }
-      else {
+      } else {
           return $l_aFieldDefinition;
       }
-    }
-    else {
+    } else {
       return [];
     }
   }//end getFieldDefinitionByAttrValue()
@@ -399,8 +393,7 @@ abstract class GOMObject
           // TODO Faire une classe Exception spécifique 'LoadObjectInvalidDBConnection'
           $l_sMsgException = sprintf("La connexion à la base de données n'est pas définie.");
           throw new \Exception($l_sMsgException);
-        }
-        else {
+        } else {
           $l_aWhereCondition  = ['TID = :tid'];
           $l_sSQLQuery        = $this->buildSQLSelectQuery($l_aWhereCondition);
           $l_oPDOStat         = $this->_oPDODBConnection->prepare($l_sSQLQuery);
@@ -427,8 +420,7 @@ abstract class GOMObject
             // TODO Faire une classe Exception spécifique 'LoadObjectInvalidDBConnection'
             $l_sMsgException = sprintf("Plusieurs objets avec le TID '%s' sont défini dans la table '%s'. Impossible de réaliser le chargement en mémoire !",$this->getTID(),$this->_sTablename);
             throw new \Exception($l_sMsgException);
-          }
-          else {
+          } else {
             $this->initFieldValuesArrayFromDefinition();
             $this->_aInitFieldValue = array_merge(
                 $this->_aInitFieldValue,
