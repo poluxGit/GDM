@@ -102,7 +102,7 @@
 	</target>
 
 	<target name="phpunit" description="PHPUnit - Tests">
-    <exec logoutput="true" dir="${project.basedir}/tests" command="phpunit" escape="false" />
+    <exec logoutput="true" dir="${rootdir}/tests" command="phpunit --testdox" escape="false" />
 	</target>
 
 	<target name="phpcb" description="PHPCodeBrowser - Visualiseur de code PHP - Jenkins">
