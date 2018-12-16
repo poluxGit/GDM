@@ -32,22 +32,22 @@ class Application
    * Chargement des paramètres de connexion à la base de données depuis
    * un fichier de settings extérieur.
    *
-   * @param  $p_sJSONFilePath   string  Chemin du fichier de paramètre à charger.
+   * @param  $psJSONFilePath   string  Chemin du fichier de paramètre à charger.
    * @static
    */
-  static function loadDBSettings($p_sJSONFilePath)
+  static function loadDBSettings($psJSONFilePath)
   {
     // fichier JSON existant ?
-    if (!file_exists($p_sJSONFilePath)) {
-      throw new \Exception("Le fichier source ne peux pas être atteint. (i.e : '".$p_sJSONFilePath."')");
+    if (!file_exists($psJSONFilePath)) {
+      throw new \Exception("Le fichier source ne peux pas être atteint. (i.e : '".$psJSONFilePath."')");
     }
     // fichier JSON  bien formé ?
-    $json_data = file_get_contents($p_sJSONFilePath);
+    $json_data = file_get_contents($psJSONFilePath);
     $json_data = stripslashes($json_data);
     $ljsonContent = json_decode($json_data , true);
     if ($ljsonContent === NULL) {
       $lstrErrJSON = json_last_error_msg();
-      throw new \Exception("Le fichier source n'est pas interprétable. (i.e : '".$p_sJSONFilePath."')\nJSON Error => ".$lstrErrJSON);
+      throw new \Exception("Le fichier source n'est pas interprétable. (i.e : '".$psJSONFilePath."')\nJSON Error => ".$lstrErrJSON);
     }
 
     // Vérification de la présence des attributs obligatoires
@@ -89,10 +89,10 @@ class Application
   /**
    * Import d'un modèle de données depuis une donnée au format JSON
    *
-   * @param json $p_sJSONData   Données JSON du modèle à importer
+   * @param json $psJSONData   Données JSON du modèle à importer
    * @static
    */
-  static function importModelFromJSONData($p_sJSONData)
+  static function importModelFromJSONData($psJSONData)
   {
     //XXX self::initDBConnection();
     $l_obj = new ObjectDefinition();

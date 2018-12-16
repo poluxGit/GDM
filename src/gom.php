@@ -86,18 +86,18 @@ function generatePROGName()
   return PROG_NAME."@".PROG_VERSION;
 }
 
-function generateHeaderForCommandLine($p_sAction)
+function generateHeaderForCommandLine($psAction)
 {
   $l_sMessage =  "*************************************************************\n";
-  $l_sMessage .= " ".generatePROGName()." - Action '$p_sAction'.\n";
+  $l_sMessage .= " ".generatePROGName()." - Action '$psAction'.\n";
   $l_sMessage .= "*************************************************************\n";
   return $l_sMessage;
 }
 
-function generateFooterForCommandLine($p_sAction)
+function generateFooterForCommandLine($psAction)
 {
   $l_sMessage =  "\n*************************************************************\n";
-  $l_sMessage .= " ".generatePROGName()." - Fin Action '$p_sAction'.\n";
+  $l_sMessage .= " ".generatePROGName()." - Fin Action '$psAction'.\n";
   $l_sMessage .= "*************************************************************\n";
   return $l_sMessage;
 }

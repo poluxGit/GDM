@@ -10,8 +10,8 @@ class ObjectDefinition extends Internal\GOMObject
   /**
    * Constructeur par défaut
    */
-  public function __construct(string $p_sTID){
-    parent::__construct($p_sTID, 'A000_OBD');
+  public function __construct(string $psTID){
+    parent::__construct($psTID, 'A000_OBD');
 
     $this->initFieldDefinition();
   }//end __construct()

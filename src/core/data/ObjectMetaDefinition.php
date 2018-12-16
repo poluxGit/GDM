@@ -11,8 +11,8 @@ class ObjectMetaDefinition extends Internal\GOMObject
   /**
    * Constructeur par défaut
    */
-  public function __construct(string $p_sTID){
-    parent::__construct($p_sTID, 'A000_OBMD');
+  public function __construct(string $psTID){
+    parent::__construct($psTID, 'A000_OBMD');
     $this->initFieldDefinition();
   }//end __construct()
 

@@ -68,25 +68,25 @@ abstract class GOMObject
    *
    * Retourne un objet depuis son TID
    *
-   * @param string $p_sTID  TID de l'objet à charger (si null => Mode Création)
+   * @param string $psTID  TID de l'objet à charger (si null => Mode Création)
    */
-  public function __construct(string $p_sTID=NULL, string $p_sTablename, \PDO $p_oDBConn = NULL)
+  public function __construct(string $psTID=NULL, string $psTablename, \PDO $poDBConn = NULL)
   {
     // Connection BD passée en paramètres ?
-    if($p_oDBConn === NULL)
+    if($poDBConn === NULL)
 		{
       $this->_oPDODBConnection = self::$_oPDOCommonDBConnection;
     } else {
-      $this->_oPDODBConnection = $p_oDBConn;
+      $this->_oPDODBConnection = $poDBConn;
     }
 
-    $this->_sTablename = $p_sTablename;
+    $this->_sTablename = $psTablename;
 
     // TID définie ?
-    if($p_sTID !== NULL)
+    if($psTID !== NULL)
     {
       // Mode MAJ !
-      $this->_sTID = $p_sTID;
+      $this->_sTID = $psTID;
     } else {
       // Mode Création !
     }
@@ -99,11 +99,11 @@ abstract class GOMObject
   /**
    * Définie l'objet de connection  à la base de données relative à l'objet
    *
-   * @param \PDO  $p_oPDOConnection   Instance d'objet PDO.
+   * @param \PDO  $poPDOConnection   Instance d'objet PDO.
    */
-  public function setPDOConnection(\PDO $p_oPDOConnection)
+  public function setPDOConnection(\PDO $poPDOConnection)
   {
-    $this->_oPDODBConnection = $p_oPDOConnection;
+    $this->_oPDODBConnection = $poPDOConnection;
   }//end setPDOConnection()
 
   /**
@@ -155,7 +155,7 @@ abstract class GOMObject
    */
   final protected function getFieldsToUpdate()
   {
-    return array_filter($this->_aFieldValue, function ($p_elem){ return $p_elem!== NULL;});
+    return array_filter($this->_aFieldValue, function ($pelem){ return $pelem!== NULL;});
   }//end getFieldsToUpdate()
 
   // ************************************************************************ //
@@ -164,18 +164,18 @@ abstract class GOMObject
   /**
    * Définie la valeur d'un champ d'un objet depuis son nom SQL
    *
-   * @param string  $p_sFieldSQLName  Nom SQL du champs à mettre à jour.
-   * @param mixed   $p_xNewValue      Nouvelle Valeur du champs
+   * @param string  $psFieldSQLName  Nom SQL du champs à mettre à jour.
+   * @param mixed   $pxNewValue      Nouvelle Valeur du champs
    */
-  public function setFieldValueFromSQLName(string $p_sFieldSQLName, mixed $p_xNewValue)
+  public function setFieldValueFromSQLName(string $psFieldSQLName, mixed $pxNewValue)
   {
-    $l_sFieldName = $this->getFieldNameFromSQLName($p_sFieldSQLName);
+    $l_sFieldName = $this->getFieldNameFromSQLName($psFieldSQLName);
     // Définition de champs trouvée ?
     if ($l_sFieldName !== NULL) {
-      $this->_aFieldValue[$p_sFieldSQLName] = $p_xNewValue;
+      $this->_aFieldValue[$psFieldSQLName] = $pxNewValue;
     } else {
       // TODO Faire une classe Exception spécifique 'FieldDefinitionNotExists'
-      $l_sMsgException = sprintf("Le champs SQL '%s' n'est pas défini sur l'objet courant.", $p_sFieldSQLName);
+      $l_sMsgException = sprintf("Le champs SQL '%s' n'est pas défini sur l'objet courant.", $psFieldSQLName);
       throw new \Exception($l_sMsgException);
     }
   }//end setFieldValueFromSQLName()
@@ -183,18 +183,18 @@ abstract class GOMObject
   /**
    * Définie la valeur d'un champ d'un objet depuis son nom
    *
-   * @param string  $p_sFieldName     Nom du champs à mettre à jour.
-   * @param mixed   $p_xNewValue      Nouvelle Valeur du champs
+   * @param string  $psFieldName     Nom du champs à mettre à jour.
+   * @param mixed   $pxNewValue      Nouvelle Valeur du champs
    */
-  public function setFieldValueFromName(string $p_sFieldName, mixed $p_xNewValue)
+  public function setFieldValueFromName(string $psFieldName, mixed $pxNewValue)
   {
     // TODO Validation du type d'attribut
-    if ($this->isFieldDefinitionExists($p_sFieldName)) {
-      $l_sSQLFieldName = $this->getSQLFieldNameFromName($p_sFieldName);
-      $this->_aFieldValue[$l_sSQLFieldName] = $p_xNewValue;
+    if ($this->isFieldDefinitionExists($psFieldName)) {
+      $l_sSQLFieldName = $this->getSQLFieldNameFromName($psFieldName);
+      $this->_aFieldValue[$l_sSQLFieldName] = $pxNewValue;
     } else {
       // TODO Faire une classe Exception spécifique 'FieldDefinitionNotExists'
-      $l_sMsgException = sprintf("Le champs '%s' n'est pas défini sur l'objet courant.", $p_sFieldName);
+      $l_sMsgException = sprintf("Le champs '%s' n'est pas défini sur l'objet courant.", $psFieldName);
       throw new \Exception($l_sMsgException);
     }
   }//end setFieldValueFromName()
@@ -202,51 +202,51 @@ abstract class GOMObject
   /**
    * Ajoute la definition d'un champ sur l'objet courant
    *
-   * @param string  $p_sFieldName     Nom du champ
-   * @param string  $p_sSQLFieldName  Nom SQL du champs
-   * @param string  $p_sFieldType     Type du champs (string, date, int, double...) IDEA
-   * @param string  $p_sFieldLabel    Libellé du champs (Optionnel)
+   * @param string  $psFieldName     Nom du champ
+   * @param string  $psSQLFieldName  Nom SQL du champs
+   * @param string  $psFieldType     Type du champs (string, date, int, double...) IDEA
+   * @param string  $psFieldLabel    Libellé du champs (Optionnel)
    */
-  public function addFieldDefinition(string $p_sFieldName, string $p_sSQLFieldName, string $p_sFieldType, string $p_sFieldLabel = null)
+  public function addFieldDefinition(string $psFieldName, string $psSQLFieldName, string $psFieldType, string $psFieldLabel = null)
   {
-      $l_bNameAlreadyExists = count($this->getFieldDefinitionByAttrValue('sql_name', $p_sSQLFieldName))>0;
+      $l_bNameAlreadyExists = count($this->getFieldDefinitionByAttrValue('sql_name', $psSQLFieldName))>0;
       // Un champs de même nom est-il déjà défini ?
       if ($l_bNameAlreadyExists) {
         // TODO Faire une classe Exception spécifique 'FieldDefinitionNotExists'
-        $l_sMsgException = sprintf("Le nom de champs '%s' est déjà défini pour l'objet.", $p_sFieldName);
+        $l_sMsgException = sprintf("Le nom de champs '%s' est déjà défini pour l'objet.", $psFieldName);
         throw new \Exception($l_sMsgException);
       }
 
       // Ajout du nouveau champs !
       $this->_aFieldDefinition[] = [
-        'name' => $p_sFieldName,
-        'sql_name' => $p_sSQLFieldName,
-        'type' => $p_sFieldType,
-        'label' => $p_sFieldLabel
+        'name' => $psFieldName,
+        'sql_name' => $psSQLFieldName,
+        'type' => $psFieldType,
+        'label' => $psFieldLabel
       ];
   }//end addFieldDefinition()
 
   /**
    * Retourne vrai si la definition de champs existe
    *
-   * @param string $p_sFieldName    Nom du champs demandé.
+   * @param string $psFieldName    Nom du champs demandé.
    * @return bool   TRUE si la définition est trouvée.
    */
-  public function isFieldDefinitionExists(string $p_sFieldName)
+  public function isFieldDefinitionExists(string $psFieldName)
   {
-      return $this->getSQLFieldNameFromName($p_sFieldName)!==NULL;
+      return $this->getSQLFieldNameFromName($psFieldName)!==NULL;
   }//end isFieldDefinitionExists()
 
   /**
    * Retourne le nom sql du champs à partir de son nom
    *
-   * @param string  $p_sSQLFieldName  Nom SQL du champs
+   * @param string  $psSQLFieldName  Nom SQL du champs
    * @return string   Nom SQL du champs (NULL si non trouvé)
    */
-  public function getSQLFieldNameFromName(string $p_sFieldName)
+  public function getSQLFieldNameFromName(string $psFieldName)
   {
     $l_sResultat = NULL;
-    $l_aFieldDefinition = $this->getFieldDefinitionByAttrValue('name', $p_sFieldName);
+    $l_aFieldDefinition = $this->getFieldDefinitionByAttrValue('name', $psFieldName);
     if (array_key_exists('sql_name', $l_aFieldDefinition)) {
       $l_sResultat = $l_aFieldDefinition['sql_name'] ;
     }
@@ -256,13 +256,13 @@ abstract class GOMObject
   /**
    * Retourne le nom du champs à partir de son nom SQL
    *
-   * @param string  $p_sSQLFieldName  Nom SQL du champs
+   * @param string  $psSQLFieldName  Nom SQL du champs
    * @return string   Nom du champs (NULL si non trouvé)
    */
-  public function getFieldNameFromSQLName(string $p_sSQLFieldName)
+  public function getFieldNameFromSQLName(string $psSQLFieldName)
   {
     $l_sResultat = NULL;
-    $l_aFieldDefinition = $this->getFieldDefinitionByAttrValue('sql_name', $p_sFieldName);
+    $l_aFieldDefinition = $this->getFieldDefinitionByAttrValue('sql_name', $psFieldName);
     if (array_key_exists('name', $l_aFieldDefinition)) {
       $l_sResultat = $l_aFieldDefinition['name'] ;
     }
@@ -272,12 +272,12 @@ abstract class GOMObject
   /**
    * Retourne le tableau de definition du champs à partir de son nom
    *
-   * @param string  $p_sFieldName  Nom SQL du champs
+   * @param string  $psFieldName  Nom SQL du champs
    * @return array(string)   Definition du champs
    */
-  protected function getFieldDefinitionFromName(string $p_sFieldName)
+  protected function getFieldDefinitionFromName(string $psFieldName)
   {
-      $l_aFieldDefinition = $this->getFieldDefinitionByAttrValue('name', $p_sFieldName);
+      $l_aFieldDefinition = $this->getFieldDefinitionByAttrValue('name', $psFieldName);
       return $l_aFieldDefinition;
   }//end getFieldDefinitionFromName()
 
@@ -285,41 +285,41 @@ abstract class GOMObject
   /**
    * Retourne le tableau de definition du champs à partir de son nom SQL
    *
-   * @param string  $p_sSQLFieldName  Nom SQL du champs
+   * @param string  $psSQLFieldName  Nom SQL du champs
    * @return string   Nom du champs (NULL si non trouvé)
    */
-  public function getFieldDefinitionFromSQLName(string $p_sSQLFieldName)
+  public function getFieldDefinitionFromSQLName(string $psSQLFieldName)
   {
-    $l_aFieldDefinition = $this->getFieldDefinitionByAttrValue('sql_name', $p_sSQLFieldName);
+    $l_aFieldDefinition = $this->getFieldDefinitionByAttrValue('sql_name', $psSQLFieldName);
     return $l_aFieldDefinition;
   }//end getFieldDefinitionFromSQLName()
 
   /**
    * Retourne la définition d'un champ de l'objet
    *
-   * @param string  $p_sFieldAttrName         Nom interne de l'attribut (name, sql_name, type, label).
-   * @param string  $p_sFieldAttrValue        Valeur à rechercher sur l'attribut.
-   * @param bool    $p_bAllowMultipleResult   (Optionnel) Permet de renvoyer plusieurs résultat (défaut : FALSE)
+   * @param string  $psFieldAttrName         Nom interne de l'attribut (name, sql_name, type, label).
+   * @param string  $psFieldAttrValue        Valeur à rechercher sur l'attribut.
+   * @param bool    $pbAllowMultipleResult   (Optionnel) Permet de renvoyer plusieurs résultat (défaut : FALSE)
    *
    * @return array(mixed)   Definition du champs
    */
-  public function getFieldDefinitionByAttrValue( $p_sFieldAttrName, $p_sFieldAttrValue, $p_bAllowMultipleResult = FALSE)
+  public function getFieldDefinitionByAttrValue( $psFieldAttrName, $psFieldAttrValue, $pbAllowMultipleResult = FALSE)
   {
     if (count($this->_aFieldDefinition) > 0) {
-      //DEBUG echo sprintf("\n--> Field to search '%s' with value '%s'.", $p_sFieldAttrName, $p_sFieldAttrValue);
-      $l_aFieldDefinition = []; //array_filter($this->_aFieldDefinition, function($p_elem){ return strtolower($p_elem[$p_sFieldAttrName])==strtolower($p_sFieldAttrValue);} );
+      //DEBUG echo sprintf("\n--> Field to search '%s' with value '%s'.", $psFieldAttrName, $psFieldAttrValue);
+      $l_aFieldDefinition = []; //array_filter($this->_aFieldDefinition, function($pelem){ return strtolower($pelem[$psFieldAttrName])==strtolower($psFieldAttrValue);} );
 
       foreach ($this->_aFieldDefinition as $l_skey => $l_aValue){
-        if(array_key_exists($p_sFieldAttrName, $l_aValue) && strtolower($l_aValue[$p_sFieldAttrName])==strtolower($p_sFieldAttrValue))
+        if(array_key_exists($psFieldAttrName, $l_aValue) && strtolower($l_aValue[$psFieldAttrName])==strtolower($psFieldAttrValue))
         {
           $l_aFieldDefinition[$l_skey] = $l_aValue;
         }
       }
 
       // Plus de 1 résultat => Exception !
-      if (count($l_aFieldDefinition)>1 && !$p_bAllowMultipleResult) {
+      if (count($l_aFieldDefinition)>1 && !$pbAllowMultipleResult) {
         // TODO Faire une classe Exception spécifique 'FieldDefintionNotExists'
-        $l_sMsgException = sprintf("Le nombre de résultat dont l'attribut '%s' vaut '%s' est anormal. Nb Résultat: %i.", $p_sFieldAttrName, $p_sFieldAttrValue, count($l_aFieldDefinition));
+        $l_sMsgException = sprintf("Le nombre de résultat dont l'attribut '%s' vaut '%s' est anormal. Nb Résultat: %i.", $psFieldAttrName, $psFieldAttrValue, count($l_aFieldDefinition));
         throw new \Exception($l_sMsgException);
       }
 
@@ -336,13 +336,13 @@ abstract class GOMObject
   /**
    * Retourne la valeur initiale du champs (dernier chargement)
    *
-   * @param string $p_sFieldName  Nom du champs
+   * @param string $psFieldName  Nom du champs
    * @return mixed  Valeur initiale du champs
    */
-  public function getFieldInitValueFromName($p_sFieldName)
+  public function getFieldInitValueFromName($psFieldName)
   {
     $l_xResult = NULL;
-    $l_sSQLFieldname = $this->getSQLFieldNameFromName($p_sFieldName);
+    $l_sSQLFieldname = $this->getSQLFieldNameFromName($psFieldName);
 
     if (array_key_exists($l_sSQLFieldname, $this->_aInitFieldValue)) {
       $l_xResult = $this->_aInitFieldValue[$l_sSQLFieldname];
@@ -354,18 +354,18 @@ abstract class GOMObject
    * Retourne la valeur depuis son nom
    * (Initiale si non mise à jour, sinon valeur mise à jour)
    *
-   * @param string $p_sFieldName  Nom du champs
+   * @param string $psFieldName  Nom du champs
    * @return mixed  Valeur du champs
    */
-  public function getFieldValueFromName($p_sFieldName)
+  public function getFieldValueFromName($psFieldName)
   {
     $l_xResult = NULL;
-    $l_sSQLFieldname = $this->getSQLFieldNameFromName($p_sFieldName);
+    $l_sSQLFieldname = $this->getSQLFieldNameFromName($psFieldName);
 
     if (array_key_exists($l_sSQLFieldname, $this->_aFieldValue) && $this->_aFieldValue[$l_sSQLFieldname] !== NULL ) {
       $l_xResult = $this->_aFieldValue[$l_sSQLFieldname];
     } else {
-      $l_xResult = $this->getFieldInitValueFromName($p_sFieldName);
+      $l_xResult = $this->getFieldInitValueFromName($psFieldName);
     }
 
     return $l_xResult;
@@ -463,15 +463,15 @@ abstract class GOMObject
   /**
    * Retourne la requête SQL de sélection de l'objet
    *
-   * @param array(string) $p_aWhereCondition  Tableau des conditions SQL Where (AND)
+   * @param array(string) $paWhereCondition  Tableau des conditions SQL Where (AND)
    * @return  string  Requete SQL de sélection
    */
-  protected function buildSQLSelectQuery($p_aWhereCondition)
+  protected function buildSQLSelectQuery($paWhereCondition)
   {
     $l_sSQLQuery = "SELECT ";
 
     // SELECT Part
-    $l_aFieldDefinitionSQLName = array_map(function($p_elem) { return $p_elem['sql_name'];}, $this->_aFieldDefinition);
+    $l_aFieldDefinitionSQLName = array_map(function($pelem) { return $pelem['sql_name'];}, $this->_aFieldDefinition);
     $l_sSQLQuery .= implode(", ", $l_aFieldDefinitionSQLName);
 
     // TODO Gestion des type de données pour formatage (... date, reel ...)
@@ -481,9 +481,9 @@ abstract class GOMObject
     $l_sSQLQuery .= $this->_sTablename;
 
     // WHERE part nécessaire ?
-    if (count($p_aWhereCondition)> 0) {
+    if (count($paWhereCondition)> 0) {
       $l_sSQLQuery .= " WHERE ";
-      $l_sSQLQuery .= implode(", ", $p_aWhereCondition);
+      $l_sSQLQuery .= implode(", ", $paWhereCondition);
     }
 
     //DEBUG echo $l_sSQLQuery."\n";
@@ -496,12 +496,12 @@ abstract class GOMObject
   /**
    * Définie l'object de Connection commune à la BD
    *
-   * @param \PDO  $p_oPDOConnection   Instance d'objet PDO.
+   * @param \PDO  $poPDOConnection   Instance d'objet PDO.
    * @static
    */
-  public static function setCommonPDOConnection(\PDO $p_oPDOConnection)
+  public static function setCommonPDOConnection(\PDO $poPDOConnection)
   {
-    self::$_oPDOCommonDBConnection = $p_oPDOConnection;
+    self::$_oPDOCommonDBConnection = $poPDOConnection;
   }//end setCommonPDOConnection()
 
 
