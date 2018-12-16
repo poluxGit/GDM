@@ -1,5 +1,5 @@
 <?php
-require_once '/var/jenkins_home/workspace/GenericDataManagement/vendor/autoload.php';
+
 use PHPUnit\Framework\TestCase;
 use GOM\Core\Application;
 
@@ -20,4 +20,28 @@ final class ApplicationTest extends TestCase
 			$this->expectException(\Exception::class);
 			Application::loadDBSettings('./toto');
 	  }//end testApplicationLoadInvalidSettingsFile()
+
+		/**
+		 * testApplicationLoadInvalidFormatSettingsFile
+		 *
+		 * Chargement des paramètres depuis un fichier au format JSON invalide.
+		 */
+  	public function testApplicationLoadInvalidFormatSettingsFile(): void
+  	{
+			$this->expectException(\Exception::class);
+			Application::loadDBSettings('./../datasets/AppSettingsFile_01-invalidformat.json');
+	  }//end testApplicationLoadInvalidFormatSettingsFile()
+
+		/**
+		 * testApplicationLoadValideSettingsFile
+		 *
+		 * Chargement des paramètres depuis un fichier au format JSON invalide.
+		 */
+  	public function testApplicationLoadValideSettingsFile(): void
+  	{
+			$this->expectException(\Exception::class);
+			Application::loadDBSettings('./../datasets/AppSettingsFile_02-valid.json');
+	  }//end testApplicationLoadValideSettingsFile()
+
+
 }//end class
