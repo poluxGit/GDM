@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="GenericDataManagement" default="ci" basedir=".">
   <property name="source" value="src" />
-	<property name="source" value="src" />
+	<property name="rootdir" value="${project.basedir}/${phing.project.name}" />
 
   <target name="ci"
       description="Tâche principale d'intégration continue"
@@ -36,14 +36,14 @@
   </target>
 
 	<target name="buildParamDisplay" description="Affichage des variables locales">
-		<echo msg="env : ${env.*}" />
 		<echo msg="Phing project nbame : ${phing.project.name}" />
 		<echo msg="Project basedir : ${project.basedir}" />
+		<echo msg="Calculated RootDir : ${rootdir}" />
 	</target>
 
 
 	<target name="pdepend" description="PHP Depend">
-		<phpdepend file="${project.basedir}/${source}">
+		<phpdepend file="${rootdir}/${source}">
 			<logger type="jdepend-xml" outfile="${project.basedir}/build/logs/jdepend.xml" />
 			<logger type="jdepend-chart" outfile="${project.basedir}/build/pdepend/dependencies.svg" />
 			<logger type="overview-pyramid" outfile="${project.basedir}/build/pdepend/overview-pyramid.svg" />
