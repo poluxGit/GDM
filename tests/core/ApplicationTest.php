@@ -29,7 +29,9 @@ final class ApplicationTest extends TestCase
   	public function testApplicationLoadInvalidFormatSettingsFile(): void
   	{
 			$this->expectException(\Exception::class);
-			Application::loadDBSettings('./../datasets/AppSettingsFile_01-invalidformat.json');
+			$laObj =Application::loadDBSettings('./../datasets/AppSettingsFile_01-invalidformat.json');
+			$this->assertEquals($laObj,NULL);
+
 	  }//end testApplicationLoadInvalidFormatSettingsFile()
 
 		/**
