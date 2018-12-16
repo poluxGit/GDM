@@ -266,7 +266,7 @@ abstract class GOMObject
   public function getFieldNameFromSQLName(string $psSQLFieldName)
   {
     $lsResultat = NULL;
-    $laFieldDefinition = $this->getFieldDefinitionByAttrValue('sql_name', $psFieldName);
+    $laFieldDefinition = $this->getFieldDefinitionByAttrValue('sql_name', $psSQLFieldName);
     if (array_key_exists('name', $laFieldDefinition)) {
       $lsResultat = $laFieldDefinition['name'] ;
     }
@@ -467,8 +467,8 @@ abstract class GOMObject
   private function initFieldValuesArrayFromDefinition()
   {
     // Destruction des tableaux en cours ?!
-    $_aFieldValue = [];
-    $_aInitFieldValue = [];
+    $this->_aFieldValue = [];
+    $this->_aInitFieldValue = [];
 
     // Pour chacun des champs définis !
     foreach($this->_aFieldDefinition as $lxValue)
