@@ -28,14 +28,14 @@
   </target>
 
 	<!-- TACHE php-composer - COMPOSER  -->
-	<target name="phpcomp" description="PHP Composer - Gestion des dépendances">
+	<!-- <target name="phpcomp" description="PHP Composer - Gestion des dépendances">
     <ComposerTask command="update"/>
-	</target>
+	</target> -->
 
 	<!-- Outils d'analyse -->
   <target name="qa" description="Lance les outils d'analyse">
 		<phingcall target="buildParamDisplay" />
-		<phingcall target="phpcomp" />
+		<!-- <phingcall target="phpcomp" /> -->
 		<phingcall target="pdepend" />
     <phingcall target="phpmd" />
     <phingcall target="phpcpd" />
