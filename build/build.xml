@@ -50,6 +50,7 @@
 		<echo msg="Phing project nbame : ${phing.project.name}" />
 		<echo msg="Project basedir : ${project.basedir}" />
 		<echo msg="Calculated RootDir : ${rootdir}" />
+		<echo msg="Workspace : ${ws}" />
 	</target>
 
 	<target name="phpcompupd" description="PHP Composer - Update Command">

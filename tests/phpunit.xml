@@ -1,6 +1,6 @@
 <phpunit bootstrap="../vendor/autoload.php">
     <testsuites>
-        <testsuite name="GenericDataManagement - Core Test Suite">
+        <testsuite name="GDM_TS01">
             <directory>./core/</directory>
         </testsuite>
     </testsuites>
