@@ -38,14 +38,14 @@ class Application
   static function loadDBSettings($p_sJSONFilePath)
   {
     // fichier JSON existant ?
-    if (!file_exists($p_sJSONFilePath)){
+    if (!file_exists($p_sJSONFilePath)) {
       throw new \Exception("Le fichier source ne peux pas être atteint. (i.e : '".$p_sJSONFilePath."')");
     }
     // fichier JSON  bien formé ?
     $json_data = file_get_contents($p_sJSONFilePath);
     $json_data = stripslashes($json_data);
     $ljsonContent = json_decode($json_data ,true);
-    if ($ljsonContent === NULL){
+    if ($ljsonContent === NULL) {
       $lstrErrJSON = json_last_error_msg();
       throw new \Exception("Le fichier source n'est pas interprétable. (i.e : '".$p_sJSONFilePath."')\nJSON Error => ".$lstrErrJSON);
     }
@@ -76,8 +76,8 @@ class Application
   static function initDBConnection()
   {
     try{
-      if (self::$_oDbPDOHandler == null){
-        self::$_oDbPDOHandler = new \PDO(self::$_sDbDsn, self::$_sDbUser , self::$_sDbPassword);
+      if (self::$_oDbPDOHandler == null) {
+        self::$_oDbPDOHandler = new \PDO(self::$_sDbDsn ,self::$_sDbUser ,self::$_sDbPassword);
       }
     }
     catch(PDOException $e)
@@ -99,4 +99,3 @@ class Application
   }//end importMDLFromJSONData()
 
 }//end class
- ?>
