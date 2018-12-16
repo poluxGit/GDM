@@ -93,7 +93,7 @@
       <fileset dir="${rootdir}/${source}">
           <include name="**/*.php"/>
       </fileset>
-    </phpdoc>
+    </phpdoc2>
 	</target>
 
 	<target name="phpunit" description="PHPUnit - Tests">
