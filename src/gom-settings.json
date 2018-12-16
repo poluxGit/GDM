@@ -1,7 +1,7 @@
 {
   "database" :{
-    "dsn":"mysql:dbname=GOM;host=localhost;port=3336",
-    "user": "gomAdmin",
+    "dsn":"mysql:dbname=GOM;host=localhost;port=3336", 
+    "user": "gomAdmin", 
     "password": "admin"
   }
 }

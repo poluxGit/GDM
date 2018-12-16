@@ -34,26 +34,26 @@ const PROG_VERSION = '1.0';
 /* -------------------------------------------------------------------------- */
 const PROG_ACTIONS = [
    'IMP_MDL' => [
-     0=> ["JSON_Filepath","Model to import filepath (JSON Format)"]
+     0=> ["JSON_Filepath", "Model to import filepath (JSON Format)"]
    ],
    'GEN_DB'  => [
-     0=> ["JSON_Filepath","Model to import filepath (JSON Format)"],
-     1=> ["SQL_OutputFilepath","Output SQL filepath (SQL Format)"]
+     0=> ["JSON_Filepath", "Model to import filepath (JSON Format)"],
+     1=> ["SQL_OutputFilepath", "Output SQL filepath (SQL Format)"]
    ],
    'LOAD_OBJ' => [
-     0=> ["OBJ_TID","TID of Object to load."]
+     0=> ["OBJ_TID", "TID of Object to load."]
    ],
    'LOAD_OBD' => [
-     0=> ["OBD_TID","TID of OBject Definition to load."]
+     0=> ["OBD_TID", "TID of OBject Definition to load."]
    ],
    'LOAD_MDL' => [
-     0=> ["MDL_TID","TID of Model to load."]
+     0=> ["MDL_TID", "TID of Model to load."]
    ],
    'LOAD_LNKD' => [
-     0=> ["LNKD_TID","TID of LiNK Definition."]
+     0=> ["LNKD_TID", "TID of LiNK Definition."]
    ],
    'LOAD_LNKMD' => [
-     0=> ["LNKMD_TID","TID of LiNKMeta Definition to load."]
+     0=> ["LNKMD_TID", "TID of LiNKMeta Definition to load."]
    ]
  ];
 /* -------------------------------------------------------------------------- */
@@ -148,7 +148,7 @@ function main($argc, $argv)
         // fichier JSON  bien formé ?
         $json_data = file_get_contents($lStrJSONFile);
         $json_data = stripslashes($json_data);
-        $ljsonContent = json_decode($json_data ,true);
+        $ljsonContent = json_decode($json_data , true);
         if($ljsonContent === NULL)
         {
           $lstrErrJSON = json_last_error_msg();
@@ -208,4 +208,4 @@ GOM\Application::loadDBSettings('./gom-settings.json');
 
 // Démarrage du traitement
 /* -------------------------------------------------------------------------- */
-main($argc,$argv);
+main($argc, $argv);

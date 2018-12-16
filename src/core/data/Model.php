@@ -52,9 +52,9 @@ class Model extends Internal\GOMObject
    * @param string $p_sComment    (Optionnel) Commentaires
    * @param string $p_sJSONData   (Optionnel) JSON Data
    */
-  public static function createNewModel($p_sShortCode,$p_sBIDCode,$p_sVersion, $p_sShortTitle,$p_sLongTitle = NULL,$p_sComment = NULL,$p_sJSONData = NULL)
+  public static function createNewModel($p_sShortCode, $p_sBIDCode, $p_sVersion, $p_sShortTitle, $p_sLongTitle = NULL, $p_sComment = NULL, $p_sJSONData = NULL)
   {
-    //SELECT DMA_createNewModel('E1', 'ECM', 'beta', 'Personal ECM', 'Gestion de documents personnel', NULL,NULL);
+    //SELECT DMA_createNewModel('E1', 'ECM', 'beta', 'Personal ECM', 'Gestion de documents personnel', NULL, NULL);
     try {
         // DB connection active ?
         if(self::$_oPDOCommonDBConnection === NULL)
@@ -81,7 +81,7 @@ class Model extends Internal\GOMObject
           // Aucun résultat ?
           if (count($l_aResultat)==0) {
             // TODO Faire une classe Exception spécifique 'LoadObjectInvalidDBConnection'
-            $l_sMsgException = sprintf("La création du model a rencontré une erreur (Code : '%s').",$p_sShortCode);
+            $l_sMsgException = sprintf("La création du model a rencontré une erreur (Code : '%s').", $p_sShortCode);
             throw new \Exception($l_sMsgException);
           }
 

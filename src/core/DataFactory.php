@@ -48,7 +48,7 @@ class DataFactory
 
 
     } catch (\Exception $e) {
-      $l_sMsgException = sprintf("Une erreur est survenue durant le chargement de l'objet TID : '%s'.",$p_sTID);
+      $l_sMsgException = sprintf("Une erreur est survenue durant le chargement de l'objet TID : '%s'.", $p_sTID);
       throw new \Exception($l_sMsgException);
     }
 
@@ -68,7 +68,7 @@ class DataFactory
       $l_obj = new Data\ObjectDefinition($p_sTID);
       $l_obj->loadObject();
     } catch (\Exception $e) {
-      $l_sMsgException = sprintf("Une erreur est survenue durant le chargement de l'OBD de TID : '%s'.",$p_sTID);
+      $l_sMsgException = sprintf("Une erreur est survenue durant le chargement de l'OBD de TID : '%s'.", $p_sTID);
       throw new \Exception($l_sMsgException);
     }
 
@@ -88,7 +88,7 @@ class DataFactory
       $l_obj = new Data\Model($p_sTID);
       $l_obj->loadObject();
     } catch (\Exception $e) {
-      $l_sMsgException = sprintf("Une erreur est survenue durant le chargement du model (TID : '%s').",$p_sTID);
+      $l_sMsgException = sprintf("Une erreur est survenue durant le chargement du model (TID : '%s').", $p_sTID);
       throw new \Exception($l_sMsgException);
     }
     return $l_obj;
@@ -107,7 +107,7 @@ class DataFactory
       $l_obj = new Data\LinkDefinition($p_sTID);
       $l_obj->loadObject();
     } catch (\Exception $e) {
-      $l_sMsgException = sprintf("Une erreur est survenue durant le chargement de la définition de liens (TID : '%s').",$p_sTID);
+      $l_sMsgException = sprintf("Une erreur est survenue durant le chargement de la définition de liens (TID : '%s').", $p_sTID);
       throw new \Exception($l_sMsgException);
     }
     return $l_obj;
@@ -126,7 +126,7 @@ class DataFactory
       $l_obj = new Data\LinkMetaDefinition($p_sTID);
       $l_obj->loadObject();
     } catch (\Exception $e) {
-      $l_sMsgException = sprintf("Une erreur est survenue durant le chargement de la définition de metadonnées de liens (TID : '%s').",$p_sTID);
+      $l_sMsgException = sprintf("Une erreur est survenue durant le chargement de la définition de metadonnées de liens (TID : '%s').", $p_sTID);
       throw new \Exception($l_sMsgException);
     }
     return $l_obj;
@@ -145,7 +145,7 @@ class DataFactory
       $l_obj = new Data\ObjectMetaDefinition($p_sTID);
       $l_obj->loadObject();
     } catch (\Exception $e) {
-      $l_sMsgException = sprintf("Une erreur est survenue durant le chargement de la définition de metadonnées d'Objet' (TID : '%s').",$p_sTID);
+      $l_sMsgException = sprintf("Une erreur est survenue durant le chargement de la définition de metadonnées d'Objet' (TID : '%s').", $p_sTID);
       throw new \Exception($l_sMsgException);
     }
     return $l_obj;
