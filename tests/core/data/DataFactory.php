@@ -1,5 +1,5 @@
 <?php
-namespace GOM\Data;
+
 
 use GOM\Data\Internal;
 
