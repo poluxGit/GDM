@@ -324,11 +324,11 @@ abstract class GOMObject
       if (count($laFieldDefinition)>1 && !$pbAllowMultipleResult) {
         // TODO Faire une classe Exception spécifique 'FieldDefintionNotExists'
         $lsMsgException = sprintf(
-                                   "Le nombre de résultat dont l'attribut '%s' vaut '%s' est anormal. Nb Résultat: %i.",
-                                   $psFieldAttrName,
-                                   $psFieldAttrValue,
-                                   count($laFieldDefinition)
-                            );
+          "Le nombre de résultat dont l'attribut '%s' vaut '%s' est anormal. Nb Résultat: %i.",
+          $psFieldAttrName,
+          $psFieldAttrValue,
+          count($laFieldDefinition)
+        );
         throw new \Exception($lsMsgException);
       }
 
@@ -421,10 +421,10 @@ abstract class GOMObject
           if (count($laResultat)==0) {
             // TODO Faire une classe Exception spécifique 'LoadObjectInvalidDBConnection'
             $lsMsgException = sprintf(
-                                                 "L'Objet avec le TID '%s' n'a pu être chargé depuis la table '%s'.",
-                                                 $this->getTID(),
-                                                 $this->_sTablename
-                                          );
+              "L'Objet avec le TID '%s' n'a pu être chargé depuis la table '%s'.",
+              $this->getTID(),
+              $this->_sTablename
+            );
             throw new \Exception($lsMsgException);
           }
 
@@ -432,11 +432,11 @@ abstract class GOMObject
           if (count($laResultat) > 1) {
             // TODO Faire une classe Exception spécifique 'LoadObjectInvalidDBConnection'
             $lsMsgException = sprintf(
-                                                 "Plusieurs objets avec le TID '%s' sont défini dans la table '%s'.
-                                                  Impossible de réaliser le chargement en mémoire !",
-                                                 $this->getTID(),
-                                                 $this->_sTablename
-                                          );
+              "Plusieurs objets avec le TID '%s' sont défini dans la table '%s'.
+              Impossible de réaliser le chargement en mémoire !",
+              $this->getTID(),
+              $this->_sTablename
+            );
             throw new \Exception($lsMsgException);
           } else {
             $this->initFieldValuesArrayFromDefinition();
