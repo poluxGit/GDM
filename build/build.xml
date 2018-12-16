@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="GenericDataManagement" default="ci" basedir=".">
   <property name="source" value="src" />
-	<property name="rootdir" value="${project.basedir}/${phing.project.name}" />
+	<property name="rootdir" value="${project.basedir}" />
 
   <target name="ci"
       description="Tâche principale d'intégration continue"
