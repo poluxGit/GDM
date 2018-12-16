@@ -209,8 +209,9 @@ abstract class GOMObject
    * @param string  $psFieldLabel    Libellé du champs (Optionnel)
    */
   public function addFieldDefinition( string $psFieldName,
-                                                                                                                                     string $psSQLFieldName,
-                                                                                                                                     string $psFieldType, string $psFieldLabel = null)
+    string $psSQLFieldName,
+    string $psFieldType,
+    string $psFieldLabel = null)
   {
       $lbNameAlreadyExists = count($this->getFieldDefinitionByAttrValue('sql_name', $psSQLFieldName))>0;
       // Un champs de même nom est-il déjà défini ?
