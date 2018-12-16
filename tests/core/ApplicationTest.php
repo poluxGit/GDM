@@ -41,11 +41,10 @@ final class ApplicationTest extends TestCase
 		 */
   	public function testApplicationLoadValideSettingsFile(): void
   	{
-			$laObj = Application::loadDBSettings('./../datasets/AppSettingsFile_02-valid.json');
+			$laObj = Application::loadDBSettings('./AppSettingsFile_02-valid.json');
 			$this->assertNotEquals($laObj,NULL);
 
 			$this->assertEquals(array_key_exists("database",$laObj),true);
 	  }//end testApplicationLoadValideSettingsFile()
-
 
 }//end class
