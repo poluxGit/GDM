@@ -9,7 +9,8 @@ namespace GOM\Data\Internal;
 /**
  * Classe GOMObject
  */
-abstract class GOMObject {
+abstract class GOMObject
+{
 
   // ************************************************************************ //
   // ATTRIBUTS
@@ -72,7 +73,8 @@ abstract class GOMObject {
   public function __construct(string $p_sTID=NULL,string $p_sTablename,\PDO $p_oDBConn = NULL)
   {
     // Connection BD passée en paramètres ?
-    if($p_oDBConn === NULL){
+    if($p_oDBConn === NULL)
+		{
       $this->_oPDODBConnection = self::$_oPDOCommonDBConnection;
     }
     else{
@@ -171,8 +173,7 @@ abstract class GOMObject {
   {
     $l_sFieldName = $this->getFieldNameFromSQLName($p_sFieldSQLName);
     // Définition de champs trouvée ?
-    if($l_sFieldName !== NULL)
-    {
+    if ($l_sFieldName !== NULL){
       $this->_aFieldValue[$p_sFieldSQLName] = $p_xNewValue;
     }
     else {
@@ -191,8 +192,7 @@ abstract class GOMObject {
   public function setFieldValueFromName(string $p_sFieldName,mixed $p_xNewValue)
   {
     // TODO Validation du type d'attribut
-    if($this->isFieldDefinitionExists($p_sFieldName))
-    {
+    if ($this->isFieldDefinitionExists($p_sFieldName)){
       $l_sSQLFieldName = $this->getSQLFieldNameFromName($p_sFieldName);
       $this->_aFieldValue[$l_sSQLFieldName] = $p_xNewValue;
     }
@@ -215,8 +215,7 @@ abstract class GOMObject {
   {
       $l_bNameAlreadyExists = count($this->getFieldDefinitionByAttrValue('sql_name',$p_sSQLFieldName))>0;
       // Un champs de même nom est-il déjà défini ?
-      if($l_bNameAlreadyExists)
-      {
+      if ($l_bNameAlreadyExists){
         // TODO Faire une classe Exception spécifique 'FieldDefinitionNotExists'
         $l_sMsgException = sprintf("Le nom de champs '%s' est déjà défini pour l'objet.",$p_sFieldName);
         throw new \Exception($l_sMsgException);
@@ -252,8 +251,7 @@ abstract class GOMObject {
   {
     $l_sResultat = NULL;
     $l_aFieldDefinition = $this->getFieldDefinitionByAttrValue('name',$p_sFieldName);
-    if(array_key_exists('sql_name',$l_aFieldDefinition))
-    {
+    if (array_key_exists('sql_name',$l_aFieldDefinition)){
       $l_sResultat = $l_aFieldDefinition['sql_name'] ;
     }
     return $l_sResultat;
@@ -269,8 +267,7 @@ abstract class GOMObject {
   {
     $l_sResultat = NULL;
     $l_aFieldDefinition = $this->getFieldDefinitionByAttrValue('sql_name',$p_sFieldName);
-    if(array_key_exists('name',$l_aFieldDefinition))
-    {
+    if (array_key_exists('name',$l_aFieldDefinition)){
       $l_sResultat = $l_aFieldDefinition['name'] ;
     }
     return $l_sResultat;
@@ -312,12 +309,11 @@ abstract class GOMObject {
    */
   public function getFieldDefinitionByAttrValue( $p_sFieldAttrName, $p_sFieldAttrValue, $p_bAllowMultipleResult = FALSE)
   {
-    if(count($this->_aFieldDefinition) > 0)
-    {
+    if (count($this->_aFieldDefinition) > 0){
       //DEBUG echo sprintf("\n--> Field to search '%s' with value '%s'.",$p_sFieldAttrName,$p_sFieldAttrValue);
       $l_aFieldDefinition = []; //array_filter($this->_aFieldDefinition, function($p_elem){ return strtolower($p_elem[$p_sFieldAttrName])==strtolower($p_sFieldAttrValue);} );
 
-      foreach ($this->_aFieldDefinition as $l_skey => $l_aValue) {
+      foreach ($this->_aFieldDefinition as $l_skey => $l_aValue){
         if(array_key_exists($p_sFieldAttrName,$l_aValue) && strtolower($l_aValue[$p_sFieldAttrName])==strtolower($p_sFieldAttrValue))
         {
           $l_aFieldDefinition[$l_skey] = $l_aValue;
@@ -325,15 +321,13 @@ abstract class GOMObject {
       }
 
       // Plus de 1 résultat => Exception !
-      if(count($l_aFieldDefinition)>1 && !$p_bAllowMultipleResult)
-      {
+      if (count($l_aFieldDefinition)>1 && !$p_bAllowMultipleResult){
         // TODO Faire une classe Exception spécifique 'FieldDefintionNotExists'
         $l_sMsgException = sprintf("Le nombre de résultat dont l'attribut '%s' vaut '%s' est anormal. Nb Résultat: %i.",$p_sFieldAttrName,$p_sFieldAttrValue,count($l_aFieldDefinition));
         throw new \Exception($l_sMsgException);
       }
 
-      if(count($l_aFieldDefinition)==1)
-      {
+      if (count($l_aFieldDefinition)==1){
         return array_shift($l_aFieldDefinition);
       }
       else {
@@ -356,8 +350,7 @@ abstract class GOMObject {
     $l_xResult = NULL;
     $l_sSQLFieldname = $this->getSQLFieldNameFromName($p_sFieldName);
 
-    if(array_key_exists($l_sSQLFieldname,$this->_aInitFieldValue))
-    {
+    if (array_key_exists($l_sSQLFieldname,$this->_aInitFieldValue)){
       $l_xResult = $this->_aInitFieldValue[$l_sSQLFieldname];
     }
     return $l_xResult;
@@ -375,8 +368,7 @@ abstract class GOMObject {
     $l_xResult = NULL;
     $l_sSQLFieldname = $this->getSQLFieldNameFromName($p_sFieldName);
 
-    if(array_key_exists($l_sSQLFieldname,$this->_aFieldValue) && $this->_aFieldValue[$l_sSQLFieldname] !== NULL )
-    {
+    if (array_key_exists($l_sSQLFieldname,$this->_aFieldValue) && $this->_aFieldValue[$l_sSQLFieldname] !== NULL ){
       $l_xResult = $this->_aFieldValue[$l_sSQLFieldname];
     } else {
       $l_xResult = $this->getFieldInitValueFromName($p_sFieldName);
@@ -394,8 +386,7 @@ abstract class GOMObject {
   final public function loadObject()
   {
     // Mode Création ? Impossible de charger l'objet...
-    if($this->_sTID === NULL)
-    {
+    if ($this->_sTID === NULL){
       // TODO Faire une classe Exception spécifique 'LoadObjectInvalidParameters'
       $l_sMsgException = sprintf("Un objet sans TID ne peut pas être chargé. (i.e : mode creation)");
       throw new \Exception($l_sMsgException);
@@ -404,8 +395,7 @@ abstract class GOMObject {
     // Chargement de l'objet depuis la BD!
     try {
         // DB connection active ?
-        if($this->_oPDODBConnection === NULL)
-        {
+        if ($this->_oPDODBConnection === NULL){
           // TODO Faire une classe Exception spécifique 'LoadObjectInvalidDBConnection'
           $l_sMsgException = sprintf("La connexion à la base de données n'est pas définie.");
           throw new \Exception($l_sMsgException);
@@ -426,15 +416,14 @@ abstract class GOMObject {
           $l_aResultat = $l_oPDOStat->fetchAll(\PDO::FETCH_ASSOC);
 
           // Aucun résultat ?
-          if(count($l_aResultat)==0){
+          if (count($l_aResultat)==0){
             // TODO Faire une classe Exception spécifique 'LoadObjectInvalidDBConnection'
             $l_sMsgException = sprintf("L'Objet avec le TID '%s' n'a pu être chargé depuis la table '%s'.",$this->getTID(),$this->_sTablename);
             throw new \Exception($l_sMsgException);
           }
 
           // Plusieurs résultats !
-          if(count($l_aResultat) > 1)
-          {
+          if (count($l_aResultat) > 1){
             // TODO Faire une classe Exception spécifique 'LoadObjectInvalidDBConnection'
             $l_sMsgException = sprintf("Plusieurs objets avec le TID '%s' sont défini dans la table '%s'. Impossible de réaliser le chargement en mémoire !",$this->getTID(),$this->_sTablename);
             throw new \Exception($l_sMsgException);
@@ -500,8 +489,7 @@ abstract class GOMObject {
     $l_sSQLQuery .= $this->_sTablename;
 
     // WHERE part nécessaire ?
-    if(count($p_aWhereCondition)> 0)
-    {
+    if (count($p_aWhereCondition)> 0){
       $l_sSQLQuery .= " WHERE ";
       $l_sSQLQuery .= implode(", ",$p_aWhereCondition);
     }
@@ -535,5 +523,3 @@ abstract class GOMObject {
   public abstract function initFieldDefinition();
 
 }//end class
-
-?>
