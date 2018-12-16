@@ -3,11 +3,13 @@
   <property name="source" value="src" />
 	<property name="rootdir" value="${project.basedir}" />
 
+	<!-- TACHE CI - TRAITEMENT PRINCIPAL -->
   <target name="ci"
       description="Tâche principale d'intégration continue"
       depends="clean,qa"
   />
 
+	<!-- TACHE CLEANING - CLEANING BUILD DIRECTORY SUBPATHS -->
   <target name="clean" description="Vide les répertoires d'artefacts">
 
 		<delete dir="${rootdir}/build/api" />
@@ -23,16 +25,17 @@
 		<mkdir dir="${rootdir}/build/pdepend" />
   </target>
 
+	<!-- Outils d'analyse -->
   <target name="qa" description="Lance les outils d'analyse">
 		<phingcall target="buildParamDisplay" />
 		<phingcall target="pdepend" />
-    <!-- <phingcall target="phpmd" />
+    <phingcall target="phpmd" />
     <phingcall target="phpcpd" />
     <phingcall target="phploc" />
     <phingcall target="phpcs" />
     <phingcall target="phpdoc" />
     <phingcall target="phpunit" />
-    <phingcall target="phpcb" /> -->
+    <phingcall target="phpcb" />
   </target>
 
 	<target name="buildParamDisplay" description="Affichage des variables locales">
@@ -51,8 +54,8 @@
 	</target>
 
 	<target name="phpmd" description="PHP Mess Detector - Statistiques Qualité du code">
-    <phpmd file="${project.basedir}/${source}">
-       <formatter type="xml" outfile="${project.basedir}/build/phpmd.xml" />
+    <phpmd file="${rootdir}/${source}">
+       <formatter type="xml" outfile="${rootdir}/build/phpmd.xml" />
     </phpmd>
 	</target>
 
