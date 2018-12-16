@@ -3,6 +3,8 @@
   <property name="source" value="src" />
 	<property name="rootdir" value="${project.basedir}" />
 
+	<autoloader autoloaderpath="vendor/autoload.php"/>
+
 	<!-- TACHE CI - TRAITEMENT PRINCIPAL -->
   <target name="ci"
       description="Tâche principale d'intégration continue"
