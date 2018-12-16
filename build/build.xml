@@ -46,7 +46,7 @@
 
 
 	<target name="pdepend" description="PHP Depend">
-		<phpdepend file="${rootdir}/${source}">
+		<phpdepend file="${rootdir}/${source}" pharlocation="/usr/bin/phpcpd">
 			<logger type="jdepend-xml" outfile="${project.basedir}/build/logs/jdepend.xml" />
 			<logger type="jdepend-chart" outfile="${project.basedir}/build/pdepend/dependencies.svg" />
 			<logger type="overview-pyramid" outfile="${project.basedir}/build/pdepend/overview-pyramid.svg" />
