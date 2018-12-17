@@ -14,19 +14,19 @@ class Application
   /**
    * @var string
    */
-  static $_sDbDsn = null;
+  protected static $_sDbDsn = null;
   /**
    * @var string
    */
-  static $_sDbUser = null;
+  protected static $_sDbUser = null;
   /**
    * @var string
    */
-  static $_sDbPassword = null;
+  protected static $_sDbPassword = null;
   /**
    * @var \PDO
    */
-  static $_oDbPDOHandler = null;
+  protected static $_oDbPDOHandler = null;
 
   /**
    * Chargement des paramètres de connexion à la base de données depuis
