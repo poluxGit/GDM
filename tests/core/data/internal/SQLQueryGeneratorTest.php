@@ -15,7 +15,7 @@ final class SQLQueryGeneratorTest extends TestCase
 		 *
 		 * Test de la génération d'une requete SQL sans définition de champs SQL
 		 */
-  	public function testSelectSQLQueryGenerationWithoutSelectFields()
+  	public function testSelectSqlQueryGenerationWithoutSelectFields()
   	{
       $lsSQLQueryExpected = "SELECT * FROM table";
 		  $lsSQLQuery = SQLGen::buildSQLSelectQuery(NULL,'table',NULL);
@@ -27,7 +27,7 @@ final class SQLQueryGeneratorTest extends TestCase
 		 *
 		 * Test de la génération d'une requete SQL avec définition de champs SQL
 		 */
-  	public function testSelectSQLQueryGenerationWithSelectFields()
+  	public function testSelectSqlQueryGenerationWithSelectFields()
   	{
       $lasSelectField = ['COL1','COL2','COL3'];
       $lsSQLQueryExpected = "SELECT COL1, COL2, COL3 FROM table";
@@ -40,7 +40,7 @@ final class SQLQueryGeneratorTest extends TestCase
 		 *
 		 * Test de la génération d'une requete SQL avec condition WHERE
 		 */
-  	public function testSelectSQLQueryGenerationWithSelectFieldsAndWhereConditions()
+  	public function testSelectSqlQueryGenerationWithSelectFieldsAndWhereConditions()
   	{
       $lasCondition = ['COL1=COL2','COL2=COL3'];
       $lsSQLQueryExpected = "SELECT * FROM table WHERE COL1=COL2 AND COL2=COL3";
@@ -54,7 +54,7 @@ final class SQLQueryGeneratorTest extends TestCase
      * Test  de l'exception en cas de table non définie
      * @expectedException GOM\Core\Internal\Exception\SQLQueryGeneratorException
      */
-    public function testSelectSQLQueryGenerationWithoutTableRaiseException(): void
+    public function testSelectSqlQueryGenerationWithoutTableRaiseException(): void
     {
       $lsSQLQuery = SQLGen::buildSQLSelectQuery(NULL,'',NULL);
       $this->assertTrue(true);
