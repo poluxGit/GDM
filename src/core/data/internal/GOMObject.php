@@ -164,8 +164,8 @@ abstract class GOMObject
   final protected function getFieldsToUpdate()
   {
     return array_filter(
-      $this->_aFieldValue,
-      function ($pelem){ return $pelem!== NULL;}
+        $this->_aFieldValue,
+        function ($pelem){ return $pelem!== NULL;}
     );
   }//end getFieldsToUpdate()
 
@@ -189,8 +189,8 @@ abstract class GOMObject
     } else {
       // TODO Faire une classe Exception spécifique 'FieldDefinitionNotExists'
       $lsMsgException = sprintf(
-        "Le champs SQL '%s' n'est pas défini sur l'objet courant.",
-        $psFieldSQLName
+          "Le champs SQL '%s' n'est pas défini sur l'objet courant.",
+          $psFieldSQLName
       );
       throw new \Exception($lsMsgException);
     }
@@ -210,7 +210,10 @@ abstract class GOMObject
       $this->_aFieldValue[$lsSQLFieldName] = $pxNewValue;
     } else {
       // TODO Faire une classe Exception spécifique 'FieldDefinitionNotExists'
-      $lsMsgException = sprintf("Le champs '%s' n'est pas défini sur l'objet courant.", $psFieldName);
+      $lsMsgException = sprintf(
+          "Le champs '%s' n'est pas défini sur l'objet courant.",
+          $psFieldName
+      );
       throw new \Exception($lsMsgException);
     }
   }//end setFieldValueFromName()
@@ -310,7 +313,10 @@ abstract class GOMObject
    */
   protected function getFieldDefinitionFromName(string $psFieldName)
   {
-      $laFieldDefinition = $this->getFieldDefinitionByAttrValue('name', $psFieldName);
+      $laFieldDefinition = $this->getFieldDefinitionByAttrValue(
+          'name',
+          $psFieldName
+      );
       return $laFieldDefinition;
   }//end getFieldDefinitionFromName()
 
@@ -323,7 +329,10 @@ abstract class GOMObject
    */
   public function getFieldDefinitionFromSQLName(string $psSQLFieldName)
   {
-    $laFieldDefinition = $this->getFieldDefinitionByAttrValue('sql_name', $psSQLFieldName);
+    $laFieldDefinition = $this->getFieldDefinitionByAttrValue(
+        'sql_name',
+        $psSQLFieldName
+    );
     return $laFieldDefinition;
   }//end getFieldDefinitionFromSQLName()
 
@@ -336,7 +345,11 @@ abstract class GOMObject
    *
    * @return array(mixed)   Definition du champs
    */
-  public function getFieldDefinitionByAttrValue( $psFieldAttrName, $psFieldAttrValue, $pbAllowMultipleResult = FALSE)
+  public function getFieldDefinitionByAttrValue(
+    $psFieldAttrName,
+    $psFieldAttrValue,
+    $pbAllowMultipleResult = FALSE
+  )
   {
     if (count($this->_aFieldDefinition) > 0) {
       //DEBUG echo sprintf("\n--> Field to search '%s' with value '%s'.", $psFieldAttrName, $psFieldAttrValue);
@@ -344,7 +357,9 @@ abstract class GOMObject
 
       foreach ($this->_aFieldDefinition as $lskey => $laValue){
         if(array_key_exists($psFieldAttrName, $laValue)
-                                   && strtolower($laValue[$psFieldAttrName])==strtolower($psFieldAttrValue))
+            && strtolower($laValue[$psFieldAttrName])==strtolower(
+              $psFieldAttrValue
+              ))
         {
           $laFieldDefinition[$lskey] = $laValue;
         }
