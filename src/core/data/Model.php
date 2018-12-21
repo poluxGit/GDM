@@ -52,7 +52,14 @@ class Model extends Internal\GOMObject
    * @param string $psComment    (Optionnel) Commentaires
    * @param string $psJSONData   (Optionnel) JSON Data
    */
-  public static function createNewModel($psShortCode, $psBIDCode, $psVersion, $psShortTitle, $psLongTitle = NULL, $psComment = NULL, $psJSONData = NULL)
+  public static function createNewModel($psShortCode,
+    $psBIDCode,
+    $psVersion,
+    $psShortTitle,
+    $psLongTitle = NULL,
+    $psComment = NULL,
+    $psJSONData = NULL
+  )
   {
     //SELECT DMA_createNewModel('E1', 'ECM', 'beta', 'Personal ECM', 'Gestion de documents personnel', NULL, NULL);
     try {
@@ -63,8 +70,10 @@ class Model extends Internal\GOMObject
           $lsMsgException = sprintf("La connexion à la base de données n'est pas définie.");
           throw new \Exception($lsMsgException);
         } else {
-          $lsSQLQuery = sprintf("SELECT DMA_createNewModel(:MDL_SCODE, :MDL_BIDCODE, :MDL_VERSION, :MDL_STITLE, :MDL_LTITLE, :MDL_COMMENT, :MDL_JSONDATA);");
-          $loPDOStat         = $this->_oPDODBConnection->prepare($lsSQLQuery);
+          $lsSQLQuery = sprintf(
+            "SELECT DMA_createNewModel(:MDL_SCODE, :MDL_BIDCODE, :MDL_VERSION, :MDL_STITLE, :MDL_LTITLE, :MDL_COMMENT, :MDL_JSONDATA);"
+          );
+          $loPDOStat  = $this->_oPDODBConnection->prepare($lsSQLQuery);
 
           $loPDOStat->bindValue(':MDL_SCODE', $psShortCode, \PDO::PARAM_STR);
           $loPDOStat->bindValue(':MDL_BIDCODE', $psBIDCode, \PDO::PARAM_STR);

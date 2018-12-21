@@ -39,3 +39,7 @@ Les objets Objets peuvent être de 2 types : *Simple* ou *Complex*.
 | _dev | Répertoire de stockage des données durant l'execution.| Utilisé par les containers des Dockers ... php.ini, mysql_data ... |
 | data | Répertoire relatif à la base de données.  | Fichiers de modélisation, Scripts SQL de déploiement ...|
 | src | Répertoire des sources des différents modules.  | Répertoire principal de développement.|
+
+### TEMP DEV
+
+CI Setup - PHPCS Dependendy trouble
