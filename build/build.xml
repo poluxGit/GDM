@@ -35,7 +35,7 @@
 	<!-- Outils d'analyse -->
   <target name="qa" description="Lance les outils d'analyse">
 		<phingcall target="buildParamDisplay" />
-		<!-- <phingcall target="phpcompupd" /> -->
+		<phingcall target="phpcompupd" /> 
 		<phingcall target="pdepend" />
     <phingcall target="phpmd" />
     <phingcall target="phpcpd" />
