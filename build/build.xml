@@ -53,10 +53,9 @@
 		<echo msg="Workspace : ${ws}" />
 	</target>
 
-	<target name="phpcompupd" description="PHP Composer - Update Command">
-		<composer command="update" />
+	<target name="phpcompupd" description="PHP Composer - DUMP-autoload command">
+		<exec logoutput="true" dir="${rootdir}" command="composer dump-autoload" escape="false" />
 	</target>
-
 
 	<target name="pdepend" description="PHP Depend">
 		<phpdepend file="${rootdir}/${source}" >
