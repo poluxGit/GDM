@@ -57,7 +57,9 @@ class Application
       self::$_sDbUser     =  $ljsonContent['database']['user'];
       self::$_sDbPassword =  $ljsonContent['database']['password'];
     } else {
-      throw new Exceptions\ApplicationSettingsMandatorySettingNotDefinedException(array_slice(self::checkMandatoryApplicationSettingsAreDefined($ljsonContent)));
+      throw new Exceptions\ApplicationSettingsMandatorySettingNotDefinedException(
+        array_shift(self::checkMandatoryApplicationSettingsAreDefined($ljsonContent))
+      );
     }
 
 
