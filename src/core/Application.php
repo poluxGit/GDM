@@ -62,7 +62,6 @@ class Application
       throw new Exceptions\ApplicationSettingsMandatorySettingNotDefinedException($lAValue);
     }
 
-
     self::initDBConnection();
     self::setupClasses();
 
@@ -90,7 +89,7 @@ class Application
     }
     catch(PDOException $e)
     {
-      echo "Connexion à la base GOM échouée : ".$e->getMessage()."\n";
+      throw new Exceptions\DatabaseException($e->getMessage());
     }
   }//end initDBConnection()
 

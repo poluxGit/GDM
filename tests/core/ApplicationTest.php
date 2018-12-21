@@ -51,7 +51,7 @@ final class ApplicationTest extends TestCase
 		 * testApplicationLoadValideSettingsFile
 		 *
 		 * Chargement des paramètres depuis un fichier au format JSON valide.
-     * @expectedException \PDOException
+     * @expectedException GOM\Core\Internal\Exception\DatabaseException
 		 */
   	public function testApplicationLoadSettingsFromValidFile(): void
   	{
