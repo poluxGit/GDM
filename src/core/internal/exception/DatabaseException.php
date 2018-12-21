@@ -14,31 +14,14 @@ use GOM\Core\Internal;
 class DatabaseException extends GOMException
 {
   /**
-   * Array of Exception Definition
+   * Constructeur par défaut
    *
-   * @var array(code => GOMExceptionObject)
+   * @param string $psAppSettingsFilePath  Chemin du fichier en erreur
    */
-  protected static $_aExceptionsDefinition = [];
-
-  /**
-   * Returns Exception message pattern
-   *
-   * @return string
-   */
-  protected static function getMessagePatternFromExceptionCode($psExceptionCode)
+  public function __construct($psDBErrorMessage)
   {
-    return "";
-  }//end getMessagePatternFromExceptionCode()
-
-  /**
-   * Add Exception Pattern definition
-   *
-   * @static
-   */
-  protected static function addExceptionDefinition($psExceptionCode)
-  {
-    return "";
-  }//end getMessagePatternFromExceptionCode()
+    parent::__construct(4200,"Database Exception - '%s' ",[$psDBErrorMessage]);
+  }//end __construct()
 
 
 }//end class
