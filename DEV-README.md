@@ -24,6 +24,17 @@ $ docker-compose [-f docker-compose.yml] up
 $ docker inspect  gdm-dev_db_1
 ```
 
+- Lancer une console interactive (User : default)
+```bash
+$ docker exec -it gdm-dev_jenkins_1 bash
+```
+
+- Lancer une console interactive (User : root)
+```bash
+$ docker exec -u 0 -it gdm-dev_jenkins_1 bash
+```
+
+
 L'environnement d'execution est structuré de la manière suivantes :
 
 |Service|Image Docker|Hôte(:port)|Description|Détails|Volumes|
@@ -36,7 +47,8 @@ L'environnement d'execution est structuré de la manière suivantes :
 
 - PHP Unit :
 ```bash
-$  docker inspect  gdm-dev_db_1
+$ cd tests
+$ php phpunit.phar
 ```
 
 ## Déploiement de la base de données

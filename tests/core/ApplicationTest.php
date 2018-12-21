@@ -14,7 +14,7 @@ final class ApplicationTest extends TestCase
 		 * testApplicationLoadInvalidSettingsFile
 		 *
 		 * Chargement des paramètres depuis un fichier invalide.
-		 * @expectedException Exception
+		 * @expectedException GOM\Core\Internal\Exception\ApplicationSettingsFileNotFoundException
 		 */
   	public function testApplicationLoadSettingsFromNonExistingFile(): void
   	{
@@ -25,26 +25,26 @@ final class ApplicationTest extends TestCase
 		 * testApplicationLoadInvalidFormatSettingsFile
 		 *
 		 * Chargement des paramètres depuis un fichier au format JSON invalide.
-		 * @expectedException Exception
+		 * @expectedException GOM\Core\Internal\Exception\ApplicationSettingsFileInvalidFormatException
 		 */
   	public function testApplicationLoadSettingsFromInvalidFormatedFile(): void
   	{
 		 //	$this->expectException(\Exception::class);
-			$laObj = Application::loadDBSettings('./../tests/datasets/AppSettingsFile_01-invalidformat.json');
+			Application::loadDBSettings('./../tests/datasets/AppSettingsFile_01-invalidformat.json');
 			$this->assertEquals($laObj,NULL);
 
 	  }//end testApplicationLoadSettingsFromInvalidFormatedFile()
 
-		// /**
-		//  * testApplicationLoadValideSettingsFile
-		//  *
-		//  * Chargement des paramètres depuis un fichier au format JSON invalide.
-		//  */
-  	// public function testApplicationLoadSettingsFromValidFile(): void
-  	// {
-		// 	$laObj = Application::loadDBSettings('./../tests/datasets/AppSettingsFile_02-valid.json');
-		// 	$this->assertNotEquals($laObj,NULL);
+		/**
+		 * testApplicationLoadValideSettingsFile
+		 *
+		 * Chargement des paramètres depuis un fichier au format JSON valide.
+		 */
+  	public function testApplicationLoadSettingsFromValidFile(): void
+  	{
+		 	Application::loadDBSettings('./../tests/datasets/AppSettingsFile_02-valid.json');
+		 	$this->assertTrue(true);
 		// 	$this->assertEquals(array_key_exists("database",$laObj),true);
-	  // }//end testApplicationLoadSettingsFromValidFile()
+	  }//end testApplicationLoadSettingsFromValidFile()
 
 }//end class

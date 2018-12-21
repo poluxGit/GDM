@@ -66,7 +66,7 @@ class GOMException extends \Exception
     // Génération du message final!
     $lStrMessageException = null;
     if (!is_null($paExceptionParamValues)) {
-      $lStrMessageException = sprintf(
+      $lStrMessageException = vsprintf(
         $lsMessage,
         $paExceptionParamValues
       );
