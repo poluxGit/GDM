@@ -35,6 +35,18 @@ final class ApplicationTest extends TestCase
 
 	  }//end testApplicationLoadSettingsFromInvalidFormatedFile()
 
+    /**
+     * testApplicationLoadSettingsFileMandaotryParamMissing
+     *
+     * Chargement des paramètres depuis un fichier au format JSON invalide.
+     * @expectedException GOM\Core\Internal\Exception\ApplicationSettingsMandatorySettingNotDefinedException
+     */
+    public function testApplicationLoadSettingsFileMandaotryParamMissing(): void
+    {
+     //	$this->expectException(\Exception::class);
+      Application::loadDBSettings('./../tests/datasets/AppSettingsFile_02-invalidNoMand.json');
+    }//end testApplicationLoadSettingsFileMandaotryParamMissing()
+
 		/**
 		 * testApplicationLoadValideSettingsFile
 		 *
@@ -47,5 +59,7 @@ final class ApplicationTest extends TestCase
 		 	$this->assertTrue(true);
 		// 	$this->assertEquals(array_key_exists("database",$laObj),true);
 	  }//end testApplicationLoadSettingsFromValidFile()
+
+
 
 }//end class
