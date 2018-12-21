@@ -1,7 +1,7 @@
 <?php
 
 use PHPUnit\Framework\TestCase;
-use GOM\Core\Data\Internal\SQLQueryGenerator;
+use \GOM\Core\Data\Internal\SQLQueryGenerator;
 
 /**
  * SQLQueryGeneratorTest
