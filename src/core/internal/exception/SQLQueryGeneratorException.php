@@ -7,12 +7,14 @@
  */
 namespace GOM\Core\Internal\Exception;
 
+use \GOM\Core\Internal\GOMException as GOMEx;
+
 /**
  * Classe SQLQueryGeneratorException
  *
  * Exception lancée
  */
-class SQLQueryGeneratorException extends \GOM\Core\Internal\GOMException
+class SQLQueryGeneratorException extends GOMEx
 {
   /**
    * Constructeur par défaut
