@@ -29,29 +29,39 @@ class SQLQueryGenerator
 
     // ************************* SELECT PART **********************************
     $lsSQLQuery = 'SELECT ';
-    foreach($paSelectFields as $lsKey => $lxValue) {
-      $lsSQLDef = null;
-      if (!\is_numeric($lsKey)) {
-        $lsSQLDef = $lxValue." as ".$lsKey;
-      } else {
-        $lsSQLDef = $lxValue;
+
+    if ($paSelectFields==NULL) {
+      $lsSQLQuery .= '*';
+    } else {
+      foreach($paSelectFields as $lsKey => $lxValue) {
+        $lsSQLDef = null;
+        if (!\is_numeric($lsKey)) {
+          $lsSQLDef = $lxValue." as ".$lsKey;
+        } else {
+          $lsSQLDef = $lxValue;
+        }
+        $laSQLFieldDefinitions[] = $lsSQLDef;
       }
-      $laSQLFieldDefinitions[] = $lsSQLDef;
+      $lsSQLQuery .= implode(", ", $laSQLFieldDefinitions);
+      // TODO Gestion des type de données pour formatage (... date, reel ...)
     }
-    $lsSQLQuery .= implode(", ", $laSQLFieldDefinitions);
-    // TODO Gestion des type de données pour formatage (... date, reel ...)
 
     // ************************* FROM PART ************************************
-    $lsSQLQuery .= " FROM ";
-    $lsSQLQuery .= $psFrom;
+    if (empty($psFrom)) {
+      throw new \GOM\Core\Internal\Exception\SQLQueryGeneratorException("Table parameter can't be empty ! Generation aborted.");
+    } else {
+      $lsSQLQuery .= " FROM ";
+      $lsSQLQuery .= $psFrom;
+    }
 
     // ************************* WHERE PART ***********************************
     // WHERE part nécessaire ?
-    if (count($paWhereCondition)> 0) {
-      $lsSQLQuery .= " WHERE ";
-      $lsSQLQuery .= implode(", ", $paWhereCondition);
+    if (!is_null($paWhereCondition)) {
+      if (count($paWhereCondition)> 0) {
+        $lsSQLQuery .= " WHERE ";
+        $lsSQLQuery .= implode(" AND ", $paWhereCondition);
+      }
     }
-
     return $lsSQLQuery;
   }//end buildSQLSelectQuery()
 
