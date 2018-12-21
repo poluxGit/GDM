@@ -369,7 +369,8 @@ abstract class GOMObject
       if (count($laFieldDefinition)>1 && !$pbAllowMultipleResult) {
         // TODO Faire une classe Exception spécifique 'FieldDefintionNotExists'
         $lsMsgException = sprintf(
-          "Le nombre de résultat dont l'attribut '%s' vaut '%s' est anormal. Nb Résultat: %i.",
+          "Le nombre de résultat dont l'attribut '%s' vaut '%s'
+          est anormal. Nb Résultat: %i.",
           $psFieldAttrName,
           $psFieldAttrValue,
           count($laFieldDefinition)
@@ -416,7 +417,8 @@ abstract class GOMObject
     $lxResult = NULL;
     $lsSQLFieldname = $this->getSQLFieldNameFromName($psFieldName);
 
-    if (array_key_exists($lsSQLFieldname, $this->_aFieldValue) && $this->_aFieldValue[$lsSQLFieldname] !== NULL ) {
+    if (array_key_exists($lsSQLFieldname, $this->_aFieldValue)
+        && $this->_aFieldValue[$lsSQLFieldname] !== NULL ) {
       $lxResult = $this->_aFieldValue[$lsSQLFieldname];
     } else {
       $lxResult = $this->getFieldInitValueFromName($psFieldName);
@@ -436,7 +438,9 @@ abstract class GOMObject
     // Mode Création ? Impossible de charger l'objet...
     if ($this->_sTID === NULL) {
       // TODO Faire une classe Exception spécifique 'LoadObjectInvalidParameters'
-      $lsMsgException = sprintf("Un objet sans TID ne peut pas être chargé. (i.e : mode creation)");
+      $lsMsgException = sprintf(
+          "Un objet sans TID ne peut pas être chargé. (i.e : mode creation)"
+      );
       throw new \Exception($lsMsgException);
     }
 
@@ -445,7 +449,9 @@ abstract class GOMObject
         // DB connection active ?
         if ($this->_oPDODBConnection === NULL) {
           // TODO Faire une classe Exception spécifique 'LoadObjectInvalidDBConnection'
-          $lsMsgException = sprintf("La connexion à la base de données n'est pas définie.");
+          $lsMsgException = sprintf(
+              "La connexion à la base de données n'est pas définie."
+          );
           throw new \Exception($lsMsgException);
         } else {
           $laWhereCondition  = ['TID = :tid'];
@@ -554,10 +560,16 @@ abstract class GOMObject
    *
    * @return array  Tableau contenant les TID des objets trouvés
    */
-  public static function searchObjectFromSQLConditions($paWhereCondition, $psTablename)
+  public static function searchObjectFromSQLConditions(
+    $paWhereCondition,
+    $psTablename
+  )
   {
     $laResults = null;
-    $lsSQLQuery = SQLQueryGenerator::buildSQLSelectQuery(['TID'],$psTablename,$paWhereCondition);
+    $lsSQLQuery = SQLQueryGenerator::buildSQLSelectQuery(
+        ['TID'],
+        $psTablename,$paWhereCondition
+    );
     $laResults = DatabaseManager::getAllRows($lsSQLQuery);
     return $laResults;
   }//end searchObjectFromSQLConditions()
