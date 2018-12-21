@@ -1,7 +1,7 @@
 <?php
 
 use PHPUnit\Framework\TestCase;
-use \GOM\Core\Data\Internal\SQLQueryGenerator;
+use GOM\Core\Data\Internal\SQLQueryGenerator as SQLGen;
 
 /**
  * SQLQueryGeneratorTest
@@ -18,7 +18,7 @@ final class SQLQueryGeneratorTest extends TestCase
   	public function testSelectSQLQueryGeneration_WithoutSelectFields()
   	{
       $lsSQLQueryExpected = "SELECT * FROM table";
-		  $lsSQLQuery = SQLQueryGenerator::buildSQLSelectQuery(NULL,'table',NULL);
+		  $lsSQLQuery = SQLGen::buildSQLSelectQuery(NULL,'table',NULL);
       $this->assertEquals($lsSQLQueryExpected,$lsSQLQuery);
     }//end testSelectSQLQueryGeneration_WithoutSelectFields()
 
@@ -31,7 +31,7 @@ final class SQLQueryGeneratorTest extends TestCase
   	{
       $lasSelectField = ['COL1','COL2','COL3'];
       $lsSQLQueryExpected = "SELECT COL1, COL2, COL3 FROM table";
-		  $lsSQLQuery = SQLQueryGenerator::buildSQLSelectQuery($lasSelectField,'table',NULL);
+		  $lsSQLQuery = SQLGen::buildSQLSelectQuery($lasSelectField,'table',NULL);
       $this->assertEquals($lsSQLQueryExpected,$lsSQLQuery);
     }//end testSelectSQLQueryGeneration_WithSelectFields()
 
@@ -44,7 +44,7 @@ final class SQLQueryGeneratorTest extends TestCase
   	{
       $lasCondition = ['COL1=COL2','COL2=COL3'];
       $lsSQLQueryExpected = "SELECT * FROM table WHERE COL1=COL2 AND COL2=COL3";
-		  $lsSQLQuery = SQLQueryGenerator::buildSQLSelectQuery(NULL,'table',$lasCondition);
+		  $lsSQLQuery = SQLGen::buildSQLSelectQuery(NULL,'table',$lasCondition);
       $this->assertEquals($lsSQLQueryExpected,$lsSQLQuery);
     }//end testSelectSQLQueryGeneration_WithSelectFieldsAndWhereConditions()
 
@@ -56,7 +56,7 @@ final class SQLQueryGeneratorTest extends TestCase
      */
     public function testSelectSQLQueryGeneration_WithoutTable_Exception(): void
     {
-      $lsSQLQuery = SQLQueryGenerator::buildSQLSelectQuery(NULL,'',NULL);
+      $lsSQLQuery = SQLGen::buildSQLSelectQuery(NULL,'',NULL);
       $this->assertTrue(true);
     }//end testSelectSQLQueryGeneration_WithoutTable_Exception()
 
