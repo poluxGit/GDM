@@ -7,11 +7,11 @@
  */
 namespace GOM\Core\Internal\Exception;
 
-use GOM\Core\Internal;
+use \GOM\Core\Internal\GOMException as GOMEx;
 /**
  * Classe GOMException
  */
-class DatabaseException extends GOMException
+class DatabaseException extends GOMEx
 {
   /**
    * Constructeur par défaut
