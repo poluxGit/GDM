@@ -165,7 +165,9 @@ abstract class GOMObject
   {
     return array_filter(
         $this->_aFieldValue,
-        function ($pelem){ return $pelem!== NULL;}
+        function ($pelem) {
+            return $pelem!== NULL;
+        }
     );
   }//end getFieldsToUpdate()
 
@@ -233,16 +235,16 @@ abstract class GOMObject
   {
       $lbNameAlreadyExists = count(
         $this->getFieldDefinitionByAttrValue(
-          'sql_name',
-          $psSQLFieldName
+            'sql_name',
+            $psSQLFieldName
         )
       )>0;
       // Un champs de même nom est-il déjà défini ?
       if ($lbNameAlreadyExists) {
         // TODO Faire une classe Exception spécifique 'FieldDefinitionNotExists'
         $lsMsgException = sprintf(
-          "Le nom de champs '%s' est déjà défini pour l'objet.",
-          $psFieldName
+            "Le nom de champs '%s' est déjà défini pour l'objet.",
+            $psFieldName
         );
         throw new \Exception($lsMsgException);
       }
@@ -277,8 +279,8 @@ abstract class GOMObject
   {
     $lsResultat = NULL;
     $laFieldDefinition = $this->getFieldDefinitionByAttrValue(
-      'name',
-      $psFieldName
+        'name',
+        $psFieldName
     );
     if (array_key_exists('sql_name', $laFieldDefinition)) {
       $lsResultat = $laFieldDefinition['sql_name'] ;
@@ -339,9 +341,11 @@ abstract class GOMObject
   /**
    * Retourne la définition d'un champ de l'objet
    *
-   * @param string  $psFieldAttrName         Nom interne de l'attribut (name, sql_name, type, label).
+   * @param string  $psFieldAttrName
+   *    Nom interne de l'attribut (name, sql_name, type, label).
    * @param string  $psFieldAttrValue        Valeur à rechercher sur l'attribut.
-   * @param bool    $pbAllowMultipleResult   (Optionnel) Permet de renvoyer plusieurs résultat (défaut : FALSE)
+   * @param bool    $pbAllowMultipleResult
+   *    (Optionnel) Permet de renvoyer plusieurs résultat (défaut : FALSE)
    *
    * @return array(mixed)   Definition du champs
    */
@@ -352,7 +356,6 @@ abstract class GOMObject
   )
   {
     if (count($this->_aFieldDefinition) > 0) {
-      //DEBUG echo sprintf("\n--> Field to search '%s' with value '%s'.", $psFieldAttrName, $psFieldAttrValue);
       $laFieldDefinition = [];
 
       foreach ($this->_aFieldDefinition as $lskey => $laValue){
@@ -457,10 +460,10 @@ abstract class GOMObject
           $laWhereCondition  = ['TID = :tid'];
           $lsSQLQuery        = SQLQueryGenerator::buildSQLSelectQuery(
             array_map(
-              function ($pelem) {
-                return $pelem['sql_name'];
-              },
-              $this->_aFieldDefinition
+                function ($pelem) {
+                  return $pelem['sql_name'];
+                },
+                $this->_aFieldDefinition
             ),
             $this->_sTablename,
             $laWhereCondition
@@ -468,9 +471,9 @@ abstract class GOMObject
           $loPDOStat         = $this->_oPDODBConnection->prepare($lsSQLQuery);
 
           $loPDOStat->bindValue(
-            ':tid',
-            $this->getTID(),
-            \PDO::PARAM_STR
+              ':tid',
+              $this->getTID(),
+              \PDO::PARAM_STR
           );
 
           // Execution de la requete
