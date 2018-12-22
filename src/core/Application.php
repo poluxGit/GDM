@@ -6,7 +6,7 @@ use GOM\Core\Data\Internal;
 use GOM\Core\Data;
 use GOM\Core\Internal\Exception as Exceptions;
 /**
- * GOMFactory - Static Class
+ * Application - Static Class
  *
  * Classe principale du program
  */
@@ -15,7 +15,21 @@ class Application
   /**
    * @var string
    */
-  protected static $_sDbDsn = null;
+  protected static $_sDbType = null;
+
+  /**
+   * @var string
+   */
+  protected static $_sDbHost = null;
+  /**
+   * @var int
+   */
+  protected static $_iDbPort = null;
+  /**
+   * @var string
+   */
+  protected static $_sDbSchema = null;
+
   /**
    * @var string
    */
@@ -36,7 +50,7 @@ class Application
    * @param  $psJSONFilePath   string  Chemin du fichier de paramètre à charger.
    * @static
    */
-  static function loadDBSettings($psJSONFilePath)
+  static function loadDBSettings($psJSONFilePath,$pbAutoRegister=true)
   {
     // fichier JSON existant ?
     if (!file_exists($psJSONFilePath)) {
@@ -53,7 +67,10 @@ class Application
 
     // Vérification de la présence des attributs obligatoires
     if (self::isAllMandatoryApplicationSettingsAreDefined($ljsonContent)) {
-      self::$_sDbDsn      =  $ljsonContent['database']['dsn'];
+      self::$_sDbType     =  $ljsonContent['database']['dbtype'];
+      self::$_sDbHost     =  $ljsonContent['database']['host'];
+      self::$_sDbSchema   =  $ljsonContent['database']['schema'];
+      self::$_iDbPort     =  $ljsonContent['database']['port'];
       self::$_sDbUser     =  $ljsonContent['database']['user'];
       self::$_sDbPassword =  $ljsonContent['database']['password'];
     } else {
@@ -84,7 +101,14 @@ class Application
   {
     try{
       if (self::$_oDbPDOHandler == null) {
-        self::$_oDbPDOHandler = new \PDO(self::$_sDbDsn , self::$_sDbUser , self::$_sDbPassword);
+
+        $lsDSN = DatabaseManager::buildDatabaseDSN(
+            self::$_sDbType,
+            self::$_sDbSchema,
+            self::$_sDbHost,
+            self::$_iDbPort
+          );
+        self::$_oDbPDOHandler = new \PDO($lsDSN , self::$_sDbUser , self::$_sDbPassword);
       }
     }
     catch(PDOException $e)
@@ -117,12 +141,18 @@ class Application
 
     if (is_null($paApplicationSettings) || !\array_key_exists('database',$paApplicationSettings)) {
       $laResult[] = "database";
-    } elseif (!\array_key_exists('dsn',$paApplicationSettings['database'])) {
-      $laResult[] = "database\dsn";
+    } elseif (!\array_key_exists('schema',$paApplicationSettings['database'])) {
+      $laResult[] = "database\schema";
     } elseif (!\array_key_exists('user',$paApplicationSettings['database'])) {
       $laResult[] = "database\user";
     } elseif (!\array_key_exists('password',$paApplicationSettings['database'])) {
       $laResult[] = "database\password";
+    } elseif (!\array_key_exists('host',$paApplicationSettings['database'])) {
+      $laResult[] = "database\host";
+    } elseif (!\array_key_exists('port',$paApplicationSettings['database'])) {
+      $laResult[] = "database\port";
+    } elseif (!\array_key_exists('dbtype',$paApplicationSettings['database'])) {
+      $laResult[] = "database\dbtype";
     }
 
     return $laResult;
@@ -138,5 +168,53 @@ class Application
   {
     return count(self::checkMandatoryApplicationSettingsAreDefined($paApplicationSettings))==0;
   }//end isAllMandatoryApplicationSettingsAreDefined()
+
+  /**
+   * Déploie le schéma applicatif 'Core' sur la base spécifiée
+   *
+   * @param string $psDBType    Type de la connection du DSN.
+   * @param string $psDBSchema  Schéma cible.
+   * @param string $psDBHost    Hote cible.
+   * @param string $piDBPort    Port cible.
+   */
+  static function deploySchemaToTargetDB($psTargetSchemaName,$psDbUser,$psDbPass,$psDbHost)
+  {
+    try {
+      // Etape 0 -> Identifier les scripts disponibles
+      // Etape 1 -> Remplacer le schéma dans le fichier anonyme
+      // Etape 3 -> TODO
+
+    } catch (\Exception $e) {
+
+    } finally {
+
+    }
+
+  }//end deploySchemaToTargetDB()
+
+  /**
+   * Déploie le schéma applicatif 'Core' sur la base par défaut.
+   *
+   * @internal Fait appel au script déjà générée à la racine Appicative 'db.sql'
+   *
+   * @param string $psDBType    Type de la connection du DSN.
+   * @param string $psDBSchema  Schéma cible.
+   * @param string $psDBHost    Hote cible.
+   * @param string $piDBPort    Port cible.
+   */
+  static function deploySchemaToDefaultTargetDB($psDbUser,$psDbPass,$psDbHost)
+  {
+    try {
+      // Etape 0 -> Identifier les scripts disponibles
+      // Etape 1 -> Remplacer le schéma dans le fichier anonyme
+      // Etape 3 -> TODO
+
+    } catch (\Exception $e) {
+
+    } finally {
+
+    }
+
+  }//end deploySchemaToTargetDB()
 
 }//end class
