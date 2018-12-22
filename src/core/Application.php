@@ -102,7 +102,7 @@ class Application
   static function importModelFromJSONData($psJSONData)
   {
     //XXX self::initDBConnection();
-    $lobj = new ObjectDefinition();
+    //$lobj = new ObjectDefinition();
   }//end importMDLFromJSONData()
 
   /**

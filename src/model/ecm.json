@@ -1,107 +1,107 @@
 {
-  "modele_prefix":"E1",
-  "modele_uid":"ECM",
-  "modele_version":"v1",
+  "modele_prefix":"E1", 
+  "modele_uid":"ECM", 
+  "modele_version":"v1", 
   "modele_definition":{
      "objects":[
         {
-           "uid-integer":5,
-           "bid":"DOCUMENT",
-           "object_type":"Complex",
-           "short_title":"Document",
-           "long_title":"Document",
-           "description":"Tous mes documents.",
-           "tid_prefix":"DOC",
+           "uid-integer":5, 
+           "bid":"DOCUMENT", 
+           "object_type":"Complex", 
+           "short_title":"Document", 
+           "long_title":"Document", 
+           "description":"Tous mes documents.", 
+           "tid_prefix":"DOC", 
            "metadef":[
               {
-                 "order":1,
-                 "bid":"",
-                 "short_title":"Année",
-                 "long_title":"Année du Document",
-                 "comment":"Attribut Année du document",
-                 "data_type":"Integer",
-                 "data_pattern":"1900..2020",
+                 "order":1, 
+                 "bid":"", 
+                 "short_title":"Année", 
+                 "long_title":"Année du Document", 
+                 "comment":"Attribut Année du document", 
+                 "data_type":"Integer", 
+                 "data_pattern":"1900..2020", 
                  "is_mandatory":true
-              },
+              }, 
               {
-                 "order":2,
-                 "short_title":"Mois",
-                 "long_title":"Mois du Document",
-                 "comment":"Attribut Mois du document",
-                 "data_type":"Integer",
-                 "data_pattern":"1..12",
+                 "order":2, 
+                 "short_title":"Mois", 
+                 "long_title":"Mois du Document", 
+                 "comment":"Attribut Mois du document", 
+                 "data_type":"Integer", 
+                 "data_pattern":"1..12", 
                  "is_mandatory":true
-              },
+              }, 
               {
-                 "order":3,
-                 "short_title":"Jour",
-                 "long_title":"Jour du Document",
-                 "comment":"Attribut Jour du document",
-                 "data_type":"Integer",
-                 "data_pattern":"1..31",
+                 "order":3, 
+                 "short_title":"Jour", 
+                 "long_title":"Jour du Document", 
+                 "comment":"Attribut Jour du document", 
+                 "data_type":"Integer", 
+                 "data_pattern":"1..31", 
                  "is_mandatory":false
-              },
+              }, 
               {
 
               }
            ]
-        },
+        }, 
         {
-           "uid-integer":1,
-           "bid":"CATEGORIE",
-           "object_type":"Simple",
-           "short_title":"Catégorie",
-           "long_title":"Catégorie générique",
-           "description":"Catégorie générique.",
-           "tid_prefix":"CAT",
+           "uid-integer":1, 
+           "bid":"CATEGORIE", 
+           "object_type":"Simple", 
+           "short_title":"Catégorie", 
+           "long_title":"Catégorie générique", 
+           "description":"Catégorie générique.", 
+           "tid_prefix":"CAT", 
            "metadef":[
 
            ]
-        },
+        }, 
         {
-           "uid-integer":2,
-           "bid":"TIER",
-           "object_type":"Simple",
-           "short_title":"Tier",
-           "long_title":"Tier",
-           "description":"Tier pouvant être une personne physique, une entreprise ou une entité logique.",
-           "tid_prefix":"TIE",
+           "uid-integer":2, 
+           "bid":"TIER", 
+           "object_type":"Simple", 
+           "short_title":"Tier", 
+           "long_title":"Tier", 
+           "description":"Tier pouvant être une personne physique, une entreprise ou une entité logique.", 
+           "tid_prefix":"TIE", 
            "metadef":[
 
            ]
         }
-     ],
+     ], 
      "links":[
         {
-           "bid":"DOC_CAT",
-           "link_type":"Multi",
-           "short_title":"Catégorie(s)",
-           "long_title":"Catégorie(s) du Document",
-           "description":"Catégorie(s) du Document.",
-           "object-source":"DOCUMENT",
-           "object-target":"CATEGORIE",
-           "tid_prefix":"DOCAT",
+           "bid":"DOC_CAT", 
+           "link_type":"Multi", 
+           "short_title":"Catégorie(s)", 
+           "long_title":"Catégorie(s) du Document", 
+           "description":"Catégorie(s) du Document.", 
+           "object-source":"DOCUMENT", 
+           "object-target":"CATEGORIE", 
+           "tid_prefix":"DOCAT", 
            "metadef":[
 
            ]
-        },
+        }, 
         {
-           "bid":"DOC_TIE",
-           "link_type":"Mono",
-           "short_title":"Tier",
-           "long_title":"Tier du Document",
-           "description":"Tier du Document.",
-           "object-source":"DOCUMENT",
-           "object-target":"TIER",
-           "tid_prefix":"DOTIE",
+           "bid":"DOC_TIE", 
+           "link_type":"Mono", 
+           "short_title":"Tier", 
+           "long_title":"Tier du Document", 
+           "description":"Tier du Document.", 
+           "object-source":"DOCUMENT", 
+           "object-target":"TIER", 
+           "tid_prefix":"DOTIE", 
            "metadef":[
 
            ]
-        },
+        }, 
         {
 
         }
-     ],
+     ], 
      "constraints":[
         {
 
