@@ -1,7 +1,7 @@
 <?php
 namespace GOM\Core;
 
-use GOM\Core\Internal\Exception;
+use GOM\Core\Internal\Exception as Exceptions;
 
 /**
  * Classe statique DatabaseManager
@@ -45,8 +45,8 @@ class DatabaseManager
     try {
         // DB connection active ?
         if (self::$_oPDODBConnection === NULL) {
-          $lsMsgException = sprintf("La connexion à la base de données n'est pas définie.");
-          throw new \DatabaseException('DB-PDO_CONNECTION-KO',$lsMsgException);
+          $lsMsgException = sprintf("Database connection not defined.");
+          throw new Exceptions\DatabaseException($lsMsgException);
         } else {
 
           $loPDOStat = $this->_oPDODBConnection->prepare($psSQLSelectQuery);
@@ -60,7 +60,11 @@ class DatabaseManager
           $laResults = $loPDOStat->fetchAll($liFetchMode);
         }
     } catch (\Exception $e) {
-      throw new \Exception($e->getMessage());
+      $lsMsgException = sprintf(
+          "An error occured during database querying (getAllRows) : %s.",
+          $e->getMessage()
+        );
+      throw new Exceptions\DatabaseException($lsMsgException);
     } finally {
       // TODO To implement
     }
@@ -85,8 +89,8 @@ class DatabaseManager
     try {
         // DB connection active ?
         if (self::$_oPDODBConnection === NULL) {
-          $lsMsgException = sprintf("La connexion à la base de données n'est pas définie.");
-          throw new \DatabaseException('DB-PDO_CONNECTION-KO',$lsMsgException);
+          $lsMsgException = sprintf("Database connection not defined.");
+          throw new Exceptions\DatabaseException($lsMsgException);
         } else {
 
           $loPDOStat = $this->_oPDODBConnection->prepare($psSQLSelectQuery);
@@ -100,7 +104,11 @@ class DatabaseManager
           $laResults = $loPDOStat->fetchAll($liFetchMode);
         }
     } catch (\Exception $e) {
-      throw new \Exception($e->getMessage());
+      $lsMsgException = sprintf(
+          "An error occured during database querying (getFirstRowOnly) : %s.",
+          $e->getMessage()
+        );
+      throw new Exceptions\DatabaseException($lsMsgException);
     } finally {
       // TODO To implement
     }
@@ -112,5 +120,65 @@ class DatabaseManager
     return $laFinalRow;
   }//end getAllRows()
 
+  /**
+   * execMySQLScriptByShell
+   *
+   * Réalise l'execution du script SQL via command Shell basée sur le client
+   * mysql
+   *
+   * @static
+   * @param string  $psSQLScriptFilepath    Chemin du script à executer.
+   * @param string  $psDbUser               DB Login Utilisateur.
+   * @param string  $psDbPass               DB Password Utilisateur.
+   * @param string  $psDbHost               DB Hote cible.
+   * @param string  $piDbPort               (Optionel) DB Port (default:3306)
+   * @return string   Retour de l'execution.
+   */
+  static function execMySQLScriptByShell($psSQLScriptFilepath,$psDbUser,$psDbPass,$psDbHost,$piDBPort=3306) : string
+  {
+    $output = null;
+    try {
+      // fichier du script existant ?
+      if (!file_exists($psSQLScriptFilepath)) {
+        throw new Exceptions\ApplicationFileNotFoundException($psSQLScriptFilepath);
+      }
+
+      $command  = "mysql --user={$psDbUser} --password='{$psDbPass}' ".
+        "-h {$psDbHost} -p {$piDBPort} -D sys < {$psSQLScriptFilepath}";
+      $output   = shell_exec($command);
+    } catch (\Exception $e) {
+      $lsMsgException = sprintf(
+          "An error occured during executing script file by shell command to MySQL database (execMySQLScriptByShell) : %s.",
+          $e->getMessage()
+        );
+      throw new Exceptions\DatabaseException($lsMsgException);
+    } finally {
+      // TODO To implement
+    }
+    return $output;
+  }//end execMySQLScriptByShell()
+
+  /**
+   * Retourne une chaine au format DSN
+   *
+   * @static
+   * @example "mysql:dbname=GOM;host=localhost;port=3336"
+   *
+   * @param string $psDBType    Type de la connection du DSN.
+   * @param string $psDBSchema  Schéma cible.
+   * @param string $psDBHost    Hote cible.
+   * @param string $piDBPort    Port cible.
+   */
+  static function buildDatabaseDSN($psDBType,$psDBSchema,$psDBHost,$piDBPort)
+  {
+    $lsDSN = sprintf(
+        "%s:dbname=%s;host=%s;port=%i",
+        $psDBType,
+        $psDBSchema,
+        $psDBHost,
+        $piDBPort
+      );
+    return $lsDSN;
+  }//end buildDatabaseDSN()
 
 }//end class
