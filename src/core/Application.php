@@ -62,9 +62,9 @@ class Application
       throw new Exceptions\ApplicationSettingsMandatorySettingNotDefinedException($lAValue);
     }
 
+    // Initialisation de la base et des classes!
     self::initDBConnection();
     self::setupClasses();
-
   }//end loadDBSettings()
 
   /**
