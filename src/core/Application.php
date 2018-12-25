@@ -203,6 +203,25 @@ class Application
     }
   }//end deploySchemaToTargetDB()
 
+
+  /**
+   * Déploie le schéma applicatif 'Core' sur la base spécifiée
+   *
+   * @param string  $psDbUser             Login Utilisateur.
+   * @param string  $psDbPass             Pass Utilisateur.
+   */
+  static function deploySchemaToDefaultAppliDB($psDbUser,$psDbPass)
+  {
+    try {
+      // Preparation -> Génération du script SQL ciblé pour le schéma.
+      self::generateSQLScriptToDefaultApplicationFile(self::$_sDbSchema);
+      // Execution du déploiement!
+      self::deployGeneratedSQLScript($psDbUser,$psDbPass,self::$_sDbHost,self::$_iDbPort);
+    } catch (\Exception $e) {
+      throw new Exceptions\ApplicationGenericException($e->getMessage());
+    }
+  }//end deploySchemaToTargetDB()
+
   /**
    * Déploie le scipt actuellement généré depuis l'emplacement par défaut.
    *
