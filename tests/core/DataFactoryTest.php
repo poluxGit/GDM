@@ -26,6 +26,9 @@ class DataFactoryTest extends TestCase
     $this->assertTrue(true);
   }//end testDeployApplicationCoreDatabaseStructure()
 
+  /**
+   * @depends testDeployApplicationCoreDatabaseStructure
+   */
   public function testGettingModelFromDatabaseByTid()
   {
     $lObj = DataFactory::getModel('MDL-SI-0001');
