@@ -15,6 +15,7 @@ db:
     - 3336:3306
   volumes:
     - "./_dev/exec/data:/var/lib/mysql"
+    - ./_dev/my.cnf:/etc/mysql/my.cnf
   environment:
     MYSQL_ROOT_PASSWORD: dev
 jenkins:
@@ -26,3 +27,5 @@ jenkins:
     - "./_dev/exec/jenkins_home:/var/jenkins_home"
   environment:
     jenkins_home: /var/jenkins_home
+  links:
+    - "db:mysql"
