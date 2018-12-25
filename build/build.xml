@@ -19,7 +19,6 @@
     <delete dir="${rootdir}/build/coverage" />
     <delete dir="${rootdir}/build/logs" />
     <delete dir="${rootdir}/build/pdepend" />
-
 		<mkdir dir="${rootdir}/build/api" />
 		<mkdir dir="${rootdir}/build/code-browser" />
 		<mkdir dir="${rootdir}/build/coverage" />
@@ -41,7 +40,7 @@
     <phingcall target="phpcpd" />
     <phingcall target="phploc" />
     <phingcall target="phpcs" />
-    <!-- <phingcall target="phpdoc" /> -->
+    <phingcall target="phpdoc" />
     <phingcall target="phpunit" />
     <phingcall target="phpcb" />
   </target>
@@ -101,7 +100,11 @@
 	</target>
 
 	<target name="phpunit" description="PHPUnit - Tests">
-    <exec logoutput="true" dir="${rootdir}/tests" command="phpunit --testdox" escape="false" />
+    <exec logoutput="true" dir="${rootdir}/tests" command="phpunit --testdox" escape="false" >
+      <arg line="--coverage-clover ${rootdir}/build/logs/clover.xml
+                      --coverage-html ${rootdir}/build/logs/
+                      ."/>
+    </exec>
 	</target>
 
 	<target name="phpcb" description="PHPCodeBrowser - Visualiseur de code PHP - Jenkins">
