@@ -47,6 +47,17 @@ final class ApplicationTest extends TestCase
       Application::loadDBSettings('./../tests/datasets/AppSettingsFile_02-invalidNoMand.json');
     }//end testApplicationLoadSettingsFileMandatoryParamMissing()
 
+    /**
+     * testApplicationInvalidDatabaseConnection
+     *
+     * Chargement des paramètres depuis un fichier au format JSON invalide.
+     * @expectedException \PDOException
+     */
+    public function testApplicationInvalidDatabaseConnection(): void
+    {
+       Application::loadDBSettings('./../tests/datasets/AppSettingsFile_03-invalidconnec.json');
+    }//end testApplicationInvalidDatabaseConnection()
+
 		/**
 		 * testApplicationLoadValideSettingsFile
 		 *
@@ -60,11 +71,11 @@ final class ApplicationTest extends TestCase
 		}//end testApplicationLoadSettingsFromValidFile()
 
     /**
-     * testApplicationDeployDB
+     * testApplicationDeployingIntoTargetDatabase
      *
      * Chargement des paramètres depuis un fichier au format JSON valide.
      */
-    public function testApplicationDeployingIntoTargetDB(): void
+    public function testApplicationDeployingIntoTargetDatabase(): void
     {
       Application::deploySchemaToTargetDB(
         'GDM_TEST',
@@ -74,15 +85,15 @@ final class ApplicationTest extends TestCase
         '3306'
       );
       $this->assertTrue(true);
-    }//end testApplicationDeployingDB()
+    }//end testApplicationDeployingIntoTargetDatabase()
 
 
     /**
-     * testApplicationDeployingDefaultAppliDB
+     * testApplicationDeployingDefaultApplicationDatabase
      *
      * Chargement des paramètres depuis un fichier au format JSON valide.
      */
-    public function testApplicationDeployingDefaultAppliDB(): void
+    public function testApplicationDeployingDefaultApplicationDatabase(): void
     {
       Application::loadDBSettings('./../tests/datasets/AppSettingsFile_02-valid.json');
       Application::deploySchemaToDefaultAppliDB(
@@ -90,6 +101,6 @@ final class ApplicationTest extends TestCase
         'dev'
       );
       $this->assertTrue(true);
-    }//end testApplicationDeployingDefaultAppliDB()
+    }//end testApplicationDeployingDefaultApplicationDatabase()
 
 }//end class
