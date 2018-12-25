@@ -143,8 +143,8 @@ class DatabaseManager
         throw new Exceptions\ApplicationFileNotFoundException($psSQLScriptFilepath);
       }
 
-      $command  = "mysql --user={$psDbUser} --password='{$psDbPass}' ".
-        "-h {$psDbHost} -p {$piDBPort} -D sys < {$psSQLScriptFilepath}";
+      $command  = "mysql --user={$psDbUser} --password={$psDbPass} ".
+        "-h {$psDbHost} -P {$piDBPort}  sys < {$psSQLScriptFilepath}";
       $output   = @shell_exec($command);
 
       print_r($output);
