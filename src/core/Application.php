@@ -15,8 +15,11 @@ class Application
   /**
    * @var string
    */
+  protected static $_sDefaultSQLScriptFilepath = './db.sql';
+  /**
+   * @var string
+   */
   protected static $_sDbType = null;
-
   /**
    * @var string
    */
@@ -79,9 +82,11 @@ class Application
       throw new Exceptions\ApplicationSettingsMandatorySettingNotDefinedException($lAValue);
     }
 
-    // Initialisation de la base et des classes!
-    self::initDBConnection();
-    self::setupClasses();
+    if ($pbAutoRegister) {
+      // Initialisation de la base et des classes!
+      self::initDBConnection();
+      self::setupClasses();
+    }
   }//end loadDBSettings()
 
   /**
@@ -108,6 +113,8 @@ class Application
             self::$_sDbHost,
             self::$_iDbPort
           );
+
+          echo $lsDSN;
         self::$_oDbPDOHandler = new \PDO($lsDSN , self::$_sDbUser , self::$_sDbPassword);
       }
     }
@@ -172,49 +179,156 @@ class Application
   /**
    * Déploie le schéma applicatif 'Core' sur la base spécifiée
    *
-   * @param string $psDBType    Type de la connection du DSN.
-   * @param string $psDBSchema  Schéma cible.
-   * @param string $psDBHost    Hote cible.
-   * @param string $piDBPort    Port cible.
+   * @param string  $psTargetSchemaName   Nom du schéma cible.
+   * @param string  $psDbUser             Login Utilisateur.
+   * @param string  $psDbPass             Pass Utilisateur.
+   * @param string  $psDBHost             Hote cible.
+   * @param int     $piDBPort             Port cible.
    */
-  static function deploySchemaToTargetDB($psTargetSchemaName,$psDbUser,$psDbPass,$psDbHost)
+  static function deploySchemaToTargetDB(
+    $psTargetSchemaName,
+    $psDbUser,
+    $psDbPass,
+    $psDbHost,
+    $piDBPort
+  )
   {
     try {
-      // Etape 0 -> Identifier les scripts disponibles
-      // Etape 1 -> Remplacer le schéma dans le fichier anonyme
-      // Etape 3 -> TODO
-
+      // Preparation -> Génération du script SQL ciblé pour le schéma.
+      self::generateSQLScriptToDefaultApplicationFile($psTargetSchemaName);
+      // Execution du déploiement!
+      self::deployGeneratedSQLScript($psDbUser,$psDbPass,$psDbHost,$piDBPort);
     } catch (\Exception $e) {
-
-    } finally {
-
+      throw new Exceptions\ApplicationGenericException($e->getMessage());
     }
-
   }//end deploySchemaToTargetDB()
 
   /**
-   * Déploie le schéma applicatif 'Core' sur la base par défaut.
+   * Déploie le scipt actuellement généré depuis l'emplacement par défaut.
    *
    * @internal Fait appel au script déjà générée à la racine Appicative 'db.sql'
    *
-   * @param string $psDBType    Type de la connection du DSN.
-   * @param string $psDBSchema  Schéma cible.
-   * @param string $psDBHost    Hote cible.
-   * @param string $piDBPort    Port cible.
+   * @param string  $psDbUser             Login Utilisateur.
+   * @param string  $psDbPass             Pass Utilisateur.
+   * @param string  $psDBHost             Hote cible.
+   * @param int     $piDBPort             Port cible.
    */
-  static function deploySchemaToDefaultTargetDB($psDbUser,$psDbPass,$psDbHost)
+  static function deployGeneratedSQLScript($psDbUser,$psDbPass,$psDbHost,$piDBPort)
   {
     try {
-      // Etape 0 -> Identifier les scripts disponibles
-      // Etape 1 -> Remplacer le schéma dans le fichier anonyme
-      // Etape 3 -> TODO
+      return DatabaseManager::execMySQLScriptByShell(
+          realpath(dirname(__FILE__)).'/'.self::$_sDefaultSQLScriptFilepath,
+          $psDbUser,
+          $psDbPass,
+          $psDbHost,
+          $piDBPort
+      );
 
     } catch (\Exception $e) {
-
-    } finally {
-
+      throw new Exceptions\ApplicationGenericException($e->getMessage());
     }
+  }//end deployGeneratedSQLScript()
 
-  }//end deploySchemaToTargetDB()
+  /**
+   * Génère le script SQL utilisé par défaut par l'application.
+   *
+   * Remplace les occurences de nom de schéma par le paramètre correspondant.
+   *
+   * @param string $psTargetDatabaseSchema  Nom du schéma cible.
+   *
+   */
+  static protected function generateSQLScriptToDefaultApplicationFile($psTargetDatabaseSchema)
+  {
+    // Vars locales!
+    $lsCoreSrcSQLFilename     = realpath(dirname(__FILE__)).'/../../data/deployment/internal/00-db_no-schema.sql';
+    $lsSysDataSrcSQLFilename  = realpath(dirname(__FILE__)).'/../../data/deployment/internal/00-db_sysdata.sql';
+    $lsTargetSQLFilename      = realpath(dirname(__FILE__)).'/'.self::$_sDefaultSQLScriptFilepath;
+    $loTargetSQLFileHandler   = null;
+    $lbRollBackFileExists     = false;
+
+    $lsFileContent = null;
+    $lsFileContentUpdated = null;
+
+    try {
+      // Paramètre TargetSchema non vide? ?
+      if (empty($psTargetDatabaseSchema)) {
+        $lsExMessage = "Target Schema can't be empty.";
+        throw new Exceptions\ApplicationGenericException($lsExMessage);
+      }
+      // fichier source 'CoreSchema' existant ?
+      if (!file_exists($lsCoreSrcSQLFilename)) {
+        throw new Exceptions\ApplicationFileNotFoundException($lsCoreSrcSQLFilename);
+      }
+      // fichier source 'SysData' existant ?
+      if (!file_exists($lsSysDataSrcSQLFilename)) {
+        throw new Exceptions\ApplicationFileNotFoundException($lsSysDataSrcSQLFilename);
+      }
+      // Procédure de rollback : copie du fichier déjà existant
+      if (file_exists($lsTargetSQLFilename)) {
+        if (file_exists(self::getDefaultSQLScriptFilenameForRollBack($lsTargetSQLFilename))) {
+          unlink(self::getDefaultSQLScriptFilenameForRollBack($lsTargetSQLFilename));
+        }
+        // Copie du fichier existant!
+        if (copy(
+            $lsTargetSQLFilename,
+            self::getDefaultSQLScriptFilenameForRollBack($lsTargetSQLFilename)
+          )) {
+            $lbRollBackFileExists = true;
+          }
+
+        // Suppression du fichier existant
+        unlink($lsTargetSQLFilename);
+      }
+
+      // Fichier CoreSchema ...
+      // ***********************************************************************
+
+      // Ouverture Fichier destination!
+      $loTargetSQLFileHandler=@fopen($lsTargetSQLFilename,'w+');
+
+      // Echec lors de l'ouverture?
+      if (!$loTargetSQLFileHandler) {
+        $lsExMessage = sprintf(
+            "Error during SQLScript target file initialization (target:'%s').",
+            $lsTargetSQLFilename
+        );
+        throw new Exceptions\ApplicationGenericException($lsExMessage);
+      }
+
+      // CoreSchema - lecture fichier & remplacement & ecriture !
+      $lsFileContent = \file_get_contents($lsCoreSrcSQLFilename);
+      $lsFileContentUpdated = \str_replace(
+          'TARGET_SCHEMA',
+          $psTargetDatabaseSchema,
+          $lsFileContent
+        );
+      \fwrite($loTargetSQLFileHandler,$lsFileContentUpdated);
+
+      // SysData - lecture fichier & ecriture !
+      $lsFileContent = null;
+      $lsFileContent = \file_get_contents($lsSysDataSrcSQLFilename);
+      \fwrite($loTargetSQLFileHandler,$lsFileContent);
+
+    } catch (\Exception $e) {
+      // TODO Rollback du fichier precedent
+      throw new Exceptions\ApplicationGenericException($e->getMessage());
+    } finally {
+      // Fermeture du fichier!
+      if (!is_null($loTargetSQLFileHandler) && $loTargetSQLFileHandler!=false) {
+        \fclose($loTargetSQLFileHandler);
+      }
+    }
+  }//end generateSQLScriptToDefaultApplicationFile()
+
+  /**
+   * Retourne le nom de fichier sql de sauvegarde
+   *
+   * @param string $psSQLFilename  Nom du fichier racine SQL
+   *
+   */
+  static protected function getDefaultSQLScriptFilenameForRollBack($psSQLFilename)
+  {
+    return \str_replace('.sql','-prev.sql',$psSQLFilename);
+  }//end getDefaultSQLScriptFilenameForRollBack()
 
 }//end class

@@ -132,9 +132,9 @@ class DatabaseManager
    * @param string  $psDbPass               DB Password Utilisateur.
    * @param string  $psDbHost               DB Hote cible.
    * @param string  $piDbPort               (Optionel) DB Port (default:3306)
-   * @return string   Retour de l'execution.
+   * @return array   Retour de l'execution.
    */
-  static function execMySQLScriptByShell($psSQLScriptFilepath,$psDbUser,$psDbPass,$psDbHost,$piDBPort=3306) : string
+  static function execMySQLScriptByShell($psSQLScriptFilepath,$psDbUser,$psDbPass,$psDbHost,$piDBPort=3306)
   {
     $output = null;
     try {
@@ -145,7 +145,9 @@ class DatabaseManager
 
       $command  = "mysql --user={$psDbUser} --password='{$psDbPass}' ".
         "-h {$psDbHost} -p {$piDBPort} -D sys < {$psSQLScriptFilepath}";
-      $output   = shell_exec($command);
+      $output   = @shell_exec($command);
+
+      print_r($output);
     } catch (\Exception $e) {
       $lsMsgException = sprintf(
           "An error occured during executing script file by shell command to MySQL database (execMySQLScriptByShell) : %s.",
@@ -172,7 +174,7 @@ class DatabaseManager
   static function buildDatabaseDSN($psDBType,$psDBSchema,$psDBHost,$piDBPort)
   {
     $lsDSN = sprintf(
-        "%s:dbname=%s;host=%s;port=%i",
+        "%s:dbname=%s;host=%s;port=%s",
         $psDBType,
         $psDBSchema,
         $psDBHost,

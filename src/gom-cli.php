@@ -44,6 +44,13 @@ const PROG_ACTIONS = [
    ],
    'LOAD_LNKMD' => [
      0=> ["LNKMD_TID", "TID of LiNKMeta Definition to load."]
+   ],
+   'DEPLOY_DB' => [
+     0=> ["HOST", "Hostname."],
+     1=> ["PORT", "Port."],
+     2=> ["SCHEMA", "Target DB Schema."],
+     3=> ["DBUSER", "DB User login."],
+     4=> ["DBPASS", "DB User password."]
    ]
  ];
 /* -------------------------------------------------------------------------- */
@@ -98,8 +105,7 @@ function generateFooterForCommandLine($psAction)
  */
 function main($argc, $argv)
 {
-  try{
-
+  try {
     $lbHeaderGenerated = false;
 
     // Action spécifiée dans l'appel ?
@@ -178,6 +184,36 @@ function main($argc, $argv)
           $loObj = GOM\Core\DataFactory::getLinkMetaDefinition($argv[2]);
           print_r($loObj);
           break;
+      case 'DEPLOY_DB':
+          // 0=> ["HOST", "Hostname."],
+          // 1=> ["PORT", "Port."],
+          // 2=> ["SCHEMA", "Target DB Schema."],
+          // 3=> ["DBUSER", "DB User login."],
+          // 4=> ["DBPASS", "DB User password."]
+
+          echo sprintf(
+            " - Déploiement de la structure de la base de données dans le schéma '%s'. \n",
+            strval($argv[4])
+          );
+
+          echo sprintf(
+            " - Host:'%s' - Port:'%s'. \n",
+            strval($argv[2]),
+            strval($argv[3])
+          );
+
+          print_r(
+            \GOM\Core\Application::deploySchemaToTargetDB(
+              $argv[4],
+              $argv[5],
+              $argv[6],
+              $argv[2],
+              $argv[3]
+            )
+          );
+          
+          echo "- Fin déploiement DB.\n";
+          break;
       default:
         echo "Action non reconnue.";
         break;
@@ -194,7 +230,7 @@ function main($argc, $argv)
 }//end main()
 
 // INITIALISATION GOM
-GOM\Core\Application::loadDBSettings('./gom-settings.json');
+GOM\Core\Application::loadDBSettings('./gom-settings.json',false);
 
 // Démarrage du traitement
 /* -------------------------------------------------------------------------- */
