@@ -60,7 +60,7 @@ class DataFactoryTest extends TestCase
    */
   public function testCreateNewModelIntoDatabase()
   {
-    GOM\Core\Data\Model::createNewModel(
+    $lsID = GOM\Core\Data\Model::createNewModel(
       'E1',
         'ECM',
         'dev',
@@ -70,7 +70,7 @@ class DataFactoryTest extends TestCase
         '{"toto":1}'
     );
 
-    $lObj = DataFactory::getModel('SI.MDL-SPE-0002');
+    $lObj = DataFactory::getModel($lsID);
     $this->assertNotNull($lObj);
     $this->assertInstanceOf(GOM\Core\Data\Model::class,$lObj);
     $lObj->loadObject();
