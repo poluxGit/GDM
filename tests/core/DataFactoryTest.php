@@ -67,8 +67,8 @@ class DataFactoryTest extends TestCase
         'dev',
         'ECM Perso',
         'ECM Personnel.',
-        NULL,
-        NULL
+        'desc',
+        '{"toto":1}'
     );
 
   } //end testCreateNewModelIntoDatabase()
