@@ -35,7 +35,7 @@ class DataFactoryTest extends TestCase
     $this->assertNotNull($lObj);
     $this->assertInstanceOf(GOM\Core\Data\Model::class,$lObj);
     $lObj->loadObject();
-    print_r($lObj);
+    
   } //end testGetModelObjectFromDatabaseByTid()
 
   /**
@@ -60,8 +60,7 @@ class DataFactoryTest extends TestCase
    */
   public function testCreateNewModelIntoDatabase()
   {
-
-    GOM\Core\Data\Model::createNewModel(
+    $lsId = GOM\Core\Data\Model::createNewModel(
       'E1',
         'ECM',
         'dev',
@@ -71,7 +70,7 @@ class DataFactoryTest extends TestCase
         '{"toto":1}'
     );
 
-    $lObj = DataFactory::getModel('SI.MDL-SPE-0002');
+    $lObj = DataFactory::getModel($lsId);
     $this->assertNotNull($lObj);
     $this->assertInstanceOf(GOM\Core\Data\Model::class,$lObj);
     $lObj->loadObject();
