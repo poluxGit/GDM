@@ -1406,7 +1406,7 @@ GRANT ALL PRIVILEGES ON TARGET_SCHEMA.* TO 'gomAdmin'@'%';
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `TARGET_SCHEMA`;
-INSERT INTO `A100_UACCT` (`TID`, `BID`, `ULOGIN`, `UHOST`) VALUES (DEFAULT, 'GOM Administrator', 'gomAdmin', '%');
+INSERT INTO `A100_UACCT` (`BID`, `ULOGIN`, `UHOST`) VALUES ('GOM Administrator', 'gomAdmin', '%');
 
 COMMIT;
 
