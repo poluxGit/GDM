@@ -31,6 +31,8 @@ class DataFactoryTest extends TestCase
     $lObj = DataFactory::getModel('MDL-SI-0001');
     $this->assertNotNull($lObj);
     $this->assertInstanceOf(GOM\Core\Data\Model::class,$lObj);
+    $lObj->loadObject();
+    print_r($lObj);
   }
 }//end class
  ?>
