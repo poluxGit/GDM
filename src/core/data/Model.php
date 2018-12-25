@@ -122,7 +122,7 @@ class Model extends Internal\GOMObject
           throw new \Exception($lsMsgException);
         } else {
           $lsSQLQuery = sprintf(
-            "SELECT DMA_createNewModel(:MDL_SCODE, :MDL_BIDCODE, :MDL_VERSION, :MDL_STITLE, :MDL_LTITLE, :MDL_COMMENT, :MDL_JSONDATA);"
+            "SELECT DMA_createNewModel(:MDL_SCODE, :MDL_BIDCODE, :MDL_VERSION, :MDL_STITLE, :MDL_LTITLE, :MDL_COMMENT, :MDL_JSONDATA)"
           );
           $loPDOStat  = self::$_oPDOCommonDBConnection->prepare($lsSQLQuery);
 
