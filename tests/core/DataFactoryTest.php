@@ -24,15 +24,33 @@ class DataFactoryTest extends TestCase
   }//end testDeployApplicationCoreDatabaseStructure()
 
   /**
+   * testGetModelObjectFromDatabaseByTid
+   *
    * @depends testDeployApplicationCoreDatabaseStructure
    */
-  public function testGettingModelFromDatabaseByTid()
+  public function testGetModelObjectFromDatabaseByTid()
   {
     $lObj = DataFactory::getModel('MDL-SI-0001');
     $this->assertNotNull($lObj);
     $this->assertInstanceOf(GOM\Core\Data\Model::class,$lObj);
     $lObj->loadObject();
     print_r($lObj);
-  }
+  } //end testGetModelObjectFromDatabaseByTid()
+
+  /**
+   * testGetObjectDefinitionFromDatabaseByTid
+   *
+   * @depends testDeployApplicationCoreDatabaseStructure
+   */
+  public function testGetObjectDefinitionFromDatabaseByTid()
+  {
+    $lObj = DataFactory::getObjectDefinition('SI.OBD-SPE-00003');
+    $this->assertNotNull($lObj);
+    $this->assertInstanceOf(GOM\Core\Data\ObjectDefinition::class,$lObj);
+    $lObj->loadObject();
+    $this->assertEquals('ODB.SYS-LNKD',$lObj->getFieldNameFromSQLName('BID'));
+  } //end testGetObjectDefinitionFromDatabaseByTid()
+
+
 }//end class
  ?>
