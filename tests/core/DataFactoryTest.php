@@ -3,6 +3,7 @@
 use PHPUnit\Framework\TestCase;
 use GOM\Core\DataFactory;
 use GOM\Core\Application;
+use GOM\Core\Data\LinkDefinition;
 
 /**
  * DataFactory - Classe statique de gestion des données
@@ -50,6 +51,27 @@ class DataFactoryTest extends TestCase
     $lObj->loadObject();
     $this->assertEquals('ODB.SYS-LNKD',$lObj->getFieldValueFromName('ID'));
   } //end testGetObjectDefinitionFromDatabaseByTid()
+
+
+  /**
+   * testCreateNewModelIntoDatabase
+   *
+   * @depends testDeployApplicationCoreDatabaseStructure
+   */
+  public function testCreateNewModelIntoDatabase()
+  {
+
+    GOM\Core\Data\Model::createNewModel(
+      'E1',
+        'ECM',
+        'dev',
+        'ECM Perso',
+        'ECM Personnel.',
+        NULL,
+        NULL
+    );
+
+  } //end testCreateNewModelIntoDatabase()
 
 
 }//end class
