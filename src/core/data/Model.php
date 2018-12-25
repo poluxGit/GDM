@@ -124,7 +124,7 @@ class Model extends Internal\GOMObject
           $lsSQLQuery = sprintf(
             "SELECT DMA_createNewModel(:MDL_SCODE, :MDL_BIDCODE, :MDL_VERSION, :MDL_STITLE, :MDL_LTITLE, :MDL_COMMENT, :MDL_JSONDATA);"
           );
-          $loPDOStat  = $this->_oPDODBConnection->prepare($lsSQLQuery);
+          $loPDOStat  = self::$_oPDOCommonDBConnection->prepare($lsSQLQuery);
 
           $loPDOStat->bindValue(':MDL_SCODE', $psShortCode, \PDO::PARAM_STR);
           $loPDOStat->bindValue(':MDL_BIDCODE', $psBIDCode, \PDO::PARAM_STR);
