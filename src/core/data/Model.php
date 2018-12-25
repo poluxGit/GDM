@@ -144,7 +144,6 @@ class Model extends Internal\GOMObject
             $lsMsgException = sprintf("La création du model a rencontré une erreur (Code : '%s').", $psShortCode);
             throw new \Exception($lsMsgException);
           }
-
           return array_shift($laResultat);
         }
     } catch (\Exception $e) {
