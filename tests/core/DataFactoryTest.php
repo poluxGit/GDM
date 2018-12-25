@@ -12,9 +12,6 @@ class DataFactoryTest extends TestCase
 {
   /**
    * testDeployApplicationCoreDatabaseStructure
-   *
-   * Chargement des paramètres depuis un fichier invalide.
-   * @expectedException GOM\Core\Internal\Exception\ApplicationSettingsFileNotFoundException
    */
   public function testDeployApplicationCoreDatabaseStructure(): void
   {
