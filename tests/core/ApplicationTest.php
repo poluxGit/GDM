@@ -51,7 +51,7 @@ final class ApplicationTest extends TestCase
 		 * testApplicationLoadValideSettingsFile
 		 *
 		 * Chargement des paramètres depuis un fichier au format JSON valide.
-     * @expectedException \PDOException
+     * @depends testApplicationDeployingDB
 		 */
   	public function testApplicationLoadSettingsFromValidFile(): void
   	{
@@ -60,6 +60,21 @@ final class ApplicationTest extends TestCase
 		// 	$this->assertEquals(array_key_exists("database",$laObj),true);
 	  }//end testApplicationLoadSettingsFromValidFile()
 
-
+    /**
+     * testApplicationDeployDB
+     *
+     * Chargement des paramètres depuis un fichier au format JSON valide.
+     */
+    public function testApplicationDeployingDB(): void
+    {
+      Application::deploySchemaToTargetDB(
+        'GDM_TEST',
+        'root',
+        'dev',
+        '172.17.0.2',
+        '3306'
+      );
+      $this->assertTrue(true);
+    }//end testApplicationDeployingDB()
 
 }//end class
