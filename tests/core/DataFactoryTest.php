@@ -48,7 +48,7 @@ class DataFactoryTest extends TestCase
     $this->assertNotNull($lObj);
     $this->assertInstanceOf(GOM\Core\Data\ObjectDefinition::class,$lObj);
     $lObj->loadObject();
-    $this->assertEquals('ODB.SYS-LNKD',$lObj->getFieldNameFromSQLName('BID'));
+    $this->assertEquals('ODB.SYS-LNKD',$lObj->getFieldValueFromName('ID'));
   } //end testGetObjectDefinitionFromDatabaseByTid()
 
 
