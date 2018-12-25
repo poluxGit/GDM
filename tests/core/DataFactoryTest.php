@@ -62,12 +62,12 @@ class DataFactoryTest extends TestCase
   {
     GOM\Core\Data\Model::createNewModel(
       'E1',
-        'ECM',
-        'dev',
-        'ECM Perso',
-        'ECM Personnel.',
-        'desc',
-        '{"toto":1}'
+      'ECM',
+      'dev',
+      'ECM Perso',
+      'ECM Personnel.',
+      'desc',
+      '{"toto":1}'
     );
 
     $lObj = DataFactory::getModel('SI.MDL-SPE-0002');
