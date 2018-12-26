@@ -54,7 +54,7 @@ class ObjectDefinitionTest extends TestCase
    *
    * @depends testCreateNewModelIntoDatabase
    */
-  public function testCreateNewModelIntoDatabase()
+  public function testCreateNewObjectDefinitionIntoDatabase()
   {
     GOM\Core\Data\ObjectDefinition::createNewObjectDefinitionModel(
       'SI.MDL-SPE-0002',
