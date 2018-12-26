@@ -52,32 +52,5 @@ class DataFactoryTest extends TestCase
     $this->assertEquals('ODB.SYS-LNKD',$lObj->getFieldValueFromName('ID'));
   } //end testGetObjectDefinitionFromDatabaseByTid()
 
-
-  /**
-   * testCreateNewModelIntoDatabase
-   *
-   * @depends testDeployApplicationCoreDatabaseStructure
-   */
-  public function testCreateNewModelIntoDatabase()
-  {
-    GOM\Core\Data\Model::createNewModel(
-      'E1',
-      'ECM',
-      'dev',
-      'ECM Perso',
-      'ECM Personnel.',
-      'desc',
-      '{"toto":1}'
-    );
-
-    $lObj = DataFactory::getModel('SI.MDL-SPE-0002');
-    $this->assertNotNull($lObj);
-    $this->assertInstanceOf(GOM\Core\Data\Model::class,$lObj);
-    $lObj->loadObject();
-    $this->assertEquals('MDL-ECM-dev',$lObj->getFieldValueFromName('ID'));
-
-  } //end testCreateNewModelIntoDatabase()
-
-
 }//end class
  ?>
