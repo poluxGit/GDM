@@ -26,10 +26,6 @@ const PROG_ACTIONS = [
    'IMP_MDL' => [
      0=> ["JSON_Filepath", "Model to import filepath (JSON Format)"]
    ],
-   'GEN_DB'  => [
-     0=> ["JSON_Filepath", "Model to import filepath (JSON Format)"],
-     1=> ["SQL_OutputFilepath", "Output SQL filepath (SQL Format)"]
-   ],
    'LOAD_OBJ' => [
      0=> ["OBJ_TID", "TID of Object to load."]
    ],
@@ -154,11 +150,6 @@ function main($argc, $argv)
         GOM\Core\Application::importModelFromJSONData($ljsonContent);
         echo "- Fin de l'import!\n";
         break;
-
-      case 'GEN_DB':
-        // GENERATION SQL du modèle - TODO
-        echo "TODO - GEN_SQL\n";
-        break;
       case 'LOAD_OBJ':
         // Chargement d'un objet
         echo "TODO - LOAD_OBJ\n";
@@ -211,7 +202,7 @@ function main($argc, $argv)
               $argv[3]
             )
           );
-          
+
           echo "- Fin déploiement DB.\n";
           break;
       default:
