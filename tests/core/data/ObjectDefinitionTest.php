@@ -50,7 +50,7 @@ class ObjectDefinitionTest extends TestCase
   } //end testCreateNewModelIntoDatabase()
 
   /**
-   * testCreateNewModelIntoDatabase
+   * testCreateNewObjectDefinitionIntoDatabase
    *
    * @depends testCreateNewModelIntoDatabase
    */
