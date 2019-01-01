@@ -13,7 +13,6 @@ use GOM\Core;
  */
 abstract class GOMObject
 {
-
   // ************************************************************************ //
   // ATTRIBUTS
   // ************************************************************************ //
@@ -516,6 +515,56 @@ abstract class GOMObject
     }
 
   }//end loadObject()
+
+  /**
+   * Sauvegarde de l'objet dans la base de données
+   *
+   * Gestion du mode (création ou mise à jour)
+   */
+  public function saveObject()
+  {
+    try {
+      // DB connection active ?
+      if ($this->_oPDODBConnection === NULL) {
+        // TODO Faire une classe Exception spécifique 'LoadObjectInvalidDBConnection'
+        $lsMsgException = sprintf(
+            "La connexion à la base de données n'est pas définie."
+        );
+        throw new \Exception($lsMsgException);
+      }
+
+      $lsSQLQuery = null;
+
+      // Mode Création ?
+      if ($this->_sTID === NULL) {
+        $lsSQLQuery = SQLQueryGenerator::buildSQLInsertQuery($this->_aFieldValue,$this->_sTablename);
+      } else {
+        $lsSQLQuery = SQLQueryGenerator::buildSQLUpdateQuery($this->_aFieldValue,$this->_sTablename,["TID = '$this->_sTID'"]);
+      }
+
+      // Execution de la requete
+      $liNbLignes = $loPDOStat->execute();
+      // $laResultat = $loPDOStat->fetchAll(\PDO::FETCH_ASSOC);
+
+      // Aucun résultat ?
+      if ($liNbLignes==0) {
+        // TODO Faire une classe Exception spécifique 'LoadObjectInvalidDBConnection'
+        $lsMsgException = sprintf(
+          "L'Objet avec le TID '%s' n'a pu être sauvé dans la table '%s'.",
+          $this->getTID(),
+          $this->_sTablename
+        );
+        throw new \Exception($lsMsgException);
+      }
+
+      return $liNbLignes;
+
+    } catch (\Exception $e) {
+      throw new \Exception($e->getMessage());
+    } finally {
+      // TODO To implement
+    }
+  }//end saveObject()
 
   // ************************************************************************ //
   // METHODES PRIVEES

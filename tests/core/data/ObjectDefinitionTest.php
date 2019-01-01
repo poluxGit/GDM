@@ -71,7 +71,7 @@ class ObjectDefinitionTest extends TestCase
       'E100_DOCUMENT'
     );
 
-
+    $this->assertTrue(true);
     // $lObj = DataFactory::getModel('SI.MDL-SPE-0002');
     // $this->assertNotNull($lObj);
     // $this->assertInstanceOf(GOM\Core\Data\Model::class,$lObj);
