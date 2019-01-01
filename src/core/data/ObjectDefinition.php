@@ -109,7 +109,7 @@ class ObjectDefinition extends Internal\GOMObject
 
           $loPDOStat->bindValue(':MDL_TID', $psModelTID, \PDO::PARAM_STR);
           $loPDOStat->bindValue(':ODB_BIDCODE', $psBIDCode, \PDO::PARAM_STR);
-          $loPDOStat->bindValue(':MDL_VERSION', $psVersion, \PDO::PARAM_STR);
+//          $loPDOStat->bindValue(':MDL_VERSION', $psVersion, \PDO::PARAM_STR);
           $loPDOStat->bindValue(':ODB_STITLE', $psShortTitle, \PDO::PARAM_STR);
           $loPDOStat->bindValue(':ODB_LTITLE', $psLongTitle, \PDO::PARAM_STR);
           $loPDOStat->bindValue(':ODB_COMMENT', $psComment, \PDO::PARAM_STR);
