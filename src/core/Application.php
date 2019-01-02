@@ -95,7 +95,7 @@ class Application
   protected static function setupClasses(){
     \GOM\Core\Data\Internal\GOMObject::setCommonPDOConnection(self::$_oDbPDOHandler);
     \GOM\Core\DataFactory::setPDOConnection(self::$_oDbPDOHandler);
-    \GOM\Core\DataManager::setPDOConnection(self::$_oDbPDOHandler);
+    \GOM\Core\DatabaseManager::setPDOConnection(self::$_oDbPDOHandler);
   }//end setupClasses
 
   /**
