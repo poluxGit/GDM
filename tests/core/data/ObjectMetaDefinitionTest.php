@@ -57,7 +57,7 @@ class ObjectMetaDefinitionTest extends TestCase
    */
   public function testCreateNewDateMetaObjectDefinitionIntoDatabase()
   {
-    GOM\Core\Data\LinkMetaDefinition::createNewMetaLinkDefinition(
+    GOM\Core\Data\ObjectMetaDefinition::createNewMetaObjectDefinition(
       'SI.OBD-SPE-00010',
       'OBMD-DOC.ATTR-DATE',
       'AttrDocDate',
@@ -82,7 +82,7 @@ class ObjectMetaDefinitionTest extends TestCase
    */
   public function testCreateNewDatetimeMetaObjectDefinitionIntoDatabase()
   {
-    GOM\Core\Data\LinkMetaDefinition::createNewMetaLinkDefinition(
+    GOM\Core\Data\ObjectMetaDefinition::createNewMetaObjectDefinition(
       'SI.OBD-SPE-00010',
       'OBMD-DOC.ATTR-DATETIME',
       'AttrDocDatetime',
@@ -107,7 +107,7 @@ class ObjectMetaDefinitionTest extends TestCase
    */
   public function testCreateNewIntegerMetaObjectDefinitionIntoDatabase()
   {
-    GOM\Core\Data\LinkMetaDefinition::createNewMetaLinkDefinition(
+    GOM\Core\Data\ObjectMetaDefinition::createNewMetaObjectDefinition(
       'SI.OBD-SPE-00010',
       'OBMD-DOC.ATTR-INT',
       'AttrDocInteger',
@@ -132,7 +132,7 @@ class ObjectMetaDefinitionTest extends TestCase
    */
   public function testCreateNewRealMetaObjectDefinitionIntoDatabase()
   {
-    GOM\Core\Data\LinkMetaDefinition::createNewMetaLinkDefinition(
+    GOM\Core\Data\ObjectMetaDefinition::createNewMetaObjectDefinition(
       'SI.OBD-SPE-00010',
       'OBMD-DOC.ATTR-REAL',
       'AttrDocReal',
