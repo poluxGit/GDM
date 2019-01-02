@@ -25,6 +25,7 @@ class ModelTest extends TestCase
 
   /**
    * testCreateNewModelIntoDatabase
+   *
    * @depends testApplicationLoadSettingsFromFile
    */
   public function testCreateNewModelIntoDatabase()
