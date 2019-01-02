@@ -138,13 +138,12 @@ class Model extends Internal\GOMObject
 
           // Execution de la requete
           $loPDOStat->execute();
-          $laResultat = $loPDOStat->fetchAll();
-
           // Aucun résultat ?
-          if (count($laResultat)==0) {
+          if ($loPDOStat->rowCount()==0) {
             $lsMsgException = sprintf("La création du model '%s' a rencontré une erreur technique.", $psShortCode);
             throw new DatabaseSQLException($lsMsgException,$loPDOStat);
           }
+          $laResultat = $loPDOStat->fetchAll();
           return array_shift($laResultat);
         }
     } catch (\Exception $e) {
