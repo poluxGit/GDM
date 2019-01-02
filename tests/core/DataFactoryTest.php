@@ -35,7 +35,7 @@ class DataFactoryTest extends TestCase
     $this->assertNotNull($lObj);
     $this->assertInstanceOf(GOM\Core\Data\Model::class,$lObj);
     $lObj->loadObject();
-    
+
   } //end testGetModelObjectFromDatabaseByTidOk()
 
   /**
@@ -51,18 +51,29 @@ class DataFactoryTest extends TestCase
   } //end testGetModelObjectFromDatabaseByTidNotOk()
 
   /**
-   * testGetObjectDefinitionFromDatabaseByTid
+   * testGetObjectDefinitionFromDatabaseByTidOk
    *
    * @depends testDeployApplicationCoreDatabaseStructure
    */
-  public function testGetObjectDefinitionFromDatabaseByTid()
+  public function testGetObjectDefinitionFromDatabaseByTidOk()
   {
     $lObj = DataFactory::getObjectDefinition('SI.OBD-SPE-00003');
     $this->assertNotNull($lObj);
     $this->assertInstanceOf(GOM\Core\Data\ObjectDefinition::class,$lObj);
     $lObj->loadObject();
     $this->assertEquals('ODB.SYS-LNKD',$lObj->getFieldValueFromName('ID'));
-  } //end testGetObjectDefinitionFromDatabaseByTid()
+  } //end testGetObjectDefinitionFromDatabaseByTidOk()
+
+  /**
+   * testGetObjectDefinitionFromDatabaseByTidNotOk
+   *
+   * @depends testDeployApplicationCoreDatabaseStructure
+   * @expectedException GOM\Core\Internal\Exception\ObjectNotFoundException
+   */
+  public function testGetObjectDefinitionFromDatabaseByTidNotOk()
+  {
+    $lObj = DataFactory::getObjectDefinition('SI.OBD-SPE-00X03');
+  } //end testGetObjectDefinitionFromDatabaseByTidNotOk()
 
 }//end class
  ?>
