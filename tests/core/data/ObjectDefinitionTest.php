@@ -16,7 +16,6 @@ class ObjectDefinitionTest extends TestCase
    * testApplicationLoadSettingsFromFile
    *
    * Chargement des paramètres depuis un fichier invalide.
-   * @expectedException GOM\Core\Internal\Exception\ApplicationSettingsFileNotFoundException
    */
   public function testApplicationLoadSettingsFromFile(): void
   {
