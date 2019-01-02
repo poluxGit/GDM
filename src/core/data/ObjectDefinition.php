@@ -123,14 +123,13 @@ class ObjectDefinition extends Internal\GOMObject
 
           // Execution de la requete
           $loPDOStat->execute();
-          $laResultat = $loPDOStat->fetchAll();
 
           // Aucun résultat ?
-          if (count($laResultat)==0) {
-            // TODO Faire une classe Exception spécifique 'LoadObjectInvalidDBConnection'
-            $lsMsgException = sprintf("La création de la définition d'objet a rencontré une erreur (Code : '%s').", $psBIDCode);
-            throw new \Exception($lsMsgException);
+          if ($loPDOStat->rowCount()==0) {
+            $lsMsgException = sprintf("La création de la définition d'objet '%s' a rencontré une erreur technique.", $psBIDCode);
+            throw new DatabaseSQLException($lsMsgException,$loPDOStat);
           }
+          $laResultat = $loPDOStat->fetchAll();
           return array_shift($laResultat);
         }
     } catch (\Exception $e) {
