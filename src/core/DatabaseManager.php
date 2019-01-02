@@ -169,6 +169,18 @@ class DatabaseManager
   }//end refreshStatisticsForLogsTable()
 
   /**
+   * refreshStatisticsForObjectTable
+   *
+   * Rafraichissement des stats sur les tables des Objets
+   *
+   * @static
+   */
+  static function refreshStatisticsForObjectTable() : void
+  {
+    self::refreshStatisticsForTable('A100_OBI');
+  }//end refreshStatisticsForObjectTable()
+
+  /**
    * execMySQLScriptByShell
    *
    * Réalise l'execution du script SQL via command Shell basée sur le client
