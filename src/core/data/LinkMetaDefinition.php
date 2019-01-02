@@ -84,7 +84,7 @@ class LinkMetaDefinition extends Internal\GOMObject
   {
 
     // Création de l'objet en mémoire!
-    $objMetaLnkDefinition = new LinkDefinition();
+    $objMetaLnkDefinition = new LinkMetaDefinition();
 
     $objMetaLnkDefinition->setFieldValueFromSQLName('LNKD_TID',$psLnkDefTID);
     $objMetaLnkDefinition->setFieldValueFromSQLName('BID',$psBIDCode);
