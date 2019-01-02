@@ -35,7 +35,7 @@ class LinkMetaDefinitionTest extends TestCase
     GOM\Core\Data\LinkMetaDefinition::createNewMetaLinkDefinition(
       'SI.LNKD-SPE-00001',
       'LNKM-DOC_CAT.ATTR-STR',
-      'AttrString'
+      'AttrString',
       'Attribut String test.',
       'Attribut Meta String test.' ,
       'String',
@@ -60,7 +60,7 @@ class LinkMetaDefinitionTest extends TestCase
     GOM\Core\Data\LinkMetaDefinition::createNewMetaLinkDefinition(
       'SI.LNKD-SPE-00001',
       'LNKM-DOC_CAT.ATTR-DATE',
-      'AttrDate'
+      'AttrDate',
       'Attribut Date.',
       'Attribut Meta Date test.' ,
       'Date',
@@ -85,7 +85,7 @@ class LinkMetaDefinitionTest extends TestCase
     GOM\Core\Data\LinkMetaDefinition::createNewMetaLinkDefinition(
       'SI.LNKD-SPE-00001',
       'LNKM-DOC_CAT.ATTR-DATETIME',
-      'AttrDatetime'
+      'AttrDatetime',
       'Attribut Datetime.',
       'Attribut Meta Datetime test.' ,
       'Datetime',
@@ -110,7 +110,7 @@ class LinkMetaDefinitionTest extends TestCase
     GOM\Core\Data\LinkMetaDefinition::createNewMetaLinkDefinition(
       'SI.LNKD-SPE-00001',
       'LNKM-DOC_CAT.ATTR-INT',
-      'AttrInteger'
+      'AttrInteger',
       'Attribut Integer.',
       'Attribut Meta Integer test.' ,
       'Integer',
@@ -135,7 +135,7 @@ class LinkMetaDefinitionTest extends TestCase
     GOM\Core\Data\LinkMetaDefinition::createNewMetaLinkDefinition(
       'SI.LNKD-SPE-00001',
       'LNKM-DOC_CAT.ATTR-REAL',
-      'AttrReal'
+      'AttrReal',
       'Attribut Real.',
       'Attribut Meta Real test.' ,
       'Real',
