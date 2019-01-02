@@ -547,15 +547,15 @@ abstract class GOMObject
       // Execution de la requete
       $liNbLignes = $loPDOStat->execute();
 
-      // Aucun résultat ?
-      if ($liNbLignes==0) {
-        // TODO Faire une classe Exception spécifique 'LoadObjectInvalidDBConnection'
-        $lsMsgException = sprintf(
-          "L'Objet avec le TID '%s' n'a pu être sauvé dans la table '%s'.",
-          $this->getTID(),
-          $this->_sTablename
-        );
-        throw new \Exception($lsMsgException);
+      // // Aucun résultat ?
+      // if ($liNbLignes==0) {
+      //   // TODO Faire une classe Exception spécifique 'LoadObjectInvalidDBConnection'
+      //   $lsMsgException = sprintf(
+      //     "L'Objet avec le TID '%s' n'a pu être sauvé dans la table '%s'.",
+      //     $this->getTID(),
+      //     $this->_sTablename
+      //   );
+      //   throw new \Exception($lsMsgException);
       }
 
       return $liNbLignes;
