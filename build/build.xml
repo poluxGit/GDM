@@ -100,7 +100,7 @@
 	</target>
 
 	<target name="phpunit" description="PHPUnit - Tests">
-    <exec logoutput="true" dir="${rootdir}/tests" command="phpunit --testdox --coverage-clover ${rootdir}/build/logs/clover.xml --coverage-html ${rootdir}/build/coverage/" escape="false"/>
+    <exec logoutput="true" dir="${rootdir}" command="phpunit --testdox --coverage-clover ${rootdir}/build/logs/clover.xml --coverage-html ${rootdir}/build/coverage/" escape="false"/>
 	</target>
 
 	<target name="phpcb" description="PHPCodeBrowser - Visualiseur de code PHP - Jenkins">

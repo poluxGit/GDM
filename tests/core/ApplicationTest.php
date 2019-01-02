@@ -30,7 +30,7 @@ final class ApplicationTest extends TestCase
   	public function testApplicationLoadSettingsFromInvalidFormatedFile(): void
   	{
 		 //	$this->expectException(\Exception::class);
-			Application::loadDBSettings('./../tests/datasets/AppSettingsFile_01-invalidformat.json');
+			Application::loadDBSettings('./../tests/datasets/app-settings_01-invalidformat.json');
 			$this->assertEquals($laObj,NULL);
 
 	  }//end testApplicationLoadSettingsFromInvalidFormatedFile()
@@ -44,7 +44,7 @@ final class ApplicationTest extends TestCase
     public function testApplicationLoadSettingsFileMandatoryParamMissing(): void
     {
      //	$this->expectException(\Exception::class);
-      Application::loadDBSettings('./../tests/datasets/AppSettingsFile_02-invalidNoMand.json');
+      Application::loadDBSettings('./../tests/datasets/app-settings_02-invalidNoMand.json');
     }//end testApplicationLoadSettingsFileMandatoryParamMissing()
 
     /**
@@ -55,7 +55,7 @@ final class ApplicationTest extends TestCase
      */
     public function testApplicationInvalidDatabaseConnection(): void
     {
-       Application::loadDBSettings('./../tests/datasets/AppSettingsFile_03-invalidconnec.json');
+       Application::loadDBSettings('./../tests/datasets/app-settings_03-invalidconnec.json');
     }//end testApplicationInvalidDatabaseConnection()
 
 		/**
@@ -66,7 +66,7 @@ final class ApplicationTest extends TestCase
 		 */
   	public function testApplicationLoadSettingsFromValidFile(): void
   	{
-		 	Application::loadDBSettings('./../tests/datasets/AppSettingsFile_02-valid.json');
+		 	Application::loadDBSettings('./../tests/datasets/app-settings_02-valid.json');
 		 	$this->assertTrue(true);
 		}//end testApplicationLoadSettingsFromValidFile()
 
@@ -95,7 +95,7 @@ final class ApplicationTest extends TestCase
      */
     public function testApplicationDeployingDefaultApplicationDatabase(): void
     {
-      Application::loadDBSettings('./../tests/datasets/AppSettingsFile_02-valid.json');
+      Application::loadDBSettings('./../tests/datasets/app-settings_02-valid.json');
       Application::deploySchemaToDefaultAppliDB(
         'root',
         'dev'

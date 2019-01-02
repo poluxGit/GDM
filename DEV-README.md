@@ -37,11 +37,11 @@ $ docker exec -u 0 -it gdm-dev_jenkins_1 bash
 
 L'environnement d'execution est structuré de la manière suivantes :
 
-|Service|Image Docker|Hôte(:port)|Description|Détails|Volumes|
+|Service|Image Docker|Hôte(:port)|Docker #ID|Description|Détails|Volumes|
 |:-------:|:-------|:-------|:-------:|
-|Base de données | mysql:8.0 | localhost:3333 | **L/M:** *root / rootdev* |Instance locale de base de données MySQL.|-|
-|RestFull API | webdevops/php-apache:7.2 | [localhost:8989](http://localhost:8989) | Serveur Web|TODO|-|
-|Jenkins | jenkins/jenkins:lts-slim | [localhost:8080](http://localhost:8080) | Interface Web Jenkins |Instance de plateforme d'intégration continue.| -|
+|Base de données | mysql:8.0 | localhost:3336| gdm-dev_db_1| **L/M:** *root / rootdev* |Instance locale de base de données MySQL.|-|
+|RestFull API | webdevops/php-apache:7.2|  [localhost:8989](http://localhost:8989) || Serveur Web|TODO|-|
+|Jenkins | jenkins/jenkins:lts-slim | [localhost:8080](http://localhost:8080)|gdm-dev_jenkins_1 | Interface Web Jenkins |Instance de plateforme d'intégration continue.| -|
 
 ## Commandes en VRAC
 
