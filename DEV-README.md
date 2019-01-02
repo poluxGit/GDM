@@ -45,10 +45,19 @@ L'environnement d'execution est structuré de la manière suivantes :
 
 ## Commandes en VRAC
 
-- PHP Unit :
+- **PHP Unit**
 ```bash
 $ cd tests
 $ php phpunit.phar
+```
+- **SQL** 
+
+```SQL
+SELECT DMA_createNewObjectDefinition('SI.MDL-SPE-0002','DOC','Document','Document Simple','com' ,'Simple','DOC',20,'','DOCB','','E100_DOCUMENT');
+
+ANALYZE TABLE Z000_LOGS;
+ANALYZE TABLE A000_MDL;
+ANALYZE TABLE A000_OBD;
 ```
 
 ## Déploiement de la base de données

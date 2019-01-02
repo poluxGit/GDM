@@ -231,4 +231,39 @@ class DatabaseManager
     return $lsDSN;
   }//end buildDatabaseDSN()
 
+  /**
+   * execQuery
+   *
+   * Execute une requete (INSERT/UPDATE/DELETE)
+   *
+   * @static
+   * @param string  $psSQLQuery   Requete SQL à executer
+   * @return bool  Statut d'execution
+   */
+  static function execQuery($psSQLQuery) : bool
+  {
+    try {
+        // DB connection active ?
+        if (self::$_oPDODBConnection === NULL) {
+          $lsMsgException = sprintf("Database connection not defined.");
+          throw new Exceptions\DatabaseException($lsMsgException);
+        } else {
+
+          $loPDOStat = $this->_oPDODBConnection->prepare($psSQLQuery);
+
+          // Execution de la requete
+          return $loPDOStat->execute();
+        }
+    } catch (\Exception $e) {
+      $lsMsgException = sprintf(
+          "An error occured during database querying (execQuery) : %s.",
+          $e->getMessage()
+        );
+      throw new Exceptions\DatabaseException($lsMsgException);
+    } finally {
+      // TODO To implement
+    }
+    return $laResults;
+  }//end execQuery()
+
 }//end class
