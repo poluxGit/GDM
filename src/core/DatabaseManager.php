@@ -44,12 +44,12 @@ class DatabaseManager
 
     try {
         // DB connection active ?
-        if (self::$_oPDODBConnection === NULL) {
+        if (self::$_oDbPDOHandler === NULL) {
           $lsMsgException = sprintf("Database connection not defined.");
           throw new Exceptions\DatabaseException($lsMsgException);
         } else {
 
-          $loPDOStat = $this->_oPDODBConnection->prepare($psSQLSelectQuery);
+          $loPDOStat = self::$_oDbPDOHandler->prepare($psSQLSelectQuery);
 
           // Execution de la requete
           $loPDOStat->execute();
@@ -88,12 +88,12 @@ class DatabaseManager
 
     try {
         // DB connection active ?
-        if (self::$_oPDODBConnection === NULL) {
+        if (self::$_oDbPDOHandler === NULL) {
           $lsMsgException = sprintf("Database connection not defined.");
           throw new Exceptions\DatabaseException($lsMsgException);
         } else {
 
-          $loPDOStat = $this->_oPDODBConnection->prepare($psSQLSelectQuery);
+          $loPDOStat = self::$_oDbPDOHandler->prepare($psSQLSelectQuery);
 
           // Execution de la requete
           $loPDOStat->execute();
@@ -137,11 +137,11 @@ class DatabaseManager
 
     try {
         // DB connection active ?
-        if (self::$_oPDODBConnection === NULL) {
+        if (self::$_oDbPDOHandler === NULL) {
           $lsMsgException = sprintf("Database connection not defined.");
           throw new Exceptions\DatabaseException($lsMsgException);
         } else {
-          $loPDOStat = $this->_oPDODBConnection->prepare($SQLcommand);
+          $loPDOStat = self::$_oDbPDOHandler->prepare($SQLcommand);
           // Execution de la requete
           $loPDOStat->execute();
         }
