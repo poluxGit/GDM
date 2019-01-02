@@ -2,6 +2,8 @@
 
 namespace GOM\Core\Data;
 
+use GOM\Core\Internal\Exception\DatabaseSQLException;
+
 /**
  * Classe GOMModel - Modele de données interne
  *
@@ -140,9 +142,8 @@ class Model extends Internal\GOMObject
 
           // Aucun résultat ?
           if (count($laResultat)==0) {
-            // TODO Faire une classe Exception spécifique 'LoadObjectInvalidDBConnection'
-            $lsMsgException = sprintf("La création du model a rencontré une erreur (Code : '%s').", $psShortCode);
-            throw new \Exception($lsMsgException);
+            $lsMsgException = sprintf("La création du model '%s' a rencontré une erreur technique.", $psShortCode);
+            throw new DatabaseSQLException($lsMsgException,$loPDOStat);
           }
           return array_shift($laResultat);
         }
