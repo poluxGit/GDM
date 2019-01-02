@@ -36,14 +36,13 @@ class LinkDefinitionTest extends TestCase
       'Lien Doc vers Catégorie.',
       'Lien de ODB Doc vers ODB Catégorie' ,
       'OneToOne',
-      'DOC' ,
-      'CAT',
+      'SI.OBD-SPE-00010' ,
+      'SI.OBD-SPE-00011',
       '{"comp_data":[]}'
     );
 
     $this->assertTrue(true);
   } //end testCreateNewLinkDefinitionIntoDatabase()
-
 
 }//end class
  ?>
