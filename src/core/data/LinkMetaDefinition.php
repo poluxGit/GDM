@@ -35,7 +35,7 @@ class LinkMetaDefinition extends Internal\GOMObject
     $this->addFieldDefinition('DateCreation', 'CDATE', 'date', 'Date de création');
     $this->addFieldDefinition('DateMaj', 'UDATE', 'date', 'Date de dernière maj');
     $this->addFieldDefinition('UserCreation', 'CUSER', 'string', 'Compte Utilisateur du créateur');
-    $this->addFieldDefinition('UserMaj', 'UUSER', 'string', 'Compte Utilisateur de l\'updateur');
+    $this->addFieldDefinition('UserMaj', 'UUSER', 'string', 'Compte Utilisateur de l updateur');
     $this->addFieldDefinition('EstSupprime', 'IS_DELETED', 'INT', 'Flag de suppression');
     $this->addFieldDefinition('EstPropage', 'IS_PROPAGATED', 'INT', 'Flag de propagation');
   }//end initFieldDefinition()
@@ -53,5 +53,57 @@ class LinkMetaDefinition extends Internal\GOMObject
   {
     return self::searchObjectFromSQLConditions(["LNKD_TID = '$psTIDObjectDefinition'"],'A000_LNKMD');
   }//end getAllMetaDefinitionsForALinkDefinition()
+
+  /**
+   * createNewMetaLinkDefinition
+   *
+   * Création d'une nouvelle définition de metadonnées de lien entre objets
+   *
+   * @param string $psLnkDefTID               TID de la définition de lien entre objet
+   * @param string $psBIDCode                 Prefix utilisée dans les codes BID
+   * @param string $psShortTitle              Titre Court
+   * @param string $psLongTitle               Titre Long
+   * @param string $psComment                 Commentaires
+   * @param string $psMetaLnkDefDataType      Type d'attribut sur lien ENUM('String', 'Date', 'Datetime', 'Integer', 'Real')
+   * @param string $psMetaLnkDefDataPattern   Data Pattern sur meta de lien
+   * @param string $psMetaLnkInstTIDPattern   TID Pattern instance de  meta de lien
+   * @param string $psMetaLnkInstBIDPattern   BID Pattern instance de  meta de lien
+   * @param string $psJSONData                JSON Additional Data
+   */
+  public static function createNewMetaLinkDefinition($psLnkDefTID,
+    $psBIDCode,
+    $psShortTitle,
+    $psLongTitle = NULL,
+    $psComment = NULL,
+    $psMetaLnkDefDataType = 'String',
+    $psMetaLnkDefDataPattern,
+    $psMetaLnkInstTIDPattern,
+    $psMetaLnkInstBIDPattern,
+    $psJSONData
+  )
+  {
+
+    // Création de l'objet en mémoire!
+    $objMetaLnkDefinition = new LinkDefinition();
+
+    $objMetaLnkDefinition->setFieldValueFromSQLName('LNKD_TID',$psLnkDefTID);
+    $objMetaLnkDefinition->setFieldValueFromSQLName('BID',$psBIDCode);
+    $objMetaLnkDefinition->setFieldValueFromSQLName('STITLE',$psShortTitle);
+    $objMetaLnkDefinition->setFieldValueFromSQLName('LTITLE',$psLongTitle);
+    $objMetaLnkDefinition->setFieldValueFromSQLName('LNKMD_DATA_TYPE',$psMetaLnkDefDataType);
+    $objMetaLnkDefinition->setFieldValueFromSQLName('LNKMD_DATA_PATTERN',$psMetaLnkDefDataPattern);
+    $objMetaLnkDefinition->setFieldValueFromSQLName('LNKMI_TID_PATTERN',$psMetaLnkInstTIDPattern);
+    $objMetaLnkDefinition->setFieldValueFromSQLName('LNKMI_BID_PATTERN',$psMetaLnkInstBIDPattern);
+    $objMetaLnkDefinition->setFieldValueFromSQLName('COMMENT',$psComment);
+    $objMetaLnkDefinition->setFieldValueFromSQLName('JSON_DATA',$psJSONData);
+
+    // Création en base de données!
+    $objMetaLnkDefinition->saveObject();
+
+    // Maj des statistics !
+    \GOM\Core\DatabaseManager::refreshStatisticsForTable('A000_LNKMD');
+    \GOM\Core\DatabaseManager::refreshStatisticsForLogsTable();
+
+  }//end createNewMetaLinkDefinition()
 
 }//end class
