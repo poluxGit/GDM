@@ -302,7 +302,6 @@ class Application
 
       // Fichier CoreSchema ...
       // ***********************************************************************
-
       // Ouverture Fichier destination!
       $loTargetSQLFileHandler=@fopen($lsTargetSQLFilename,'w+');
 

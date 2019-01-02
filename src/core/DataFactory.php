@@ -23,18 +23,6 @@ class DataFactory
   }//end setPDOConnection()
 
   /**
-   * Import d'un modèle de données depuis une donnée au format JSON
-   *
-   * @param json $psJSONData   Données JSON du modèle à importer
-   * @static
-   */
-  static function importModelFromJSONData($psJSONData)
-  {
-    //XXX self::initDBConnection();
-    $lobj = new Data\ObjectDefinition();
-  }//end importMDLFromJSONData()
-
-  /**
    * Retourne l'objet dont le TID est passé en argument
    *
    * @throws GOM\Core\Internal\Exception\ObjectNotFoundException
