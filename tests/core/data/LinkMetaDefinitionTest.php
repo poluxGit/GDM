@@ -147,5 +147,20 @@ class LinkMetaDefinitionTest extends TestCase
 
     $this->assertTrue(true);
   } //end testCreateNewMetaRealLinkDefinitionIntoDatabase()
+
+  /**
+   * testGetAllMetaDefinitionsForALinkDefinition
+   *
+   * Vérification du nombre de meta enregistrées (5 attendu)
+   *
+   * @depends testApplicationLoadSettingsFromFile
+   * @depends testCreateNewMetaRealLinkDefinitionIntoDatabase
+   */
+  public function testCreateNewMetaRealLinkDefinitionIntoDatabase()
+  {
+    $aResults = GOM\Core\Data\LinkMetaDefinition::getAllMetaDefinitionsForALinkDefinition('SI.LNKD-SPE-00001');
+    $this->assertCount(5,$aResults);
+  } //end testGetAllMetaDefinitionsForALinkDefinition()
+
 }//end class
  ?>
