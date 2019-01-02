@@ -11,9 +11,20 @@ use GOM\Core\Data\LinkDefinition;
  */
 class ModelTest extends TestCase
 {
+
+  /**
+   * testApplicationLoadSettingsFromFile
+   *
+   * Chargement des paramètres depuis un fichier valide.
+   */
+  public function testApplicationLoadSettingsFromFile(): void
+  {
+    Application::loadDBSettings('./tests/datasets/app-settings_02-valid.json');
+  }//end testApplicationLoadSettingsFromFile()
+
   /**
    * testCreateNewModelIntoDatabase
-   *
+   * @depends testApplicationLoadSettingsFromFile
    */
   public function testCreateNewModelIntoDatabase()
   {

@@ -15,7 +15,7 @@ class ObjectDefinitionTest extends TestCase
   /**
    * testApplicationLoadSettingsFromFile
    *
-   * Chargement des paramètres depuis un fichier invalide.
+   * Chargement des paramètres depuis un fichier valide.
    */
   public function testApplicationLoadSettingsFromFile(): void
   {
@@ -26,6 +26,7 @@ class ObjectDefinitionTest extends TestCase
   /**
    * testCreateNewObjectDefinitionIntoDatabase
    *
+   * @depends testApplicationLoadSettingsFromFile
    */
   public function testCreateNewObjectDefinitionIntoDatabase()
   {
