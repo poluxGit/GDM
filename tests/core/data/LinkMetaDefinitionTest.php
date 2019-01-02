@@ -156,7 +156,7 @@ class LinkMetaDefinitionTest extends TestCase
    * @depends testApplicationLoadSettingsFromFile
    * @depends testCreateNewMetaRealLinkDefinitionIntoDatabase
    */
-  public function testCreateNewMetaRealLinkDefinitionIntoDatabase()
+  public function testGetAllMetaDefinitionsForALinkDefinition()
   {
     $aResults = GOM\Core\Data\LinkMetaDefinition::getAllMetaDefinitionsForALinkDefinition('SI.LNKD-SPE-00001');
     $this->assertCount(5,$aResults);
