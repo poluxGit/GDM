@@ -25,18 +25,30 @@ class DataFactoryTest extends TestCase
   }//end testDeployApplicationCoreDatabaseStructure()
 
   /**
-   * testGetModelObjectFromDatabaseByTid
+   * testGetModelObjectFromDatabaseByTidOk
    *
    * @depends testDeployApplicationCoreDatabaseStructure
    */
-  public function testGetModelObjectFromDatabaseByTid()
+  public function testGetModelObjectFromDatabaseByTidOk()
   {
     $lObj = DataFactory::getModel('MDL-SI-0001');
     $this->assertNotNull($lObj);
     $this->assertInstanceOf(GOM\Core\Data\Model::class,$lObj);
     $lObj->loadObject();
-    print_r($lObj);
-  } //end testGetModelObjectFromDatabaseByTid()
+    
+  } //end testGetModelObjectFromDatabaseByTidOk()
+
+  /**
+   * testGetModelObjectFromDatabaseByTidNotOk
+   *
+   * @depends testDeployApplicationCoreDatabaseStructure
+   * @expectedException GOM\Core\Internal\Exception\ObjectNotFoundException
+   */
+  public function testGetModelObjectFromDatabaseByTidNotOk()
+  {
+    $lObj = DataFactory::getModel('MDL-SI-0003');
+
+  } //end testGetModelObjectFromDatabaseByTidNotOk()
 
   /**
    * testGetObjectDefinitionFromDatabaseByTid

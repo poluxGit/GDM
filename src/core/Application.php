@@ -114,7 +114,7 @@ class Application
             self::$_iDbPort
           );
 
-          echo $lsDSN;
+        //  echo $lsDSN;
         self::$_oDbPDOHandler = new \PDO($lsDSN , self::$_sDbUser , self::$_sDbPassword);
       }
     }
