@@ -16,7 +16,7 @@ class DataFactoryTest extends TestCase
    */
   public function testDeployApplicationCoreDatabaseStructure(): void
   {
-    Application::loadDBSettings('./../tests/datasets/AppSettingsFile_02-valid.json');
+    Application::loadDBSettings('./tests/datasets/app-settings_02-valid.json');
     Application::deploySchemaToDefaultAppliDB(
       'root',
       'dev'
