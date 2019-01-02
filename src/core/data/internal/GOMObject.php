@@ -177,11 +177,11 @@ abstract class GOMObject
    * Définie la valeur d'un champ d'un objet depuis son nom SQL
    *
    * @param string  $psFieldSQLName  Nom SQL du champs à mettre à jour.
-   * @param mixed   $pxNewValue      Nouvelle Valeur du champs
+   * @param \mixed   $pxNewValue      Nouvelle Valeur du champs
    */
   public function setFieldValueFromSQLName(
     string $psFieldSQLName,
-    mixed $pxNewValue)
+    \mixed $pxNewValue)
   {
     $lsFieldName = $this->getFieldNameFromSQLName($psFieldSQLName);
     // Définition de champs trouvée ?
