@@ -542,9 +542,10 @@ abstract class GOMObject
         $lsSQLQuery = SQLQueryGenerator::buildSQLUpdateQuery($this->_aFieldValue,$this->_sTablename,["TID = '$this->_sTID'"]);
       }
 
+      $loPDOStat = $this->_oPDODBConnection->prepare($lsSQLQuery);
+
       // Execution de la requete
       $liNbLignes = $loPDOStat->execute();
-      // $laResultat = $loPDOStat->fetchAll(\PDO::FETCH_ASSOC);
 
       // Aucun résultat ?
       if ($liNbLignes==0) {
