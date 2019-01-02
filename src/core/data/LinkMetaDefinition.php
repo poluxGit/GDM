@@ -51,7 +51,7 @@ class LinkMetaDefinition extends Internal\GOMObject
    */
   public static function getAllMetaDefinitionsForALinkDefinition($psTIDLinkDefinition)
   {
-    return self::searchObjectFromSQLConditions(["LNKD_TID = '$psTIDObjectDefinition'"],'A000_LNKMD');
+    return self::searchObjectFromSQLConditions(["LNKD_TID = '$psTIDLinkDefinition'"],'A000_LNKMD');
   }//end getAllMetaDefinitionsForALinkDefinition()
 
   /**
