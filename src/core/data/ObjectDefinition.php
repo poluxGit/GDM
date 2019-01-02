@@ -126,13 +126,9 @@ class ObjectDefinition extends Internal\GOMObject
           // Execution de la requete
           $loPDOStat->execute();
 
-          // Aucun résultat ?
-          if ($loPDOStat->rowCount()==0) {
-            $lsMsgException = sprintf("La création de la définition d'objet '%s' a rencontré une erreur technique.", $psBIDCode);
-            throw new DatabaseSQLException($lsMsgException,$loPDOStat);
-          }
-          $laResultat = $loPDOStat->fetchAll();
-          return array_shift($laResultat);
+          // Maj des statistics !
+          \GOM\Core\DatabaseManager::refreshStatisticsForTable('A000_OBD');
+          \GOM\Core\DatabaseManager::refreshStatisticsForLogsTable();
         }
     } catch (\Exception $e) {
       throw new \Exception($e->getMessage());
