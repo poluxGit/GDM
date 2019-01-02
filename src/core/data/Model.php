@@ -144,11 +144,13 @@ class Model extends Internal\GOMObject
             throw new DatabaseSQLException($lsMsgException,$loPDOStat);
           }
 
-          // Maj des statistics !
-          //\GOM\Core\DatabaseManager::refreshStatisticsForTable('A000_MDL');
-          //\GOM\Core\DatabaseManager::refreshStatisticsForLogsTable();
-
           $laResultat = $loPDOStat->fetchAll();
+
+          // Maj des statistics !
+          \GOM\Core\DatabaseManager::refreshStatisticsForTable('A000_MDL');
+          \GOM\Core\DatabaseManager::refreshStatisticsForLogsTable();
+
+
           return array_shift($laResultat);
         }
     } catch (\Exception $e) {
