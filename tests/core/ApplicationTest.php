@@ -69,22 +69,22 @@ final class ApplicationTest extends TestCase
 		 	$this->assertTrue(true);
 		}//end testApplicationLoadSettingsFromValidFile()
 
-    /**
-     * testApplicationDeployingIntoTargetDatabase
-     *
-     * Chargement des paramètres depuis un fichier au format JSON valide.
-     */
-    public function testApplicationDeployingIntoTargetDatabase(): void
-    {
-      Application::deploySchemaToTargetDB(
-        'GDM_TEST',
-        'root',
-        'dev',
-        '172.17.0.2',
-        '3306'
-      );
-      $this->assertTrue(true);
-    }//end testApplicationDeployingIntoTargetDatabase()
+    // /**
+    //  * testApplicationDeployingIntoTargetDatabase
+    //  *
+    //  * Chargement des paramètres depuis un fichier au format JSON valide.
+    //  */
+    // public function testApplicationDeployingIntoTargetDatabase(): void
+    // {
+    //   Application::deploySchemaToTargetDB(
+    //     'GDM_TEST',
+    //     'root',
+    //     'dev',
+    //     '172.17.0.2',
+    //     '3306'
+    //   );
+    //   $this->assertTrue(true);
+    // }//end testApplicationDeployingIntoTargetDatabase()
 
 
     /**
