@@ -33,12 +33,6 @@ class ObjectDefinitionTest extends TestCase
     );
 
     $this->assertTrue(true);
-    // $lObj = DataFactory::getModel('SI.MDL-SPE-0002');
-    // $this->assertNotNull($lObj);
-    // $this->assertInstanceOf(GOM\Core\Data\Model::class,$lObj);
-    // $lObj->loadObject();
-    // $this->assertEquals('MDL-ECM-dev',$lObj->getFieldValueFromName('ID'));
-
   } //end testCreateNewModelIntoDatabase()
 
 

@@ -118,7 +118,55 @@ class DatabaseManager
     }
 
     return $laFinalRow;
-  }//end getAllRows()
+  }//end getFirstRowOnly()
+
+  /**
+   * refreshStatisticsForTable
+   *
+   * Execution du rafraichissement des statictics, nécessaire pour le calcul de sidentifiants internes.
+   *
+   * @static
+   * @param string  $tableName   Nom de la table
+   */
+  static function refreshStatisticsForTable($tableName) : void
+  {
+    $laResults = [];
+    $laFinalRow = null;
+
+    $SQLcommand = "ANALYZE TABLE ".$tableName.";";
+
+    try {
+        // DB connection active ?
+        if (self::$_oPDODBConnection === NULL) {
+          $lsMsgException = sprintf("Database connection not defined.");
+          throw new Exceptions\DatabaseException($lsMsgException);
+        } else {
+          $loPDOStat = $this->_oPDODBConnection->prepare($SQLcommand);
+          // Execution de la requete
+          $loPDOStat->execute();
+        }
+    } catch (\Exception $e) {
+      $lsMsgException = sprintf(
+          "An error occured during database querying (refreshStatistics) : %s.",
+          $e->getMessage()
+        );
+      throw new Exceptions\DatabaseException($lsMsgException);
+    } finally {
+      // TODO To implement
+    }
+  }//end refreshStatisticsForTable()
+
+  /**
+   * refreshStatisticsForLogsTable
+   *
+   * Rafraichissement des stats sur les tables de logs
+   *
+   * @static
+   */
+  static function refreshStatisticsForLogsTable() : void
+  {
+    self::refreshStatisticsForTable('Z000_LOGS');
+  }//end refreshStatisticsForLogsTable()
 
   /**
    * execMySQLScriptByShell
