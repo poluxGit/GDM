@@ -158,7 +158,7 @@ class ObjectMetaDefinitionTest extends TestCase
    */
   public function testGetAllMetaDefinitionsForAnObjetDefinition()
   {
-    $aResults = GOM\Core\Data\LinkMetaDefinition::getAllMetaDefinitionsForAnObjectDefinition('SI.OBD-SPE-00010');
+    $aResults = GOM\Core\Data\ObjectMetaDefinition::getAllMetaDefinitionsForAnObjectDefinition('SI.OBD-SPE-00010');
     $this->assertCount(5,$aResults);
   } //end testGetAllMetaDefinitionsForAnObjetDefinition()
 
