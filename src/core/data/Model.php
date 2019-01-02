@@ -145,8 +145,8 @@ class Model extends Internal\GOMObject
           }
 
           // Maj des statistics !
-          \GOM\Core\DatabaseManager::refreshStatisticsForTable('A000_MDL');
-          \GOM\Core\DatabaseManager::refreshStatisticsForLogsTable();
+          //\GOM\Core\DatabaseManager::refreshStatisticsForTable('A000_MDL');
+          //\GOM\Core\DatabaseManager::refreshStatisticsForLogsTable();
 
           $laResultat = $loPDOStat->fetchAll();
           return array_shift($laResultat);
