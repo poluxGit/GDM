@@ -17,9 +17,10 @@ class ModelTest extends TestCase
    *
    * Chargement des paramètres depuis un fichier valide.
    */
-  public function testApplicationLoadSettingsFromFile(): void
+  public function testApplicationLoadSettingsFromFile()
   {
     Application::loadDBSettings('./tests/datasets/app-settings_02-valid.json');
+    $this->assertTrue(true);
   }//end testApplicationLoadSettingsFromFile()
 
   /**
