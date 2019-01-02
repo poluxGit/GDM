@@ -3,6 +3,7 @@
 namespace GOM\Core\Data\Internal;
 
 use GOM\Core;
+use GOM\Core\Internal\Exception\DatabaseSQLException;
 
 /**
  * Représentation générique d'objet en base de données
@@ -520,6 +521,8 @@ abstract class GOMObject
    * Sauvegarde de l'objet dans la base de données
    *
    * Gestion du mode (création ou mise à jour)
+   *
+   * @throws GOM\Core\Internal\Exception\DatabaseSQLException
    */
   public function saveObject()
   {
@@ -540,25 +543,16 @@ abstract class GOMObject
       } else {
         $lsSQLQuery = SQLQueryGenerator::buildSQLUpdateQuery($this->_aFieldValue,$this->_sTablename,["TID = '$this->_sTID'"]);
       }
-    /*  echo $lsSQLQuery;
-      $loPDOStat = $this->_oPDODBConnection->prepare($lsSQLQuery);*/
 
-      // Execution de la requete
-      $liNbLignes = $this->_oPDODBConnection->->execute($lsSQLQuery);
+      $loPDOStat = $this->_oPDODBConnection->prepare($lsSQLQuery);
+      // Execution de la requete!
+      $loPDOStat->execute();
 
-      // // Aucun résultat ?
-      // if ($liNbLignes==0) {
-      //   // TODO Faire une classe Exception spécifique 'LoadObjectInvalidDBConnection'
-      //   $lsMsgException = sprintf(
-      //     "L'Objet avec le TID '%s' n'a pu être sauvé dans la table '%s'.",
-      //     $this->getTID(),
-      //     $this->_sTablename
-      //   );
-      //   throw new \Exception($lsMsgException);
-    //  }
-
-      return $liNbLignes;
-
+      // Aucun résultat ?
+      if ($loPDOStat->rowCount()==0) {
+        $lsMsgException = sprintf("L'enregistrement de l'objet dans la table '%s' a rencontré une erreur technique.",$this->_sTablename);
+        throw new DatabaseSQLException($lsMsgException,$loPDOStat);
+      }
     } catch (\Exception $e) {
       throw new \Exception($e->getMessage());
     } finally {
