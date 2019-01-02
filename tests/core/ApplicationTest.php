@@ -62,8 +62,7 @@ final class ApplicationTest extends TestCase
 		 * testApplicationLoadValideSettingsFile
 		 *
 		 * Chargement des paramètres depuis un fichier au format JSON valide.
-     * @depends testApplicationDeployingDB
-		 */
+     */
   	public function testApplicationLoadSettingsFromValidFile(): void
   	{
 		 	Application::loadDBSettings('./tests/datasets/app-settings_02-valid.json');
