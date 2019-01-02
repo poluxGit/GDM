@@ -149,7 +149,13 @@ class Model extends Internal\GOMObject
           \GOM\Core\DatabaseManager::refreshStatisticsForTable('A000_MDL');
           \GOM\Core\DatabaseManager::refreshStatisticsForLogsTable();
 
+          $lfinalResult = null;
+          if (count($laResultat)>0) {
+            $lfinalResult = array_shift($laResultat);
+          }
+          return $lfinalResult;
         }
+
     } catch (\Exception $e) {
       throw new \Exception($e->getMessage());
     } finally {
