@@ -74,13 +74,13 @@ class ObjectMetaDefinitionTest extends TestCase
   } //end testCreateNewDateMetaObjectDefinitionIntoDatabase()
 
   /**
-   * testCreateNewMetaDatetimeLinkDefinitionIntoDatabase
+   * testCreateNewDatetimeMetaObjectDefinitionIntoDatabase
    *
    * Déclaration d'une métadonnée sur objet de type Datetime
    *
    * @depends testApplicationLoadSettingsFromFile
    */
-  public function testCreateNewMetaDatetimeLinkDefinitionIntoDatabase()
+  public function testCreateNewDatetimeMetaObjectDefinitionIntoDatabase()
   {
     GOM\Core\Data\LinkMetaDefinition::createNewMetaLinkDefinition(
       'SI.OBD-SPE-00010',
@@ -96,16 +96,16 @@ class ObjectMetaDefinitionTest extends TestCase
     );
 
     $this->assertTrue(true);
-  } //end testCreateNewMetaDatetimeLinkDefinitionIntoDatabase()
+  } //end testCreateNewDatetimeMetaObjectDefinitionIntoDatabase()
 
   /**
-   * testCreateNewMetaIntegerLinkDefinitionIntoDatabase
+   * testCreateNewIntegerMetaObjectDefinitionIntoDatabase
    *
    * Déclaration d'une métadonnée sur objet de type Integer
    *
    * @depends testApplicationLoadSettingsFromFile
    */
-  public function testCreateNewMetaIntegerLinkDefinitionIntoDatabase()
+  public function testCreateNewIntegerMetaObjectDefinitionIntoDatabase()
   {
     GOM\Core\Data\LinkMetaDefinition::createNewMetaLinkDefinition(
       'SI.OBD-SPE-00010',
@@ -121,7 +121,7 @@ class ObjectMetaDefinitionTest extends TestCase
     );
 
     $this->assertTrue(true);
-  } //end testCreateNewMetaIntegerLinkDefinitionIntoDatabase()
+  } //end testCreateNewIntegerMetaObjectDefinitionIntoDatabase()
 
   /**
    * testCreateNewMetaRealLinkDefinitionIntoDatabase
@@ -130,7 +130,7 @@ class ObjectMetaDefinitionTest extends TestCase
    *
    * @depends testApplicationLoadSettingsFromFile
    */
-  public function testCreateNewMetaRealLinkDefinitionIntoDatabase()
+  public function testCreateNewRealMetaObjectDefinitionIntoDatabase()
   {
     GOM\Core\Data\LinkMetaDefinition::createNewMetaLinkDefinition(
       'SI.OBD-SPE-00010',
@@ -146,7 +146,7 @@ class ObjectMetaDefinitionTest extends TestCase
     );
 
     $this->assertTrue(true);
-  } //end testCreateNewMetaRealLinkDefinitionIntoDatabase()
+  } //end testCreateNewRealMetaObjectDefinitionIntoDatabase()
 
   /**
    * testGetAllMetaDefinitionsForAnObjetDefinition
@@ -154,7 +154,7 @@ class ObjectMetaDefinitionTest extends TestCase
    * Vérification du nombre de meta enregistrées (5 attendu)
    *
    * @depends testApplicationLoadSettingsFromFile
-   * @depends testCreateNewMetaRealLinkDefinitionIntoDatabase
+   * @depends testCreateNewRealMetaObjectDefinitionIntoDatabase
    */
   public function testGetAllMetaDefinitionsForAnObjetDefinition()
   {
