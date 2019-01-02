@@ -244,12 +244,12 @@ class DatabaseManager
   {
     try {
         // DB connection active ?
-        if (self::$_oPDODBConnection === NULL) {
+        if (self::$_oDbPDOHandler === NULL) {
           $lsMsgException = sprintf("Database connection not defined.");
           throw new Exceptions\DatabaseException($lsMsgException);
         } else {
 
-          $loPDOStat = $this->_oPDODBConnection->prepare($psSQLQuery);
+          $loPDOStat = self::$_oDbPDOHandler->prepare($psSQLQuery);
 
           // Execution de la requete
           return $loPDOStat->execute();
