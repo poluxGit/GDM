@@ -526,7 +526,6 @@ abstract class GOMObject
     try {
       // DB connection active ?
       if ($this->_oPDODBConnection === NULL) {
-        // TODO Faire une classe Exception spécifique 'LoadObjectInvalidDBConnection'
         $lsMsgException = sprintf(
             "La connexion à la base de données n'est pas définie."
         );
@@ -541,11 +540,11 @@ abstract class GOMObject
       } else {
         $lsSQLQuery = SQLQueryGenerator::buildSQLUpdateQuery($this->_aFieldValue,$this->_sTablename,["TID = '$this->_sTID'"]);
       }
-      echo $lsSQLQuery;
-      $loPDOStat = $this->_oPDODBConnection->prepare($lsSQLQuery);
+    /*  echo $lsSQLQuery;
+      $loPDOStat = $this->_oPDODBConnection->prepare($lsSQLQuery);*/
 
       // Execution de la requete
-      $liNbLignes = $loPDOStat->execute();
+      $liNbLignes = $this->_oPDODBConnection->->execute($lsSQLQuery);
 
       // // Aucun résultat ?
       // if ($liNbLignes==0) {
