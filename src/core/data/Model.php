@@ -143,15 +143,12 @@ class Model extends Internal\GOMObject
             $lsMsgException = sprintf("La création du model '%s' a rencontré une erreur technique.", $psShortCode);
             throw new DatabaseSQLException($lsMsgException,$loPDOStat);
           }
-
           $laResultat = $loPDOStat->fetchAll();
 
           // Maj des statistics !
           \GOM\Core\DatabaseManager::refreshStatisticsForTable('A000_MDL');
           \GOM\Core\DatabaseManager::refreshStatisticsForLogsTable();
 
-
-          return array_shift($laResultat);
         }
     } catch (\Exception $e) {
       throw new \Exception($e->getMessage());
