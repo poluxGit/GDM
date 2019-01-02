@@ -81,10 +81,10 @@ class SQLQueryGenerator
 
     // ********************** SQL INSERT QUERY GENERATION *********************
     $lsSQLQuery = sprintf(
-      "INSERT INTO %s(%s) VALUES (%s)",
+      "INSERT INTO %s(%s) VALUES ('%s')",
       $psTablename,
       implode(", ", array_keys($paInsertFieldValue)),
-      implode(", ", array_values($paInsertFieldValue))
+      implode("', '", array_values($paInsertFieldValue))
     );
     // TODO Gestion des type de données pour formatage (... date, reel ...)
 
