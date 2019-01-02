@@ -38,7 +38,7 @@ class LinkDefinitionTest extends TestCase
       'OneToOne',
       'DOC' ,
       'CAT',
-      ''
+      '{"comp_data":[]}'
     );
 
     $this->assertTrue(true);
