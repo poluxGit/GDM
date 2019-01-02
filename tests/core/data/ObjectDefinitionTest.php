@@ -11,6 +11,19 @@ use GOM\Core\Data\LinkDefinition;
  */
 class ObjectDefinitionTest extends TestCase
 {
+
+  /**
+   * testApplicationLoadSettingsFromFile
+   *
+   * Chargement des paramètres depuis un fichier invalide.
+   * @expectedException GOM\Core\Internal\Exception\ApplicationSettingsFileNotFoundException
+   */
+  public function testApplicationLoadSettingsFromFile(): void
+  {
+    Application::loadDBSettings('./tests/datasets/app-settings_02-valid.json');
+  }//end testApplicationLoadSettingsFromFile()
+
+
   /**
    * testCreateNewObjectDefinitionIntoDatabase
    *

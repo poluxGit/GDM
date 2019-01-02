@@ -2,6 +2,8 @@
 
 namespace GOM\Core\Data;
 
+use GOM\Core\Internal\Exception\DatabaseSQLException;
+
 /**
  * Définition d'Objet
  */
