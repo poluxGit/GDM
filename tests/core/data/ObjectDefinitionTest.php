@@ -46,6 +46,21 @@ class ObjectDefinitionTest extends TestCase
       'E100_DOCUMENT'
     );
 
+    GOM\Core\Data\ObjectDefinition::createNewObjectDefinitionModel(
+      'SI.MDL-SPE-0002',
+      'CAT',
+      'Catégorie',
+      "Catégorie Simple",
+      "com Catégorie" ,
+      'Simple',
+      'CAT',
+      10,
+      '',
+      'CATB',
+      '',
+      'E100_CATEGORIE'
+    );
+
     $this->assertTrue(true);
   } //end testCreateNewModelIntoDatabase()
 
