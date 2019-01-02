@@ -4,6 +4,7 @@ namespace GOM\Core\Data\Internal;
 
 use GOM\Core;
 use GOM\Core\Internal\Exception\DatabaseSQLException;
+use GOM\Core\DatabaseManager;
 
 /**
  * Représentation générique d'objet en base de données
