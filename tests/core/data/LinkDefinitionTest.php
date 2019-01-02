@@ -34,7 +34,7 @@ class LinkDefinitionTest extends TestCase
       'LNK-DOC_CAT',
       'Lien Doc vers Catégorie',
       'Lien Doc vers Catégorie.',
-      'Lien de l\'objet Doc vers l\'objet Catégorie' ,
+      'Lien de ODB Doc vers ODB Catégorie' ,
       'OneToOne',
       'DOC' ,
       'CAT',
