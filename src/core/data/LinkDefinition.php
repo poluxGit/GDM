@@ -12,7 +12,6 @@ class LinkDefinition extends Internal\GOMObject
    */
   public function __construct(string $psTID=NULL){
     parent::__construct($psTID, 'A000_LNKD');
-
     $this->initFieldDefinition();
   }//end __construct()
 

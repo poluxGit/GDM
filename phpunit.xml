@@ -7,6 +7,7 @@
           <file>tests/core/DataFactoryTest.php</file>
           <file>tests/core/data/ModelTest.php</file>
           <file>tests/core/data/ObjectDefinitionTest.php</file>
+          <file>tests/core/data/LinkDefinitionTest.php</file>
         </testsuite>
     </testsuites>
     <filter>
