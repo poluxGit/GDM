@@ -556,7 +556,7 @@ abstract class GOMObject
       //     $this->_sTablename
       //   );
       //   throw new \Exception($lsMsgException);
-      }
+    //  }
 
       return $liNbLignes;
 
