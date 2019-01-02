@@ -12,22 +12,8 @@ use GOM\Core\Data\LinkDefinition;
 class ModelTest extends TestCase
 {
   /**
-   * testDeployApplicationCoreDatabaseStructure
-   */
-  public function testDeployApplicationCoreDatabaseStructure(): void
-  {
-    Application::loadDBSettings('./../tests/datasets/AppSettingsFile_02-valid.json');
-    Application::deploySchemaToDefaultAppliDB(
-      'root',
-      'dev'
-    );
-    $this->assertTrue(true);
-  }//end testDeployApplicationCoreDatabaseStructure()
-
-  /**
    * testCreateNewModelIntoDatabase
    *
-   * @depends testDeployApplicationCoreDatabaseStructure
    */
   public function testCreateNewModelIntoDatabase()
   {
@@ -46,9 +32,6 @@ class ModelTest extends TestCase
     $this->assertInstanceOf(GOM\Core\Data\Model::class,$lObj);
     $lObj->loadObject();
     $this->assertEquals('MDL-ECM-dev',$lObj->getFieldValueFromName('ID'));
-
   } //end testCreateNewModelIntoDatabase()
-
-
 }//end class
  ?>

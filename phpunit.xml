@@ -5,6 +5,8 @@
         </testsuite>
         <testsuite name="CoreDataManagement">
           <file>tests/core/DataFactoryTest.php</file>
+          <file>tests/core/data/ModelTest.php</file>
+          <file>tests/core/data/ObjectDefinitionTest.php</file>
         </testsuite>
     </testsuites>
     <filter>
