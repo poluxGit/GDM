@@ -151,7 +151,7 @@ class Model extends Internal\GOMObject
 
           $lfinalResult = null;
           if (count($laResultat)>0) {
-            $lfinalResult = $laResultat[0];
+            $lfinalResult = $laResultat[0][0];
           }
           return $lfinalResult;
         }
