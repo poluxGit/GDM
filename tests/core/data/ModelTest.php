@@ -40,7 +40,7 @@ class ModelTest extends TestCase
       '{"toto":1}'
     );
 
-    echo $lsModelTID;
+    print_r($lsModelTID);
 
     $lObj = DataFactory::getModel('SI.MDL-SPE-0002');
     $this->assertNotNull($lObj);
