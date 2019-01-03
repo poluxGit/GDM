@@ -46,7 +46,7 @@ class ObjectDefinitionTest extends TestCase
       'E100_DOCUMENT'
     );
 
-    print_r($lsTIDDocObj);
+    echo "Coucou :".$lsTIDDocObj;
 
     GOM\Core\Data\ObjectDefinition::createNewObjectDefinitionModel(
       'SI.MDL-SPE-0002',
