@@ -94,6 +94,8 @@ class LinkDefinition extends Internal\GOMObject
     \GOM\Core\DatabaseManager::refreshStatisticsForTable('A000_LNKD');
     \GOM\Core\DatabaseManager::refreshStatisticsForLogsTable();
 
+    return $objLnkDefinition->getTID();
+
   }//end createNewLinkDefinitionModel()
 
 

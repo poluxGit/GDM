@@ -29,7 +29,7 @@ class LinkDefinitionTest extends TestCase
    */
   public function testCreateNewLinkDefinitionIntoDatabase()
   {
-    GOM\Core\Data\LinkDefinition::createNewLinkDefinitionModel(
+    $lsLNKDTID = GOM\Core\Data\LinkDefinition::createNewLinkDefinitionModel(
       'SI.MDL-SPE-0002',
       'LNK-DOC_CAT',
       'Lien Doc vers Catégorie',
@@ -40,6 +40,8 @@ class LinkDefinitionTest extends TestCase
       'SI.OBD-SPE-00011',
       '{"comp_data":[]}'
     );
+
+    echo "TID :".$lsLNKDTID;
 
     $this->assertTrue(true);
   } //end testCreateNewLinkDefinitionIntoDatabase()
