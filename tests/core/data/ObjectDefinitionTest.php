@@ -31,7 +31,7 @@ class ObjectDefinitionTest extends TestCase
    */
   public function testCreateNewObjectDefinitionIntoDatabase()
   {
-    GOM\Core\Data\ObjectDefinition::createNewObjectDefinitionModel(
+    $lsTIDDocObj = GOM\Core\Data\ObjectDefinition::createNewObjectDefinitionModel(
       'SI.MDL-SPE-0002',
       'DOC',
       'Document',
@@ -45,6 +45,8 @@ class ObjectDefinitionTest extends TestCase
       '',
       'E100_DOCUMENT'
     );
+
+    print_r($lsTIDDocObj);
 
     GOM\Core\Data\ObjectDefinition::createNewObjectDefinitionModel(
       'SI.MDL-SPE-0002',
