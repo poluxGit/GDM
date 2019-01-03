@@ -88,13 +88,13 @@ class LinkDefinition extends Internal\GOMObject
     $objLnkDefinition->setFieldValueFromSQLName('JSON_DATA',$psJSONData);
 
     // Création en base de données!
-    $objLnkDefinition->saveObject();
+    $lsTID = $objLnkDefinition->saveObject();
 
     // Maj des statistics !
     \GOM\Core\DatabaseManager::refreshStatisticsForTable('A000_LNKD');
     \GOM\Core\DatabaseManager::refreshStatisticsForLogsTable();
 
-    return $objLnkDefinition->getTID();
+    return $lsTID;
 
   }//end createNewLinkDefinitionModel()
 

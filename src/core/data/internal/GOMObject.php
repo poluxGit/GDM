@@ -554,6 +554,14 @@ abstract class GOMObject
         $lsMsgException = sprintf("L'enregistrement de l'objet dans la table '%s' a rencontré une erreur technique.",$this->_sTablename);
         throw new DatabaseSQLException($lsMsgException,$loPDOStat);
       }
+
+      $laResultat = $loPDOStat->fetchAll();
+
+      $lfinalResult = null;
+      if (count($laResultat)>0) {
+        $lfinalResult = $laResultat[0][0];
+      }
+      return $lfinalResult;
     } catch (\Exception $e) {
       throw new \Exception($e->getMessage());
     } finally {
