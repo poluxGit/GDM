@@ -98,12 +98,12 @@ class LinkMetaDefinition extends Internal\GOMObject
     $objMetaLnkDefinition->setFieldValueFromSQLName('JSON_DATA',$psJSONData);
 
     // Création en base de données!
-    $objMetaLnkDefinition->saveObject();
+    $lsTID = $objMetaLnkDefinition->saveObject();
 
     // Maj des statistics !
     \GOM\Core\DatabaseManager::refreshStatisticsForTable('A000_LNKMD');
     \GOM\Core\DatabaseManager::refreshStatisticsForLogsTable();
-
+    return $lsTID;
   }//end createNewMetaLinkDefinition()
 
 }//end class
