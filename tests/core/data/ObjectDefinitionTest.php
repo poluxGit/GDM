@@ -46,9 +46,9 @@ class ObjectDefinitionTest extends TestCase
       'E100_DOCUMENT'
     );
 
-    echo "Coucou :".$lsTIDDocObj;
+    $this->assertEquals('SI.OBD-SPE-00010',$lsTIDDocObj);
 
-    GOM\Core\Data\ObjectDefinition::createNewObjectDefinitionModel(
+    $lsTIDDocObj = GOM\Core\Data\ObjectDefinition::createNewObjectDefinitionModel(
       'SI.MDL-SPE-0002',
       'CAT',
       'Catégorie',
@@ -63,7 +63,8 @@ class ObjectDefinitionTest extends TestCase
       'E100_CATEGORIE'
     );
 
-    $this->assertTrue(true);
+    $this->assertEquals('SI.OBD-SPE-00011',$lsTIDDocObj);
+
   } //end testCreateNewModelIntoDatabase()
 
 
