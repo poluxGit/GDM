@@ -537,10 +537,13 @@ abstract class GOMObject
       }
 
       $lsSQLQuery = null;
+      $lsSQLQueryTID = null;
 
       // Mode Création ?
       if ($this->_sTID === NULL) {
         $lsSQLQuery = SQLQueryGenerator::buildSQLInsertQuery($this->_aFieldValue,$this->_sTablename);
+        $lsSQLQueryTID = SQLQueryGenerator::buildSQLSelectQuery(["MAX(TID) AS MTID"],$this->_sTablename,["CDATE = (SELECT MAX(CDATE) FROM $this->_sTablename)"]);
+        //SELECT MAX(TID) INTO lStrTID FROM A000_MDL WHERE CDATE = (SELECT MAX(CDATE) FROM A000_MDL) ;
       } else {
         $lsSQLQuery = SQLQueryGenerator::buildSQLUpdateQuery($this->_aFieldValue,$this->_sTablename,["TID = '$this->_sTID'"]);
       }
@@ -555,12 +558,15 @@ abstract class GOMObject
         throw new DatabaseSQLException($lsMsgException,$loPDOStat);
       }
 
-      $laResultat = $loPDOStat->fetchAll();
-      print_r($laResultat);
       $lfinalResult = null;
-      if (count($laResultat)>0) {
-        $lfinalResult = $laResultat[0][0];
+      if ($lsSQLQueryTID !== NULL) {
+          $loPDOStat = $this->_oPDODBConnection->prepare($lsSQLQueryTID);
+          $laResultat = $loPDOStat->fetchAll();
+          if (count($laResultat)>0) {
+            $lfinalResult = $laResultat[0][0];
+          }
       }
+
       return $lfinalResult;
     } catch (\Exception $e) {
       throw new \Exception($e->getMessage());
