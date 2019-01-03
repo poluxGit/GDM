@@ -40,7 +40,7 @@ class ModelTest extends TestCase
       '{"toto":1}'
     );
 
-    $this->assertEquals('SI.MDL-SPE-0002',implode('',$lsModelTID));
+    $this->assertEquals('SI.MDL-SPE-0002',$lsModelTID);
     $lObj = DataFactory::getModel('SI.MDL-SPE-0002');
     $this->assertNotNull($lObj);
     $this->assertInstanceOf(GOM\Core\Data\Model::class,$lObj);
