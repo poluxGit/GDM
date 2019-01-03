@@ -542,7 +542,11 @@ abstract class GOMObject
       // Mode Création ?
       if ($this->_sTID === NULL) {
         $lsSQLQuery = SQLQueryGenerator::buildSQLInsertQuery($this->_aFieldValue,$this->_sTablename);
-        $lsSQLQueryTID = SQLQueryGenerator::buildSQLSelectQuery(["MAX(TID) AS MTID"],$this->_sTablename,["CDATE = (SELECT MAX(CDATE) FROM $this->_sTablename)"]);
+        $lsSQLQueryTID = SQLQueryGenerator::buildSQLSelectQuery(
+            ["MAX(TID) AS MTID"],
+            $this->_sTablename,
+            ["CDATE = (SELECT MAX(CDATE) FROM $this->_sTablename)"]
+          );
         //SELECT MAX(TID) INTO lStrTID FROM A000_MDL WHERE CDATE = (SELECT MAX(CDATE) FROM A000_MDL) ;
       } else {
         $lsSQLQuery = SQLQueryGenerator::buildSQLUpdateQuery($this->_aFieldValue,$this->_sTablename,["TID = '$this->_sTID'"]);

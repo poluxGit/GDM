@@ -32,7 +32,7 @@ class ObjectMetaDefinitionTest extends TestCase
    */
   public function testCreateNewStringMetaObjectDefinition()
   {
-    GOM\Core\Data\ObjectMetaDefinition::createNewMetaObjectDefinition(
+    $lsTID = GOM\Core\Data\ObjectMetaDefinition::createNewMetaObjectDefinition(
       'SI.OBD-SPE-00010',
       'OBMD-DOC.ATTR-STR',
       'AttrDocString',
@@ -45,7 +45,7 @@ class ObjectMetaDefinitionTest extends TestCase
       '{"comp_data":[]}'
     );
 
-    $this->assertTrue(true);
+    $this->assertEquals('SI.OBMD-SPE-0000000001',$lsTID);
   } //end testCreateNewStringMetaObjectDefinition()
 
   /**
@@ -57,7 +57,7 @@ class ObjectMetaDefinitionTest extends TestCase
    */
   public function testCreateNewDateMetaObjectDefinitionIntoDatabase()
   {
-    GOM\Core\Data\ObjectMetaDefinition::createNewMetaObjectDefinition(
+    $lsTID = GOM\Core\Data\ObjectMetaDefinition::createNewMetaObjectDefinition(
       'SI.OBD-SPE-00010',
       'OBMD-DOC.ATTR-DATE',
       'AttrDocDate',
@@ -70,7 +70,7 @@ class ObjectMetaDefinitionTest extends TestCase
       '{"comp_data":[]}'
     );
 
-    $this->assertTrue(true);
+    $this->assertEquals('SI.OBMD-SPE-0000000002',$lsTID);
   } //end testCreateNewDateMetaObjectDefinitionIntoDatabase()
 
   /**
@@ -82,7 +82,7 @@ class ObjectMetaDefinitionTest extends TestCase
    */
   public function testCreateNewDatetimeMetaObjectDefinitionIntoDatabase()
   {
-    GOM\Core\Data\ObjectMetaDefinition::createNewMetaObjectDefinition(
+    $lsTID = GOM\Core\Data\ObjectMetaDefinition::createNewMetaObjectDefinition(
       'SI.OBD-SPE-00010',
       'OBMD-DOC.ATTR-DATETIME',
       'AttrDocDatetime',
@@ -95,7 +95,7 @@ class ObjectMetaDefinitionTest extends TestCase
       '{"comp_data":[]}'
     );
 
-    $this->assertTrue(true);
+    $this->assertEquals('SI.OBMD-SPE-0000000003',$lsTID);
   } //end testCreateNewDatetimeMetaObjectDefinitionIntoDatabase()
 
   /**
@@ -107,7 +107,7 @@ class ObjectMetaDefinitionTest extends TestCase
    */
   public function testCreateNewIntegerMetaObjectDefinitionIntoDatabase()
   {
-    GOM\Core\Data\ObjectMetaDefinition::createNewMetaObjectDefinition(
+    $lsTID = GOM\Core\Data\ObjectMetaDefinition::createNewMetaObjectDefinition(
       'SI.OBD-SPE-00010',
       'OBMD-DOC.ATTR-INT',
       'AttrDocInteger',
@@ -120,7 +120,7 @@ class ObjectMetaDefinitionTest extends TestCase
       '{"comp_data":[]}'
     );
 
-    $this->assertTrue(true);
+    $this->assertEquals('SI.OBMD-SPE-0000000004',$lsTID);
   } //end testCreateNewIntegerMetaObjectDefinitionIntoDatabase()
 
   /**
@@ -132,7 +132,7 @@ class ObjectMetaDefinitionTest extends TestCase
    */
   public function testCreateNewRealMetaObjectDefinitionIntoDatabase()
   {
-    GOM\Core\Data\ObjectMetaDefinition::createNewMetaObjectDefinition(
+    $lsTID = GOM\Core\Data\ObjectMetaDefinition::createNewMetaObjectDefinition(
       'SI.OBD-SPE-00010',
       'OBMD-DOC.ATTR-REAL',
       'AttrDocReal',
@@ -145,7 +145,7 @@ class ObjectMetaDefinitionTest extends TestCase
       '{"comp_data":[]}'
     );
 
-    $this->assertTrue(true);
+    $this->assertEquals('SI.OBMD-SPE-0000000005',$lsTID);
   } //end testCreateNewRealMetaObjectDefinitionIntoDatabase()
 
   /**

@@ -32,7 +32,7 @@ class LinkMetaDefinitionTest extends TestCase
    */
   public function testCreateNewMetaStringLinkDefinitionIntoDatabase()
   {
-    GOM\Core\Data\LinkMetaDefinition::createNewMetaLinkDefinition(
+    $lsTID = GOM\Core\Data\LinkMetaDefinition::createNewMetaLinkDefinition(
       'SI.LNKD-SPE-00001',
       'LNKM-DOC_CAT.ATTR-STR',
       'AttrString',
@@ -45,7 +45,7 @@ class LinkMetaDefinitionTest extends TestCase
       '{"comp_data":[]}'
     );
 
-    $this->assertTrue(true);
+    $this->assertEquals('SI.LNKD-SPE-0000000001',$lsTID);
   } //end testCreateNewMetaStringLinkDefinitionIntoDatabase()
 
   /**
@@ -57,7 +57,7 @@ class LinkMetaDefinitionTest extends TestCase
    */
   public function testCreateNewMetaDateLinkDefinitionIntoDatabase()
   {
-    GOM\Core\Data\LinkMetaDefinition::createNewMetaLinkDefinition(
+    $lsTID = GOM\Core\Data\LinkMetaDefinition::createNewMetaLinkDefinition(
       'SI.LNKD-SPE-00001',
       'LNKM-DOC_CAT.ATTR-DATE',
       'AttrDate',
@@ -70,7 +70,7 @@ class LinkMetaDefinitionTest extends TestCase
       '{"comp_data":[]}'
     );
 
-    $this->assertTrue(true);
+    $this->assertEquals('SI.LNKD-SPE-0000000002',$lsTID);
   } //end testCreateNewMetaDateLinkDefinitionIntoDatabase()
 
   /**
@@ -82,7 +82,7 @@ class LinkMetaDefinitionTest extends TestCase
    */
   public function testCreateNewMetaDatetimeLinkDefinitionIntoDatabase()
   {
-    GOM\Core\Data\LinkMetaDefinition::createNewMetaLinkDefinition(
+    $lsTID = GOM\Core\Data\LinkMetaDefinition::createNewMetaLinkDefinition(
       'SI.LNKD-SPE-00001',
       'LNKM-DOC_CAT.ATTR-DATETIME',
       'AttrDatetime',
@@ -95,7 +95,7 @@ class LinkMetaDefinitionTest extends TestCase
       '{"comp_data":[]}'
     );
 
-    $this->assertTrue(true);
+    $this->assertEquals('SI.LNKD-SPE-0000000003',$lsTID);
   } //end testCreateNewMetaDatetimeLinkDefinitionIntoDatabase()
 
   /**
@@ -107,7 +107,7 @@ class LinkMetaDefinitionTest extends TestCase
    */
   public function testCreateNewMetaIntegerLinkDefinitionIntoDatabase()
   {
-    GOM\Core\Data\LinkMetaDefinition::createNewMetaLinkDefinition(
+    $lsTID = GOM\Core\Data\LinkMetaDefinition::createNewMetaLinkDefinition(
       'SI.LNKD-SPE-00001',
       'LNKM-DOC_CAT.ATTR-INT',
       'AttrInteger',
@@ -120,7 +120,7 @@ class LinkMetaDefinitionTest extends TestCase
       '{"comp_data":[]}'
     );
 
-    $this->assertTrue(true);
+    $this->assertEquals('SI.LNKD-SPE-0000000004',$lsTID);
   } //end testCreateNewMetaIntegerLinkDefinitionIntoDatabase()
 
   /**
@@ -132,7 +132,7 @@ class LinkMetaDefinitionTest extends TestCase
    */
   public function testCreateNewMetaRealLinkDefinitionIntoDatabase()
   {
-    GOM\Core\Data\LinkMetaDefinition::createNewMetaLinkDefinition(
+    $lsTID = GOM\Core\Data\LinkMetaDefinition::createNewMetaLinkDefinition(
       'SI.LNKD-SPE-00001',
       'LNKM-DOC_CAT.ATTR-REAL',
       'AttrReal',
@@ -145,7 +145,7 @@ class LinkMetaDefinitionTest extends TestCase
       '{"comp_data":[]}'
     );
 
-    $this->assertTrue(true);
+    $this->assertEquals('SI.LNKD-SPE-0000000005',$lsTID);
   } //end testCreateNewMetaRealLinkDefinitionIntoDatabase()
 
   /**

@@ -40,10 +40,7 @@ class LinkDefinitionTest extends TestCase
       'SI.OBD-SPE-00011',
       '{"comp_data":[]}'
     );
-
-    echo "TID :".$lsLNKDTID;
-
-    $this->assertTrue(true);
+    $this->assertEquals('SI.LNKD-SPE-00001',$lsLNKDTID);
   } //end testCreateNewLinkDefinitionIntoDatabase()
 
 }//end class
