@@ -561,6 +561,7 @@ abstract class GOMObject
       $lfinalResult = null;
       if ($lsSQLQueryTID !== NULL) {
           $loPDOStat = $this->_oPDODBConnection->prepare($lsSQLQueryTID);
+          $loPDOStat->execute();
           $laResultat = $loPDOStat->fetchAll();
           if (count($laResultat)>0) {
             $lfinalResult = $laResultat[0][0];
