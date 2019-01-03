@@ -125,10 +125,17 @@ class ObjectDefinition extends Internal\GOMObject
 
           // Execution de la requete
           $loPDOStat->execute();
+          $laResultat = $loPDOStat->fetchAll();
 
           // Maj des statistics !
           \GOM\Core\DatabaseManager::refreshStatisticsForTable('A000_OBD');
           \GOM\Core\DatabaseManager::refreshStatisticsForLogsTable();
+
+          $lfinalResult = null;
+          if (count($laResultat)>0) {
+            $lfinalResult = $laResultat[0][0];
+          }
+          return $lfinalResult;
         }
     } catch (\Exception $e) {
       throw new \Exception($e->getMessage());
