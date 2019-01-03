@@ -556,7 +556,7 @@ abstract class GOMObject
       }
 
       $laResultat = $loPDOStat->fetchAll();
-
+      print_r($laResultat);
       $lfinalResult = null;
       if (count($laResultat)>0) {
         $lfinalResult = $laResultat[0][0];
