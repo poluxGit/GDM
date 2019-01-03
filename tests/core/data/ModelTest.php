@@ -30,7 +30,7 @@ class ModelTest extends TestCase
    */
   public function testCreateNewModelIntoDatabase()
   {
-    GOM\Core\Data\Model::createNewModel(
+    $lsModelTID = GOM\Core\Data\Model::createNewModel(
       'E1',
       'ECM',
       'dev',
@@ -39,6 +39,8 @@ class ModelTest extends TestCase
       'desc',
       '{"toto":1}'
     );
+
+    echo $lsModelTID;
 
     $lObj = DataFactory::getModel('SI.MDL-SPE-0002');
     $this->assertNotNull($lObj);
