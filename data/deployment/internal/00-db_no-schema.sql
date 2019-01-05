@@ -15,7 +15,7 @@ DROP SCHEMA IF EXISTS `TARGET_SCHEMA` ;
 --
 -- Generic Object Management
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `TARGET_SCHEMA` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8_bin ;
+CREATE SCHEMA IF NOT EXISTS `TARGET_SCHEMA` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci ;
 USE `TARGET_SCHEMA` ;
 
 -- -----------------------------------------------------
