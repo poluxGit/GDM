@@ -34,6 +34,16 @@ $ docker exec -it gdm-dev_jenkins_1 bash
 $ docker exec -u 0 -it gdm-dev_jenkins_1 bash
 ```
 
+- (Re)Déployer la base de données DEV depuis le docker JENKINS  (User : root)
+```bash
+$ docker exec -u 0 -it gdm-dev_jenkins_1 sh -c "cd /var/jenkins_home/workspace/GenericDataManagement/src && echo a && php gom-cli.php DEPLOY_DB 172.17.0.2 3306 GDM_DEV root dev"
+```
+
+- Déploiment du model ECM de test dans la base de données DEV depuis le docker JENKINS  (User : root)
+```bash
+$ docker exec -u 0 -it gdm-dev_jenkins_1 sh -c "cd /var/jenkins_home/workspace/GenericDataManagement/src && echo a && php gom-cli.php IMP_SCH model/ecm.json"
+```
+
 
 L'environnement d'execution est structuré de la manière suivantes :
 
@@ -50,7 +60,7 @@ L'environnement d'execution est structuré de la manière suivantes :
 $ cd tests
 $ php phpunit.phar
 ```
-- **SQL** 
+- **SQL**
 
 ```SQL
 SELECT DMA_createNewObjectDefinition('SI.MDL-SPE-0002','DOC','Document','Document Simple','com' ,'Simple','DOC',20,'','DOCB','','E100_DOCUMENT');
