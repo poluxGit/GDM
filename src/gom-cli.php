@@ -214,13 +214,8 @@ function main($argc, $argv)
           strval($argv[2])
         );
 
-        $lObjModelDef = new \GOM\Core\Data\ModelDefinition(strval($argv[2]));
-        $lObjModelDef->loadModelDefinition();
-        echo $lObjModelDef->getSummary();
-        $lobjCreated = $lObjModelDef->importAll();
-
+        $lobjCreated = Application::importModelFromJSONData(strval($argv[2]));
         print_r($lobjCreated);
-
 
         break;
       default:

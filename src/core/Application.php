@@ -128,14 +128,16 @@ class Application
   /**
    * Import d'un modèle de données depuis une donnée au format JSON
    *
-   * @param json $psJSONData   Données JSON du modèle à importer
+   * @param string $psJSONModelFile   Fichier de Données JSON du modèle à importer
    * @static
    */
-  static function importModelFromJSONData($psJSONData)
+  static function importModelFromJSONData($psJSONModelFile)
   {
-    //XXX self::initDBConnection();
-    //$lobj = new ObjectDefinition();
-  }//end importMDLFromJSONData()
+    $lObjModelDef = new \GOM\Core\Data\ModelDefinition($psJSONModelFile);
+    $lObjModelDef->loadModelDefinition();
+
+    return  $lObjModelDef->importAll();
+  }//end importModelFromJSONData()
 
   /**
    * Vérifie l'existence de tous les champs obligatoires à l'Application
@@ -262,7 +264,7 @@ class Application
    */
   static function deploySQLScriptToDatabase($sSQLScriptFilepath)
   {
-  
+
     try {
       return DatabaseManager::execMySQLScriptByShell(
           $sSQLScriptFilepath,
