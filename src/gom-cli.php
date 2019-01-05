@@ -47,6 +47,9 @@ const PROG_ACTIONS = [
      2=> ["SCHEMA", "Target DB Schema."],
      3=> ["DBUSER", "DB User login."],
      4=> ["DBPASS", "DB User password."]
+   ],
+   'IMP_SCH' => [
+     0=> ["SCHEMA_FILE","Source schéma file."]
    ]
  ];
 /* -------------------------------------------------------------------------- */
@@ -205,6 +208,21 @@ function main($argc, $argv)
 
           echo "- Fin déploiement DB.\n";
           break;
+      case 'IMP_SCH':
+        echo sprintf(
+          " - Import de schéma depuis le fichier source '%s'. \n",
+          strval($argv[2])
+        );
+
+        $lObjModelDef = new \GOM\Core\Data\ModelDefinition(strval($argv[2]));
+        $lObjModelDef->loadModelDefinition();
+        echo $lObjModelDef->getSummary();
+        $lobjCreated = $lObjModelDef->importAll();
+
+        print_r($lobjCreated);
+
+
+        break;
       default:
         echo "Action non reconnue.";
         break;
@@ -221,7 +239,7 @@ function main($argc, $argv)
 }//end main()
 
 // INITIALISATION GOM
-GOM\Core\Application::loadDBSettings('./gom-settings.json',false);
+GOM\Core\Application::loadDBSettings('./gom-settings.json',true);
 
 // Démarrage du traitement
 /* -------------------------------------------------------------------------- */

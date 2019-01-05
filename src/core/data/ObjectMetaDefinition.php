@@ -2,6 +2,9 @@
 
 namespace GOM\Core\Data;
 
+use GOM\Core\Data\ObjectDefinition;
+use GOM\Core\Data\Model;
+
 /**
  * Définition de metadonnées d'Objet
  */
@@ -83,11 +86,20 @@ class ObjectMetaDefinition extends Internal\GOMObject
     $psJSONData
   )
   {
+    $obd = new ObjectDefinition($psObjDefTID);
+    $obd->loadObject();
+
+    $model = new Model($obd->getFieldValueFromName('MODEL'));
+    $model->loadObject();
+
+    // Calcul du BID de la définition de meta d'objet!
+    $sBID = self::generateBIDForNewOBMD($model->getFieldValueFromName('CODE'),$obd->getFieldValueFromName('TIDPrefix'),$psBIDCode);
+
     // Création de l'objet en mémoire!
     $objMetaLnkDefinition = new ObjectMetaDefinition();
 
     $objMetaLnkDefinition->setFieldValueFromSQLName('OBD_TID',$psObjDefTID);
-    $objMetaLnkDefinition->setFieldValueFromSQLName('BID',$psBIDCode);
+    $objMetaLnkDefinition->setFieldValueFromSQLName('BID',$sBID);
     $objMetaLnkDefinition->setFieldValueFromSQLName('STITLE',$psShortTitle);
     $objMetaLnkDefinition->setFieldValueFromSQLName('LTITLE',$psLongTitle);
     $objMetaLnkDefinition->setFieldValueFromSQLName('COMMENT',$psComment);
@@ -111,5 +123,22 @@ class ObjectMetaDefinition extends Internal\GOMObject
     return $lsTID;
 
   }//end createNewMetaObjectDefinition()
+
+
+  /**
+   * Genere le BID d'une nouvelle définition de meta sur d'objet
+   *
+   * @param string $modelPrefix   Prefix du model de l'objet
+   * @param string $objTIDPrefix  Prefix TID de l'objet
+   * @param string $metaBID       Prefix BID de la meta de l'objet
+   *
+   * @example self::generateBIDForNewOBMD('E3','CAT','TEST') => (string) 'OBMD.E3-CAT.TEST'
+   *
+   * @return string   BID généré
+   */
+  protected static function generateBIDForNewOBMD($modelPrefix,$objTIDPrefix,$metaBID)
+  {
+    return  'OBMD.'.$modelPrefix.'-'.$objTIDPrefix.".".$metaBID;
+  }//end generateBIDForNewOBMD()
 
 }//end class

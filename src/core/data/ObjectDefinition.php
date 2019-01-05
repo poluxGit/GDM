@@ -69,9 +69,11 @@ class ObjectDefinition extends Internal\GOMObject
    * @param string $psShortBIDPrefix    Prefix BID
    * @param string $psShortBIDPattern   Pattern BID
    * @param string $psObjetTablename    Table
+   *
+   * @internal SQL => SELECT DMA_createNewModel('E1', 'ECM', 'beta', 'Personal ECM', 'Gestion de documents personnel', NULL, NULL);
    */
   public static function createNewObjectDefinitionModel($psModelTID,
-    $psBIDCode,
+    $psModelPrefix,
     $psShortTitle,
     $psLongTitle = NULL,
     $psComment = NULL,
@@ -84,7 +86,6 @@ class ObjectDefinition extends Internal\GOMObject
     $psObjetTablename
   )
   {
-    //SELECT DMA_createNewModel('E1', 'ECM', 'beta', 'Personal ECM', 'Gestion de documents personnel', NULL, NULL);
     try {
         // DB connection active ?
         if(self::$_oPDOCommonDBConnection === NULL)
@@ -93,6 +94,10 @@ class ObjectDefinition extends Internal\GOMObject
           $lsMsgException = sprintf("La connexion à la base de données n'est pas définie.");
           throw new \Exception($lsMsgException);
         } else {
+          // Calcul du BID !
+          $sBID = self::generateBIDForNewOBD($psModelPrefix,$psShortTIDPrefix);
+
+          // Préparation SQL !
           $lsSQLQuery = sprintf(
             "SELECT DMA_createNewObjectDefinition(
               :MDL_TID ,
@@ -110,7 +115,7 @@ class ObjectDefinition extends Internal\GOMObject
           $loPDOStat  = self::$_oPDOCommonDBConnection->prepare($lsSQLQuery);
 
           $loPDOStat->bindValue(':MDL_TID', $psModelTID, \PDO::PARAM_STR);
-          $loPDOStat->bindValue(':ODB_BIDCODE', $psBIDCode, \PDO::PARAM_STR);
+          $loPDOStat->bindValue(':ODB_BIDCODE', $sBID, \PDO::PARAM_STR);
 //          $loPDOStat->bindValue(':MDL_VERSION', $psVersion, \PDO::PARAM_STR);
           $loPDOStat->bindValue(':ODB_STITLE', $psShortTitle, \PDO::PARAM_STR);
           $loPDOStat->bindValue(':ODB_LTITLE', $psLongTitle, \PDO::PARAM_STR);
@@ -143,5 +148,20 @@ class ObjectDefinition extends Internal\GOMObject
       // TODO To implement
     }
   }//end createNewObjectDefinitionModel()
+
+  /**
+   * Genere le BID d'une nouvelle définition d'objet
+   *
+   * @param string $modelPrefix   Prefix du model de l'objet
+   * @param string $objTIDPrefix  Prefix TID de l'objet
+   *
+   * @example self::generateBIDForNewOBD('E3','CAT') => (string) 'OBD.E3-CAT'
+   *
+   * @return string   BID généré
+   */
+  protected static function generateBIDForNewOBD($modelPrefix,$objTIDPrefix)
+  {
+    return  "OBD.".$modelPrefix."-".$objTIDPrefix;
+  }//end generateBIDForNewOBD()
 
 }//end class

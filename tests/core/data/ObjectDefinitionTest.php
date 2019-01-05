@@ -33,7 +33,7 @@ class ObjectDefinitionTest extends TestCase
   {
     $lsTIDDocObj = GOM\Core\Data\ObjectDefinition::createNewObjectDefinitionModel(
       'SI.MDL-SPE-0002',
-      'DOC',
+      'T1',
       'Document',
       "Document Simple",
       "com" ,
@@ -50,7 +50,7 @@ class ObjectDefinitionTest extends TestCase
 
     $lsTIDDocObj = GOM\Core\Data\ObjectDefinition::createNewObjectDefinitionModel(
       'SI.MDL-SPE-0002',
-      'CAT',
+      'T1',
       'Catégorie',
       "Catégorie Simple",
       "com Catégorie" ,

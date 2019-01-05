@@ -34,7 +34,7 @@ class ObjectMetaDefinitionTest extends TestCase
   {
     $lsTID = GOM\Core\Data\ObjectMetaDefinition::createNewMetaObjectDefinition(
       'SI.OBD-SPE-00010',
-      'OBMD-DOC.ATTR-STR',
+      'GENSTR',
       'AttrDocString',
       'AttributDoc String test.',
       'AttributDoc Meta String test.' ,
@@ -59,7 +59,7 @@ class ObjectMetaDefinitionTest extends TestCase
   {
     $lsTID = GOM\Core\Data\ObjectMetaDefinition::createNewMetaObjectDefinition(
       'SI.OBD-SPE-00010',
-      'OBMD-DOC.ATTR-DATE',
+      'GENDATE',
       'AttrDocDate',
       'Attribut Date.',
       'Attribut Meta Date test.' ,
@@ -84,7 +84,7 @@ class ObjectMetaDefinitionTest extends TestCase
   {
     $lsTID = GOM\Core\Data\ObjectMetaDefinition::createNewMetaObjectDefinition(
       'SI.OBD-SPE-00010',
-      'OBMD-DOC.ATTR-DATETIME',
+      'GENDATETIME',
       'AttrDocDatetime',
       'Attribut Datetime.',
       'Attribut Meta Datetime test.' ,
@@ -109,7 +109,7 @@ class ObjectMetaDefinitionTest extends TestCase
   {
     $lsTID = GOM\Core\Data\ObjectMetaDefinition::createNewMetaObjectDefinition(
       'SI.OBD-SPE-00010',
-      'OBMD-DOC.ATTR-INT',
+      'GENINT',
       'AttrDocInteger',
       'Attribut Integer.',
       'Attribut Meta Integer test.' ,
@@ -134,7 +134,7 @@ class ObjectMetaDefinitionTest extends TestCase
   {
     $lsTID = GOM\Core\Data\ObjectMetaDefinition::createNewMetaObjectDefinition(
       'SI.OBD-SPE-00010',
-      'OBMD-DOC.ATTR-REAL',
+      'GENREAL',
       'AttrDocReal',
       'Attribut Real.',
       'Attribut Meta Real test.' ,

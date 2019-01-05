@@ -249,6 +249,36 @@ class Application
     }
   }//end deployGeneratedSQLScript()
 
+
+  /**
+   * Déploie le scipt actuellement généré depuis l'emplacement par défaut.
+   *
+   * @internal Fait appel au script déjà générée à la racine Appicative 'db.sql'
+   *
+   * @param string  $psDbUser             Login Utilisateur.
+   * @param string  $psDbPass             Pass Utilisateur.
+   * @param string  $psDBHost             Hote cible.
+   * @param int     $piDBPort             Port cible.
+   */
+  static function deploySQLScriptToDatabase($sSQLScriptFilepath)
+  {
+  
+    try {
+      return DatabaseManager::execMySQLScriptByShell(
+          $sSQLScriptFilepath,
+          self::$_sDbUser,
+          self::$_sDbPassword,
+          self::$_sDbHost,
+          self::$_iDbPort
+      );
+
+    } catch (\Exception $e) {
+      throw new Exceptions\ApplicationGenericException($e->getMessage());
+    }
+  }//end deployGeneratedSQLScript()
+
+
+
   /**
    * Génère le script SQL utilisé par défaut par l'application.
    *

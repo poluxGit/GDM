@@ -31,7 +31,7 @@ class ModelTest extends TestCase
   public function testCreateNewModelIntoDatabase()
   {
     $lsModelTID = GOM\Core\Data\Model::createNewModel(
-      'E1',
+      'T1',
       'ECM',
       'dev',
       'ECM Perso',
@@ -41,11 +41,22 @@ class ModelTest extends TestCase
     );
 
     $this->assertEquals('SI.MDL-SPE-0002',$lsModelTID);
+  
+  } //end testCreateNewModelIntoDatabase()
+
+  /**
+   * testGetNewModel
+   *
+   * @depends testApplicationLoadSettingsFromFile
+   */
+  public function testGetNewModel()
+  {
     $lObj = DataFactory::getModel('SI.MDL-SPE-0002');
     $this->assertNotNull($lObj);
     $this->assertInstanceOf(GOM\Core\Data\Model::class,$lObj);
     $lObj->loadObject();
     $this->assertEquals('MDL-ECM-dev',$lObj->getFieldValueFromName('ID'));
-  } //end testCreateNewModelIntoDatabase()
+  }//end testGetNewModel()
+
 }//end class
  ?>
