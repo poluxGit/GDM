@@ -232,21 +232,70 @@ class ModelDefinition
   /**
    * Renvoi le code SQL propre à la création des tables d'un objet Complex
    *
-   * @param array  $aObjectDefinition   Définition de l'objet.
+   * @param string  $psTargetDatabaseSchema   Schéma BD cible.
+   * @param string  $psTablename              Nom de la table.
+   * @param string  $psShortCode              Short Code de la table
    */
-  protected function generateSQLScriptForComplexObject($aObjectDefinition)
+  protected function generateSQLScriptForComplexObject($psTargetDatabaseSchema,$psTablename,$psShortCode)
   {
+    // Vars locales!
+    $lsSimpleSQLFilename      = realpath(dirname(__FILE__)).'/../../../data/deployment/internal/templates/sql-template-complex_object.sql';
+    $lsTargetSQLFilename      = realpath(dirname(__FILE__)).'/./../'.self::$_tmpSQLFilename;
+    $loTargetSQLFileHandler   = null;
+    $lbRollBackFileExists     = false;
 
-    // TODO A implémenter
+    $lsFileContent = null;
+    $lsFileContentUpdated = null;
 
-    // Gestion des objets 'Simple'
+    try {
 
-    // Gestion des objets 'Complex'
+      // Fichier CoreSchema ...
+      // ***********************************************************************
+      // Ouverture Fichier destination!
+      $loTargetSQLFileHandler=@fopen($lsTargetSQLFilename,'w+');
 
-    // Gestion des objets 'Metadonnées sur Objet'
+      // Echec lors de l'ouverture?
+      if (!$loTargetSQLFileHandler) {
+        $lsExMessage = sprintf(
+            "Error during SQLScript target file initialization (target:'%s').",
+            $lsTargetSQLFilename
+        );
+        throw new ApplicationGenericException($lsExMessage);
+      }
 
+      // SimpleObject - lecture fichier & remplacement & ecriture !
+      $lsFileContent = \file_get_contents($lsSimpleSQLFilename);
+      $lsFileContentUpdated = \str_replace(
+          '{$target_schema}',
+          $psTargetDatabaseSchema,
+          $lsFileContent
+        );
 
-    // Gestion des objets 'Metadonnées sur Liens'
+      $lsFileContentUpdated = \str_replace(
+          '{$tmp_tablename}',
+          $psTablename,
+          $lsFileContentUpdated
+        );
+
+      $lsFileContentUpdated = \str_replace(
+          '{$tmp_OBJCODE}',
+          $psShortCode,
+          $lsFileContentUpdated
+        );
+
+      \fwrite($loTargetSQLFileHandler,$lsFileContentUpdated);
+
+    } catch (\Exception $e) {
+      // TODO Rollback du fichier precedent
+      throw new Exceptions\ApplicationGenericException($e->getMessage());
+    } finally {
+      // Fermeture du fichier!
+      if (!is_null($loTargetSQLFileHandler) && $loTargetSQLFileHandler!=false) {
+        \fclose($loTargetSQLFileHandler);
+      }
+    }
+
+    return $lsTargetSQLFilename;
 
   }//end generateSQLScriptForSimpleObject()
 
@@ -505,7 +554,8 @@ class ModelDefinition
       $sSQLScriptFilePath = $this->generateSQLScriptForSimpleObject('GDM_DEV',$sTablenameObj,$objDefinitionArray['tid_data']['tid_prefix']);
       Application::deploySQLScriptToDatabase($sSQLScriptFilePath);
     } elseif ($objDefinitionArray['object_type'] == 'Complex') {
-    //  echo "Obj Complex : ".$objDef['bid']."\n";;
+      $sSQLScriptFilePath = $this->generateSQLScriptForComplexObject('GDM_DEV',$sTablenameObj,$objDefinitionArray['tid_data']['tid_prefix']);
+      Application::deploySQLScriptToDatabase($sSQLScriptFilePath);
     } else {
       echo "Type de l'objet non valid !";
     }
