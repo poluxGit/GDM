@@ -40,7 +40,7 @@ USE `{$target_schema}`$$
 CREATE TRIGGER {$tmp_tablename}_BEFINS BEFORE INSERT ON `{$tmp_tablename}` FOR EACH ROW
 BEGIN
 	SET NEW.CUSER = current_user();
-    SET NEW.TID = DMA_generateTIDFromOBDTablename('{$tmp_tablename}');
+  SET NEW.TID = DMA_generateTIDFromOBDTablename('{$tmp_tablename}');
 END$$
 
 
@@ -49,7 +49,12 @@ DROP TRIGGER IF EXISTS `{$tmp_tablename}_AFTINS` $$
 USE `{$target_schema}`$$
 CREATE TRIGGER {$tmp_tablename}_AFTINS AFTER INSERT ON `{$tmp_tablename}` FOR EACH ROW
 BEGIN
-CALL LOG_logDBDataEvent('INSERT',NEW.TID,NEW.BID);
+  DECLARE l_sTIDOBD VARCHAR(100);
+  CALL LOG_logDBDataEvent('INSERT',NEW.TID,NEW.BID);
+  SELECT TID INTO l_sTIDOBD FROM A000_OBD WHERE OBI_DB_TABLENAME = '{$tmp_tablename}';
+
+  INSERT INTO A100_OBI(`TID`,`OBD_TID`,`BID`)VALUES (:NEW.TID,l_sTIDOBD,:NEW.BID);
+
 END$$
 
 
