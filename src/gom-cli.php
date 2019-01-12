@@ -214,7 +214,7 @@ function main($argc, $argv)
           strval($argv[2])
         );
 
-        $lobjCreated = Application::importModelFromJSONData(strval($argv[2]));
+        $lobjCreated = \GOM\Core\Application::importModelFromJSONData(strval($argv[2]));
         print_r($lobjCreated);
 
         break;
