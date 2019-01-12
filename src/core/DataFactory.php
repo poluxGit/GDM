@@ -43,7 +43,7 @@ class DataFactory
     if ($sObjDefType == 'Simple') {
       $lobj = self::getSimpleObjectInstance($psTID,$sObjDefDBTable);
     } elseif ($sObjDefType == 'Complex') {
-        $lobj = self::getComplexObjectInstance($psTID,$sObjDefDBTable);.
+        $lobj = self::getComplexObjectInstance($psTID,$sObjDefDBTable);
     }
     return $lobj;
   }//end getBusinessObject()
