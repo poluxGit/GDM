@@ -79,6 +79,7 @@ class ComplexObjectInstance extends Internal\GOMObject
   public function createNextVersion()
   {
     //TODO createNextVersion
+    $lNewObj = new ComplexObjectInstance
   }
 
   public function createNextRevision()
