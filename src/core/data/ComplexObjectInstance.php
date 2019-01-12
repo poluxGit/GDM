@@ -9,7 +9,7 @@ use GOM\Core\Data\ObjectDefinition;
  *
  * Instance d'un objet métier complex
  */
-class ComplexObjectInstance extends Internal\GOMObject
+class ComplexObjectInstance extends Internal\GOMBusinessObject
 {
 
   private $OBI = NULL;
@@ -28,7 +28,7 @@ class ComplexObjectInstance extends Internal\GOMObject
     $lsTablename = $psTablename;
     if(!is_null($psTID))
     {
-      $oOBI = new ObjectInstance($psTID);
+      $oOBI = \GOM\Core\DataFactory::getObjectInstance($psTID);
       $oOBD = $oOBI->getObjectDefinition();
       $lsTablename = $oOBD->getFieldValueFromName('DBTable');
     }
@@ -63,27 +63,55 @@ class ComplexObjectInstance extends Internal\GOMObject
   }//end initFieldDefinition()
 
   /**
-   * Creation en mémoire d'une instance d'un objet complex (non enregistrées en base)
+   * createNewObjectInstance - Retourne une nouvelle instance d'un objet
    *
+   * @static
+   * @internal Objet logique - non enregistrés en base de données   *
+   * @param string $objDefTID TID du type de l'objet (OBD)
+   *
+   * @return GOM\Core\Data\ComplexObjectInstance
    */
-  public static function createNewComplexObjectInstance($objDefTID)
+  public static function createNewObjectInstance($objDefTID)
   {
-    $loObjDef = new ObjectDefinition($objDefTID);
-    $loObjDef->loadObject();
+    $loObjDef = \GOM\Core\DataFactory::getObjectDefinition($objDefTID);
     $oObjResult = new ComplexObjectInstance(NULL,$loObjDef->getFieldValueFromName('DBTable')) ;
 
     return $oObjResult;
-  }//end createNewComplexObjectInstance()
+  }//end createNewObjectInstance()
 
-
+  /**
+   * Retourne la nouvelle version de l'objet courant
+   *
+   * @return GOM\Core\Data\ComplexObjectInstance
+   */
   public function createNextVersion()
   {
+    // Variable de retour de la méthode
+    $loNewObjVersion = null;
     //TODO createNextVersion
-    $lNewObj = new ComplexObjectInstance
+    //$lNewObj = new ComplexObjectInstance
+
+    return $loNewObjVersion;
   }
 
+  /**
+   * Retourne la nouvelle version de l'objet courant
+   *
+   * @return GOM\Core\Data\ComplexObjectInstance
+   */
   public function createNextRevision()
   {
     //TODO createNextRevision
   }
+
+  /**
+   * Retourne le BID complet de l'objet complex
+   *
+   * @example BID : CAT-TEST, VERS = 1 , REV = 9 => CAT-TEST_01.09
+   * @return string
+   */
+  public function getBID() : string
+  {
+    return $this->getFieldValueFromName('ID').'_'.sprintf('%02d',$this->getFieldValueFromName('Version').'.'.sprintf('%02d',$this->getFieldValueFromName('Revision'));
+  }//end getBID()
 }//end class

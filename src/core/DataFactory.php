@@ -2,6 +2,7 @@
 namespace GOM\Core;
 
 use GOM\Core\Internal\Exception\ObjectNotFoundException;
+use GOM\Core\Data\Internal\GOMBusinessObject;
 
 /**
  * DataFactory - Classe statique de gestion des données
@@ -26,32 +27,93 @@ class DataFactory
    * Retourne l'objet dont le TID est passé en argument
    *
    * @throws GOM\Core\Internal\Exception\ObjectNotFoundException
-   * @param string $psTID  TID de l'objet à charger
-   * @return Data\Internal\GOMObject
+   * @param string $psTID   TID de l'objet à charger
+   * @return \GOM\Core\Data\Internal\GOMBusinessObject
    */
-  static function getObject($psTID){
+  static function getBusinessObject($psTID)
+  {
+    // Instance d'objet depuis le référentiel interne.
+    $objInst = self::getObjectInstance($psTID);
+    $objDef  = self::getObjectDefinition($objInst->getFieldValueFromName('ObjectDefTID'));
+    $sObjDefType    = $objDef->getFieldValueFromName('Type');
+    $sObjDefDBTable = $objDef->getFieldValueFromName('DBTable');
+
+    $lobj = NULL;
+
+    if ($sObjDefType == 'Simple') {
+      $lobj = self::getSimpleObjectInstance($psTID,$sObjDefDBTable);
+    } elseif ($sObjDefType == 'Complex') {
+        $lobj = self::getComplexObjectInstance($psTID,$sObjDefDBTable);.
+    }
+    return $lobj;
+  }//end getBusinessObject()
+
+  /**
+   * Retourne l'objet dont le TID est passé en argument
+   *
+   * @throws GOM\Core\Internal\Exception\ObjectNotFoundException
+   * @param string $psTID   TID de l'objet à charger
+   * @return \GOM\Core\Data\ComplexObjectInstance
+   */
+  static function getComplexObjectInstance($psTID,$psTablename){
 
     $lobj = NULL;
     try {
-        // TODO To dev
-      $lobj = new Data\ObjectDefinition($psTID);
+      $lobj = new \GOM\Core\Data\ComplexObjectInstance($psTID,$psTablename);
       $lobj->loadObject();
-
-
     } catch (\Exception $e) {
-      $lsMsgException = sprintf("Une erreur est survenue durant le chargement de l'objet TID : '%s'.", $psTID);
-      throw new \Exception($lsMsgException);
+      throw new ObjectNotFoundException("Instance d'objet OBI",$psTID);
+    }
+    return $lobj;
+  }//end getComplexObjectInstance()
+
+  /**
+   * Retourne l'objet dont le TID est passé en argument
+   *
+   * @throws GOM\Core\Internal\Exception\ObjectNotFoundException
+   * @param string $psTID   TID de l'objet à charger
+   * @return \GOM\Core\Data\SimpleObjectInstance
+   */
+  static function getSimpleObjectInstance($psTID,$psTablename){
+
+    $lobj = NULL;
+    try {
+      $lobj = new \GOM\Core\Data\SimpleObjectInstance($psTID,$psTablename);
+      $lobj->loadObject();
+    } catch (\Exception $e) {
+      throw new ObjectNotFoundException("Instance d'objet OBI",$psTID);
     }
 
     return $lobj;
-  }//end loadObject()
+  }//end getSimpleObjectInstance()
+
+
+  /**
+   * Retourne l'objet dont le TID est passé en argument
+   *
+   * @throws GOM\Core\Internal\Exception\ObjectNotFoundException
+   * @param string $psTID   TID de l'objet à charger
+   * @return \GOM\Core\Data\ObjectInstance
+   */
+  static function getObjectInstance($psTID){
+
+    $lobj = NULL;
+    try {
+      $lobj = new \GOM\Core\Data\ObjectInstance($psTID);
+      $lobj->loadObject();
+    } catch (\Exception $e) {
+      throw new ObjectNotFoundException("Instance d'objet OBI",$psTID);
+    }
+
+    return $lobj;
+  }//end getObjectInstance()
 
   /**
    * Retourne l'OBD dont le TID est passé en argument
    *
    * @throws GOM\Core\Internal\Exception\ObjectNotFoundException
    * @param string $psTID  TID de l'OBD à charger
-   * @return Data\ObjectDefinition
+   * @return \GOM\Core\Data\ObjectDefinition
    */
   static function getObjectDefinition($psTID){
 
@@ -70,7 +132,7 @@ class DataFactory
    *
    * @throws GOM\Core\Internal\Exception\ObjectNotFoundException
    * @param string $psTID  TID du model à charger
-   * @return Data\Model
+   * @return \GOM\Core\Data\Model
    */
   static function getModel($psTID){
 
@@ -89,7 +151,7 @@ class DataFactory
    *
    * @throws GOM\Core\Internal\Exception\ObjectNotFoundException
    * @param string $psTID  TID du lien à charger
-   * @return Data\LinkDefinition
+   * @return \GOM\Core\Data\LinkDefinition
    */
   static function getLinkDefinition($psTID){
 
@@ -108,7 +170,7 @@ class DataFactory
    *
    * @throws GOM\Core\Internal\Exception\ObjectNotFoundException
    * @param string $psTID  TID de la metadonnées de liens à charger
-   * @return Data\LinkMetaDefinition
+   * @return \GOM\Core\Data\LinkMetaDefinition
    */
   static function getLinkMetaDefinition($psTID){
 
@@ -127,7 +189,7 @@ class DataFactory
    *
    * @throws GOM\Core\Internal\Exception\ObjectNotFoundException
    * @param string $psTID  TID de la metadonnées de liens à charger
-   * @return Data\ObjectMetaDefinition
+   * @return \GOM\Core\Data\ObjectMetaDefinition
    */
   static function getObjectMetaDefinition($psTID){
 
@@ -140,5 +202,24 @@ class DataFactory
     }
     return $lobj;
   }//end getObjectMetaDefinition()
+
+  /**
+   * Retourne l'instance de la metadonnées d'objet
+   *
+   * @throws GOM\Core\Internal\Exception\ObjectNotFoundException
+   * @param string $psTID  TID de la metadonnées de liens à charger
+   * @return \GOM\Core\Data\ObjectMetaInstance
+   */
+  static function getObjectMetaInstance($psTID){
+
+    $lobj = NULL;
+    try {
+      $lobj = new Data\ObjectMetaInstance($psTID);
+      $lobj->loadObject();
+    } catch (\Exception $e) {
+      throw new ObjectNotFoundException("Instance de metadonnées d'objet",$psTID);
+    }
+    return $lobj;
+  }//end getObjectMetaInstance()
 
 }//end class

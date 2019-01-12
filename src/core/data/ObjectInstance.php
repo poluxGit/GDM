@@ -37,6 +37,17 @@ class ObjectInstance extends Internal\GOMObject
   }//end initFieldDefinition()
 
   /**
+   * Surcharge de l'enregistrement par défaut
+   *
+   * @internal  Ajout du rafraissement du réferentiel interne A000_OBI
+   */
+  public function saveObject()
+  {
+    parent::saveObject();
+    \GOM\Core\DatabaseManager::refreshStatisticsForTable('A000_OBI');
+  }//end saveObject()
+
+  /**
    * Retourne L'OBD de l'objet
    *
    * @return ObjectDefinition
@@ -47,4 +58,16 @@ class ObjectInstance extends Internal\GOMObject
     $loObjDef->loadObject();
     return $loObjDef;
   }//end getObjectDefinition()
+
+
+/**
+ * TODO Ajout des méthodes relatives à la gestion des metadonnées de l'objet
+ *
+ * - Use Cases :
+ * --> Instanciation
+ * --> Mise à jour
+ * --> Suppression (XXX)
+ * --> Duplication entre objet (complex)
+ */
+
 }//end class

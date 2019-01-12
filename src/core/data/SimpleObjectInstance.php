@@ -9,7 +9,7 @@ use GOM\Core\Data\ObjectDefinition;
  *
  * Instance d'un objet métier
  */
-class SimpleObjectInstance extends Internal\GOMObject
+class SimpleObjectInstance extends Internal\GOMBusinessObject
 {
 
   private $OBI = NULL;
@@ -72,4 +72,14 @@ class SimpleObjectInstance extends Internal\GOMObject
 
     return $oObjResult;
   }//end createNewSimpleObjectInstance()
+
+  /**
+   * Retourne le BID complet de l'objet simple
+   *
+   * @return string
+   */
+  public function getBID() : string
+  {
+    return $this->getFieldValueFromName('ID');
+  }//end getBID()
 }//end class
