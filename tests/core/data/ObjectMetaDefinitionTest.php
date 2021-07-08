@@ -1,0 +1,166 @@
+<?php
+
+use PHPUnit\Framework\TestCase;
+use GOM\Core\DataFactory;
+use GOM\Core\Application;
+use GOM\Core\Data\LinkDefinition;
+use GOM\Core\Data\LinkMetaDefinition;
+
+/**
+ * ObjectMetaDefinitionTest
+ *
+ */
+class ObjectMetaDefinitionTest extends TestCase
+{
+  /**
+   * testApplicationLoadSettingsFromFile
+   *
+   * Chargement des paramètres depuis un fichier valide.
+   */
+  public function testApplicationLoadSettingsFromFile()
+  {
+    Application::loadDBSettings('./tests/datasets/app-settings_02-valid.json');
+    $this->assertTrue(true);
+  }//end testApplicationLoadSettingsFromFile()
+
+  /**
+   * testCreateNewStringMetaObjectDefinition
+   *
+   * Déclaration d'une métadonnée sur objet de type string
+   *
+   * @depends testApplicationLoadSettingsFromFile
+   */
+  public function testCreateNewStringMetaObjectDefinition()
+  {
+    $lsTID = GOM\Core\Data\ObjectMetaDefinition::createNewMetaObjectDefinition(
+      'SI.OBD-SPE-00010',
+      'GENSTR',
+      'AttrDocString',
+      'AttributDoc String test.',
+      'AttributDoc Meta String test.' ,
+      'String',
+      'OBMD-DOC_TEST-STR' ,
+      'OBMIT-DOC_TEST-STR',
+      'OBMIB-DOC_TEST-STR',
+      '{"comp_data":[]}'
+    );
+
+    $this->assertEquals('SI.OBMD-SPE-0000000001',$lsTID);
+  } //end testCreateNewStringMetaObjectDefinition()
+
+  /**
+   * testCreateNewDateMetaObjectDefinitionIntoDatabase
+   *
+   * Déclaration d'une métadonnée sur objet de type date
+   *
+   * @depends testApplicationLoadSettingsFromFile
+   */
+  public function testCreateNewDateMetaObjectDefinitionIntoDatabase()
+  {
+    $lsTID = GOM\Core\Data\ObjectMetaDefinition::createNewMetaObjectDefinition(
+      'SI.OBD-SPE-00010',
+      'GENDATE',
+      'AttrDocDate',
+      'Attribut Date.',
+      'Attribut Meta Date test.' ,
+      'Date',
+      'OBMD-DOC_DATE' ,
+      'OBMIT-DOC_DATE',
+      'OBMIB-DOC_DATE',
+      '{"comp_data":[]}'
+    );
+
+    $this->assertEquals('SI.OBMD-SPE-0000000002',$lsTID);
+  } //end testCreateNewDateMetaObjectDefinitionIntoDatabase()
+
+  /**
+   * testCreateNewDatetimeMetaObjectDefinitionIntoDatabase
+   *
+   * Déclaration d'une métadonnée sur objet de type Datetime
+   *
+   * @depends testApplicationLoadSettingsFromFile
+   */
+  public function testCreateNewDatetimeMetaObjectDefinitionIntoDatabase()
+  {
+    $lsTID = GOM\Core\Data\ObjectMetaDefinition::createNewMetaObjectDefinition(
+      'SI.OBD-SPE-00010',
+      'GENDATETIME',
+      'AttrDocDatetime',
+      'Attribut Datetime.',
+      'Attribut Meta Datetime test.' ,
+      'Datetime',
+      'OBMD-DOC_DATETIME' ,
+      'OBMIT-DOC_DATETIME',
+      'OBMIB-DOC_DATETIME',
+      '{"comp_data":[]}'
+    );
+
+    $this->assertEquals('SI.OBMD-SPE-0000000003',$lsTID);
+  } //end testCreateNewDatetimeMetaObjectDefinitionIntoDatabase()
+
+  /**
+   * testCreateNewIntegerMetaObjectDefinitionIntoDatabase
+   *
+   * Déclaration d'une métadonnée sur objet de type Integer
+   *
+   * @depends testApplicationLoadSettingsFromFile
+   */
+  public function testCreateNewIntegerMetaObjectDefinitionIntoDatabase()
+  {
+    $lsTID = GOM\Core\Data\ObjectMetaDefinition::createNewMetaObjectDefinition(
+      'SI.OBD-SPE-00010',
+      'GENINT',
+      'AttrDocInteger',
+      'Attribut Integer.',
+      'Attribut Meta Integer test.' ,
+      'Integer',
+      'OBMD-DOC_INT' ,
+      'OBMIT-DOC_INT',
+      'OBMIB-DOC_INT',
+      '{"comp_data":[]}'
+    );
+
+    $this->assertEquals('SI.OBMD-SPE-0000000004',$lsTID);
+  } //end testCreateNewIntegerMetaObjectDefinitionIntoDatabase()
+
+  /**
+   * testCreateNewMetaRealLinkDefinitionIntoDatabase
+   *
+   * Déclaration d'une métadonnée sur objet de type Real
+   *
+   * @depends testApplicationLoadSettingsFromFile
+   */
+  public function testCreateNewRealMetaObjectDefinitionIntoDatabase()
+  {
+    $lsTID = GOM\Core\Data\ObjectMetaDefinition::createNewMetaObjectDefinition(
+      'SI.OBD-SPE-00010',
+      'GENREAL',
+      'AttrDocReal',
+      'Attribut Real.',
+      'Attribut Meta Real test.' ,
+      'Real',
+      'OBMD-DOC_REAL' ,
+      'OBMIT-DOC_REAL',
+      'OBMIB-DOC_REAL',
+      '{"comp_data":[]}'
+    );
+
+    $this->assertEquals('SI.OBMD-SPE-0000000005',$lsTID);
+  } //end testCreateNewRealMetaObjectDefinitionIntoDatabase()
+
+  /**
+   * testGetAllMetaDefinitionsForAnObjetDefinition
+   *
+   * Vérification du nombre de meta enregistrées (5 attendu)
+   *
+   * @depends testApplicationLoadSettingsFromFile
+   * @depends testCreateNewRealMetaObjectDefinitionIntoDatabase
+   */
+  public function testGetAllMetaDefinitionsForAnObjetDefinition()
+  {
+    $aResults = GOM\Core\Data\ObjectMetaDefinition::getAllMetaDefinitionsForAnObjectDefinition('SI.OBD-SPE-00010');
+    $this->assertCount(5,$aResults);
+  } //end testGetAllMetaDefinitionsForAnObjetDefinition()
+
+}//end class
+ ?>

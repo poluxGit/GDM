@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite name="GDM_TS01" tests="10" assertions="8" errors="0" failures="0" skipped="2" time="0.103990">
+    <testsuite name="ApplicationTest" file="F:\projects\gdm-dev\tests\core\ApplicationTest.php" tests="5" assertions="4" errors="0" failures="0" skipped="1" time="0.102002">
+      <testcase name="testApplicationLoadSettingsFromNonExistingFile" class="ApplicationTest" classname="ApplicationTest" file="F:\projects\gdm-dev\tests\core\ApplicationTest.php" line="19" assertions="1" time="0.001000"/>
+      <testcase name="testApplicationLoadSettingsFromInvalidFormatedFile" class="ApplicationTest" classname="ApplicationTest" file="F:\projects\gdm-dev\tests\core\ApplicationTest.php" line="30" assertions="1" time="0.001000"/>
+      <testcase name="testApplicationLoadSettingsFileMandatoryParamMissing" class="ApplicationTest" classname="ApplicationTest" file="F:\projects\gdm-dev\tests\core\ApplicationTest.php" line="44" assertions="1" time="0.000000"/>
+      <testcase name="testApplicationLoadSettingsFromValidFile" class="ApplicationTest" classname="ApplicationTest" file="F:\projects\gdm-dev\tests\core\ApplicationTest.php" line="56" assertions="0" time="0.000000">
+        <skipped/>
+      </testcase>
+      <testcase name="testApplicationDeployingDB" class="ApplicationTest" classname="ApplicationTest" file="F:\projects\gdm-dev\tests\core\ApplicationTest.php" line="68" assertions="1" time="0.100002"/>
+    </testsuite>
+    <testsuite name="DataFactoryTest" file="F:\projects\gdm-dev\tests\core\DataFactoryTest.php" tests="1" assertions="0" errors="0" failures="0" skipped="1" time="0.000000">
+      <testcase name="testApplicationLoadSettingsFromNonExistingFile" class="DataFactoryTest" classname="DataFactoryTest" file="F:\projects\gdm-dev\tests\core\DataFactoryTest.php" line="18" assertions="0" time="0.000000">
+        <skipped/>
+      </testcase>
+    </testsuite>
+    <testsuite name="SQLQueryGeneratorTest" file="F:\projects\gdm-dev\tests\core\data\internal\SQLQueryGeneratorTest.php" tests="4" assertions="4" errors="0" failures="0" skipped="0" time="0.001988">
+      <testcase name="testSelectSqlQueryGenerationWithoutSelectFields" class="SQLQueryGeneratorTest" classname="SQLQueryGeneratorTest" file="F:\projects\gdm-dev\tests\core\data\internal\SQLQueryGeneratorTest.php" line="18" assertions="1" time="0.000999"/>
+      <testcase name="testSelectSqlQueryGenerationWithSelectFields" class="SQLQueryGeneratorTest" classname="SQLQueryGeneratorTest" file="F:\projects\gdm-dev\tests\core\data\internal\SQLQueryGeneratorTest.php" line="30" assertions="1" time="0.000000"/>
+      <testcase name="testSelectSqlQueryGenerationWithSelectFieldsAndWhereConditions" class="SQLQueryGeneratorTest" classname="SQLQueryGeneratorTest" file="F:\projects\gdm-dev\tests\core\data\internal\SQLQueryGeneratorTest.php" line="43" assertions="1" time="0.000000"/>
+      <testcase name="testSelectSqlQueryGenerationWithoutTableRaiseException" class="SQLQueryGeneratorTest" classname="SQLQueryGeneratorTest" file="F:\projects\gdm-dev\tests\core\data\internal\SQLQueryGeneratorTest.php" line="57" assertions="1" time="0.000989"/>
+    </testsuite>
+  </testsuite>
+</testsuites>

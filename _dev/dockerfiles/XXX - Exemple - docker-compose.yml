@@ -1,0 +1,28 @@
+php_apache:
+  image: webdevops/php-apache:7.2
+  name: gdm-web
+  links:
+    - db:mysql
+  ports:
+    - 8989:80
+  volumes:
+    - ./:/app/
+    - ./_dev/php.ini/:/opt/docker/etc/php/php.ini
+db:
+  image: mysql/mysql-server:8.0
+  name: gdm-db
+  ports:
+    - 3306:3306
+  volumes:
+    - "./data/:/var/lib/mysql"
+  environment:
+    MYSQL_ROOT_PASSWORD: dev
+phpmyadmin:
+  image: corbinu/docker-phpmyadmin
+  links:
+    - db:mysql
+  ports:
+    - 8181:80
+  environment:
+    MYSQL_USERNAME: root
+    MYSQL_ROOT_PASSWORD: dev

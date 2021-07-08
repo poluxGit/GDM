@@ -1,0 +1,6 @@
+{
+  "database" :{
+    "dsn":"mysql:dbname=sys;host=localhost;port=3336",
+    "password": "dev"
+  }
+}

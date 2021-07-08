@@ -1,0 +1,37 @@
+{
+    "name": "poluxGit/gdm",
+    "type": "library",
+    "license": "MIT",
+    "homepage": "https://github.com/poluxGit/GDM",
+    "description": "Generic Object Management",
+    "keywords": ["personal", "poluxGit", "php"],
+    "authors": [
+        {
+            "name": "polux_fr",
+            "email": "poluxmsn@free.fr"
+        }
+    ],
+    "require": {
+        "php": ">=7.1"
+    },
+    "require-dev": {
+      "phpunit/php-code-coverage": "^6.1",
+			"squizlabs/php_codesniffer": "^2.9.2",
+			"phpmd/phpmd": "@stable",
+			"sebastian/phpcpd": "@stable",
+			"pdepend/pdepend": "@stable",
+			"phploc/phploc": "^4.0.1",
+			"phpunit/phpunit": "^7.5.1",
+			"phpdocumentor/phpdocumentor": "^2.9.0",
+			"mayflower/php-codebrowser": "^2.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "GOM\\Core\\": "src/core",
+						"GOM\\Test\\": "tests/core"
+        }
+    },
+		"config": {
+			"optimize-autoloader": true
+		}
+}

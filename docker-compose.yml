@@ -1,0 +1,31 @@
+web-api:
+  image: webdevops/php-apache:7.2
+  links:
+    - "db:mysql"
+  ports:
+    - 8989:80
+  volumes:
+    - ./src/api:/app/
+    - ./_dev/php-api.ini/:/opt/docker/etc/php/php.ini
+db:
+  image: mysql:8.0
+  command: --default-authentication-plugin=mysql_native_password
+  restart: always
+  ports:
+    - 3336:3306
+  volumes:
+    - "./_dev/exec/data:/var/lib/mysql"
+    - ./_dev/my.cnf:/etc/mysql/my.cnf
+  environment:
+    MYSQL_ROOT_PASSWORD: dev
+jenkins:
+  image: jenkins/jenkins:lts-slim
+  ports:
+    - 8080:8080
+    - 50000:50000
+  volumes:
+    - "./_dev/exec/jenkins_home:/var/jenkins_home"
+  environment:
+    jenkins_home: /var/jenkins_home
+  links:
+    - "db:mysql"
